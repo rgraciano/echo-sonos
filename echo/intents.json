@@ -1,0 +1,25 @@
+{
+  "intents": [
+    {
+     "intent": "PlayIntent",
+     "slots": [
+        {
+          "name": "Preset",
+          "type": "LITERAL"
+        }
+      ]
+    },
+    {
+      "intent": "PauseIntent",
+      "slots": []
+    },
+    {
+      "intent": "VolumeDownIntent",
+      "slots": []
+    },
+    {
+      "intent": "VolumeUpIntent",
+      "slots": []
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+PlayIntent play {test|Preset}
+PlayIntent play {rock|Preset}
+PlayIntent play {rap|Preset}
+PlayIntent play {pop rap|Preset}
+
+PauseIntent pause
+PauseIntent stop
+PauseIntent stop the music
+PauseIntent pause the music
+
+VolumeUpIntent turn it up
+VolumeUpIntent turn the volume up
+VolumeUpIntent louder
+VolumeUpIntent volume up
+
+VolumeDownIntent turn it down
+VolumeDownIntent turn the volume down
+VolumeDownIntent softer
+VolumeDownIntent quieter
+VolumeDownIntent volume down

@@ -1,0 +1,27 @@
+{
+  "session": {
+    "new": true,
+    "sessionId": "session1234",
+    "attributes": {},
+    "user": {
+      "userId": null
+    },
+    "application": {
+      "applicationId": "YOUR_ECHO_AWS_APP_ID_HERE"
+    }
+  },
+  "version": "1.0",
+  "request": {
+    "intent": {
+      "slots": {
+        "Preset": {
+          "name": "Preset",
+          "value": "Test"
+        }
+      },
+      "name": "Play"
+    },
+    "type": "IntentRequest",
+    "requestId": "request5678"
+  }
+}
