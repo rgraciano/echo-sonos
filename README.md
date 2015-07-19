@@ -13,6 +13,8 @@ Other commands:
 * "Alexa, tell Sonos to turn it up (or down)"
 * "Alexa, tell Sonos to pause"
 
+When you say the command to Alexa, it triggers the Alexa skill with invocation name Sonos. The Alexa skill calls a web service running on AWS Lambda, passing it the preset name ("rock" in the example). Lambda then fires an HTTP request to a node.js server running node-sonos-http-api on your local network. node-sonos-http-api gathers all of the settings from the preset named "rock" in presets.json, sending them all to Sonos over your local network.
+
 Included here are the Alexa API definitions, the Lambda AWS service that catches the Alexa requests, and an example preset configuration for jishi's node-sonos-http-api to actually play the music.
 
 To set it up, you need to do the following:
