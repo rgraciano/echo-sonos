@@ -13,7 +13,7 @@
       "players": [
         { "roomName": "Dining Room", "volume": 30},
         { "roomName": "Living Room", "volume": 30},
-        { "roomName": "Master Bedroom", "volume": 30}
+        { "roomName": "Master Bedroom", "volume": 30},
         { "roomName": "Kitchen5", "volume": 40},
         { "roomName": "KitchenWall", "volume": 50}
       ],
@@ -27,7 +27,7 @@
       "players": [
         { "roomName": "Dining Room", "volume": 30},
         { "roomName": "Living Room", "volume": 30},
-        { "roomName": "Master Bedroom", "volume": 30}
+        { "roomName": "Master Bedroom", "volume": 30},
         {"roomName": "Kitchen5", "volume": 40},
         {"roomName": "KitchenWall", "volume": 50}
       ],
@@ -42,7 +42,7 @@
         { "roomName": "Dining Room", "volume": 30},
         { "roomName": "Living Room", "volume": 30},
         {"roomName": "Kitchen5", "volume": 40},
-        { "roomName": "Master Bedroom", "volume": 30}
+        { "roomName": "Master Bedroom", "volume": 30},
         {"roomName": "KitchenWall", "volume": 50}
       ],
       "state": "PLAYING",
