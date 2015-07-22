@@ -16,10 +16,10 @@
       "slots": {
         "Preset": {
           "name": "Preset",
-          "value": "Test"
+          "value": "test"
         }
       },
-      "name": "Play"
+      "name": "PlayIntent"
     },
     "type": "IntentRequest",
     "requestId": "request5678"
