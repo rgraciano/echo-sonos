@@ -24,6 +24,48 @@ EchoSonos.prototype.intentHandlers = {
         options.path = '/pauseall';
         httpreq(options, response, "Pausing");
     },
+    NextIntent: function (intent, session, response) {
+        console.log("NextIntent received");
+        options.path = '/next';
+        httpreq(options, response, "OK");
+    },
+    PrevIntent: function (intent, session, response) {
+        console.log("PreviousIntent received");
+        options.path = '/previous';
+        httpreq(options, response, "OK");
+    },
+    StateIntent: function (intent, session, response) {
+        console.log("StateIntent received");
+        options.path = '/state';
+        http.get(options, function(res) {
+            var body = '';
+            res.setEncoding("utf8");
+            res.on('data', function (chunk) {
+                body += chunk;
+            });
+
+            res.on('end', function () {
+              var obj = JSON.parse(body);
+
+              httpreq(options, response, "Currently Playing: " + obj.currentTrack.title + ", by " + obj.currentTrack.artist) + ".";
+            });
+        }).on('error', function (e) {
+            console.log("Got error: ", e);
+        });
+    },
+    VolumeIntent: function (intent, session, response) {
+        var speechResponse = "";
+        if (intent.slots.Room && intent.slots.Room.value) {
+                console.log("VolumeIntent received for " + intent.slots.Room.value);
+                options.path = '/'+encodeURIComponent(intent.slots.Room.value) + '/volume/'+encodeURIComponent(intent.slots.Level.value);
+                speechResponse = "Changing "+ intent.slots.Room.value + " volume";
+        } else {
+                console.log("VolumeIntent " + intent.slots.Level.value + " received");
+                options.path = '/groupVolume/'+encodeURIComponent(intent.slots.Level.value);
+                speechResponse = "OK";
+        }
+        httpreq(options, response, speechResponse);
+    },
     VolumeDownIntent: function (intent, session, response) {
         console.log("VolumeDownIntent received");
         options.path = '/groupVolume/-10';

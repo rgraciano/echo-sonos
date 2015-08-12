@@ -10,8 +10,37 @@
       ]
     },
     {
+      "intent": "PartyIntent",
+      "slots": []
+    },
+    {
+      "intent": "StateIntent",
+      "slots": []
+    },
+    {
       "intent": "PauseIntent",
       "slots": []
+    },
+    {
+      "intent": "NextIntent",
+      "slots": []
+    },
+    {
+      "intent": "PrevIntent",
+      "slots": []
+    },
+    {
+      "intent": "VolumeIntent",
+      "slots": [
+        {
+          "name": "Level",
+          "type": "NUMBER"
+        },
+        {
+          "name": "Room",
+          "type": "LITERAL"
+        }
+      ]
     },
     {
       "intent": "VolumeDownIntent",
