@@ -7,11 +7,15 @@ Here's how it's used:
 
 1. I pre-define typical use-cases for my Sonos, like playing my Rock favorite on all speakers at typical volume
 2. I say "Alexa, use Sonos to play Rock"
- 
+
 Other commands:
 
 * "Alexa, tell Sonos to turn it up (or down)"
 * "Alexa, tell Sonos to pause"
+* "Alexa, ask Sonos what song is playing"
+* "Alexa, tell Sonos to skip track"
+* "Alexa, tell Sonos to change volume to 50"
+* "Alexa, tell Sonos to set Kitchen volume to 25"
 
 When you say the command to Alexa, it triggers the Alexa skill with invocation name Sonos. The Alexa skill calls a web service running on AWS Lambda, passing it the preset name ("rock" in the example). Lambda then fires an HTTP request to a node.js server running node-sonos-http-api on your local network. node-sonos-http-api gathers all of the settings from the preset named "rock" in presets.json, sending them all to Sonos over your local network.
 
@@ -44,7 +48,7 @@ To set it up, you need to do the following:
 # Configure the AWS Lambda service that will trigger your node-sonos-http-api server
 1. Create an AWS Lambda account if you don't have one already. It's free!
 2. In the Lambda console, look to the upper right. Make sure "N. Virginia" is selected, because not every zone supports Alexa yet.
-3. Create a new Lambda function. Skip the blueprint. 
+3. Create a new Lambda function. Skip the blueprint.
 4. Pick any name you want, and choose runtime Node.js.
 5. Go into this repo's "lambda/src" directory and copy options.example.js to options.js. Edit options.js to have your DynDNS hostname, your port, and the Alexa App ID you just copied.
 6. In lambda/src, zip up everything. On Mac, "cd src; zip -r src.zip *.js".  Make sure you don't capture the folder, just the files.
