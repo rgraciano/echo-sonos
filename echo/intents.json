@@ -10,10 +10,6 @@
       ]
     },
     {
-      "intent": "PartyIntent",
-      "slots": []
-    },
-    {
       "intent": "StateIntent",
       "slots": []
     },
