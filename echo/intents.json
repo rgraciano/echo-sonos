@@ -1,6 +1,18 @@
 {
   "intents": [
     {
+      "intent": "PartyIntent",
+      "slots": []
+    },
+    {
+      "intent": "LoungeIntent",
+      "slots": []
+    },
+    {
+      "intent": "ChillIntent",
+      "slots": []
+    },
+    {
      "intent": "PlayIntent",
      "slots": [
         {
@@ -40,11 +52,21 @@
     },
     {
       "intent": "VolumeDownIntent",
-      "slots": []
+      "slots": [
+        {
+          "name": "Room",
+          "type": "LITERAL"
+        }
+      ]
     },
     {
       "intent": "VolumeUpIntent",
-      "slots": []
+      "slots": [
+        {
+          "name": "Room",
+          "type": "LITERAL"
+        }
+      ]
     }
   ]
 }

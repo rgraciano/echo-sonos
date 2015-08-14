@@ -1,3 +1,7 @@
+PartyIntent party
+LoungeIntent lounge
+ChillIntent chill
+
 PlayIntent play {party|Preset}
 PlayIntent play {bedtime|Preset}
 PlayIntent play {lounge|Preset}
@@ -80,6 +84,26 @@ VolumeUpIntent turn the volume up
 VolumeUpIntent louder
 VolumeUpIntent volume up
 VolumeUpIntent crank it up
+VolumeUpIntent turn up {living room|Room}
+VolumeUpIntent turn up {living room|Room} volume
+VolumeUpIntent turn up the {living room|Room}
+VolumeUpIntent turn up the {living room|Room} volume
+VolumeUpIntent turn up {dining room|Room}
+VolumeUpIntent turn up {dining room|Room} volume
+VolumeUpIntent turn up the {dining room|Room}
+VolumeUpIntent turn up the {dining room|Room} volume
+VolumeUpIntent turn up {bathroom|Room}
+VolumeUpIntent turn up {bathroom|Room} volume
+VolumeUpIntent turn up the {bathroom|Room}
+VolumeUpIntent turn up the {bathroom|Room} volume
+VolumeUpIntent turn up {bedroom|Room}
+VolumeUpIntent turn up {bedroom|Room} volume
+VolumeUpIntent turn up the {bedroom|Room}
+VolumeUpIntent turn up the {bedroom|Room} volume
+VolumeUpIntent turn up {kitchen|Room}
+VolumeUpIntent turn up {kitchen|Room} volume
+VolumeUpIntent turn up the {kitchen|Room}
+VolumeUpIntent turn up the {kitchen|Room} volume
 
 VolumeDownIntent turn it down
 VolumeDownIntent turn the volume down
@@ -87,3 +111,23 @@ VolumeDownIntent softer
 VolumeDownIntent quieter
 VolumeDownIntent be quiet
 VolumeDownIntent volume down
+VolumeDownIntent turn down {living room|Room}
+VolumeDownIntent turn down {living room|Room} volume
+VolumeDownIntent turn down the {living room|Room}
+VolumeDownIntent turn down the {living room|Room} volume
+VolumeDownIntent turn down {dining room|Room}
+VolumeDownIntent turn down {dining room|Room} volume
+VolumeDownIntent turn down the {dining room|Room}
+VolumeDownIntent turn down the {dining room|Room} volume
+VolumeDownIntent turn down {bathroom|Room}
+VolumeDownIntent turn down {bathroom|Room} volume
+VolumeDownIntent turn down the {bathroom|Room}
+VolumeDownIntent turn down the {bathroom|Room} volume
+VolumeDownIntent turn down {bedroom|Room}
+VolumeDownIntent turn down {bedroom|Room} volume
+VolumeDownIntent turn down the {bedroom|Room}
+VolumeDownIntent turn down the {bedroom|Room} volume
+VolumeDownIntent turn down {kitchen|Room}
+VolumeDownIntent turn down {kitchen|Room} volume
+VolumeDownIntent turn down the {kitchen|Room}
+VolumeDownIntent turn down the {kitchen|Room} volume

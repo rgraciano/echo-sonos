@@ -14,6 +14,21 @@ EchoSonos.prototype.constructor = EchoSonos;
 
 EchoSonos.prototype.intentHandlers = {
     // register custom intent handlers
+    PartyIntent: function (intent, session, response) {
+        console.log("PartyIntent received");
+        options.path = '/preset/party';
+        httpreq(options, response, "Party Time!";
+    },
+    LoungeIntent: function (intent, session, response) {
+        console.log("LoungeIntent received");
+        options.path = '/preset/lounge';
+        httpreq(options, response, "Smoooooth";
+    },
+    ChillIntent: function (intent, session, response) {
+        console.log("ChillIntent received");
+        options.path = '/preset/chill';
+        httpreq(options, response, "OK";
+    },
     PlayIntent: function (intent, session, response) {
         console.log("PlayIntent received");
         options.path = '/preset/'+encodeURIComponent(intent.slots.Preset.value);
@@ -54,27 +69,43 @@ EchoSonos.prototype.intentHandlers = {
         });
     },
     VolumeIntent: function (intent, session, response) {
-        var speechResponse = "";
-        if (intent.slots.Room && intent.slots.Room.value) {
-                console.log("VolumeIntent received for " + intent.slots.Room.value);
-                options.path = '/'+encodeURIComponent(intent.slots.Room.value) + '/volume/'+encodeURIComponent(intent.slots.Level.value);
-                speechResponse = "Changing "+ intent.slots.Room.value + " volume";
-        } else {
-                console.log("VolumeIntent " + intent.slots.Level.value + " received");
-                options.path = '/groupVolume/'+encodeURIComponent(intent.slots.Level.value);
-                speechResponse = "OK";
-        }
-        httpreq(options, response, speechResponse);
+      var speechResponse = "";
+      if (intent.slots.Room && intent.slots.Room.value) {
+        console.log("VolumeIntent received for " + intent.slots.Room.value);
+        options.path = '/'+encodeURIComponent(intent.slots.Room.value) + '/volume/'+encodeURIComponent(intent.slots.Level.value);
+        speechResponse = "Changing "+ intent.slots.Room.value + " volume";
+      } else {
+        console.log("VolumeIntent " + intent.slots.Level.value + " received");
+        options.path = '/groupVolume/'+encodeURIComponent(intent.slots.Level.value);
+        speechResponse = "OK";
+      }
+      httpreq(options, response, speechResponse);
     },
     VolumeDownIntent: function (intent, session, response) {
-        console.log("VolumeDownIntent received");
+      var speechResponse = "";
+      if (intent.slots.Room && intent.slots.Room.value) {
+        console.log("VolumeDownIntent received for" + intents.slots.Room.value);
+        options.path = '/'+encodeURIComponent(intent.slots.Room.value) + '/volume/-10';
+        speechResponse = "Turning down the " + intent.slots.Room.value + ".";
+      } else {
+        console.log("VolumeDownIntent received.");
         options.path = '/groupVolume/-10';
-        httpreq(options, response, "OK");
+        speechResponse = "Whatever";
+      }
+      httpreq(options, response, speechResponse);
     },
     VolumeUpIntent: function (intent, session, response) {
-        console.log("VolumeUpIntent received");
+      var speechResponse = "";
+      if (intent.slots.Room && intent.slots.Room.value) {
+        console.log("VolumeDownIntent received for" + intents.slots.Room.value);
+        options.path = '/'+encodeURIComponent(intent.slots.Room.value) + '/volume/+10';
+        speechResponse = "Turning down the " + intent.slots.Room.value + ".";
+      } else {
+        console.log("VolumeDownIntent received.");
         options.path = '/groupVolume/+10';
-        httpreq(options, response, "OK");
+        speechResponse = "OK";
+      }
+      httpreq(options, response, speechResponse);
     }
 };
 
