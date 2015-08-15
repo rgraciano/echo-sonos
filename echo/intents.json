@@ -1,6 +1,18 @@
 {
   "intents": [
     {
+      "intent": "PartyIntent",
+      "slots": []
+    },
+    {
+      "intent": "LoungeIntent",
+      "slots": []
+    },
+    {
+      "intent": "ChillIntent",
+      "slots": []
+    },
+    {
      "intent": "PlayIntent",
      "slots": [
         {
@@ -10,16 +22,51 @@
       ]
     },
     {
+      "intent": "StateIntent",
+      "slots": []
+    },
+    {
       "intent": "PauseIntent",
       "slots": []
     },
     {
-      "intent": "VolumeDownIntent",
+      "intent": "NextIntent",
       "slots": []
     },
     {
-      "intent": "VolumeUpIntent",
+      "intent": "PrevIntent",
       "slots": []
+    },
+    {
+      "intent": "VolumeIntent",
+      "slots": [
+        {
+          "name": "Level",
+          "type": "NUMBER"
+        },
+        {
+          "name": "Room",
+          "type": "LITERAL"
+        }
+      ]
+    },
+    {
+      "intent": "VolumeDownIntent",
+      "slots": [
+        {
+          "name": "Room",
+          "type": "LITERAL"
+        }
+      ]
+    },
+    {
+      "intent": "VolumeUpIntent",
+      "slots": [
+        {
+          "name": "Room",
+          "type": "LITERAL"
+        }
+      ]
     }
   ]
 }

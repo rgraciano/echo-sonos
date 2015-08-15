@@ -1,20 +1,133 @@
-PlayIntent play {test|Preset}
-PlayIntent play {rock|Preset}
-PlayIntent play {rap|Preset}
-PlayIntent play {pop rap|Preset}
+PartyIntent party
+LoungeIntent lounge
+ChillIntent chill
+
+PlayIntent play {party|Preset}
+PlayIntent play {bedtime|Preset}
+PlayIntent play {lounge|Preset}
+PlayIntent play {chill|Preset}
+
+StateIntent what song is playing
+StateIntent what track is playing
+StateIntent what's playing
+StateIntent what song is this
+StateIntent what track is this
+StateIntent what's this song
+StateIntent what's this track
+
+VolumeIntent set volume to {ten|Level}
+VolumeIntent set volume to {fifty|Level}
+VolumeIntent set volume to {twenty five|Level}
+VolumeIntent set volume to {one hundred|Level}
+VolumeIntent change volume to {ten|Level}
+VolumeIntent change volume to {fifty|Level}
+VolumeIntent change volume to {twenty five|Level}
+VolumeIntent change volume to {one hundred|Level}
+VolumeIntent set {living room|Room} volume to {ten|Level}
+VolumeIntent set {living room|Room} volume to {fifty|Level}
+VolumeIntent set {living room|Room} volume to {twenty five|Level}
+VolumeIntent set {living room|Room} volume to {one hundred|Level}
+VolumeIntent set {kitchen|Room} volume to {ten|Level}
+VolumeIntent set {kitchen|Room} volume to {fifty|Level}
+VolumeIntent set {kitchen|Room} volume to {twenty five|Level}
+VolumeIntent set {kitchen|Room} volume to {one hundred|Level}
+VolumeIntent set {bedroom|Room} volume to {ten|Level}
+VolumeIntent set {bedroom|Room} volume to {fifty|Level}
+VolumeIntent set {bedroom|Room} volume to {twenty five|Level}
+VolumeIntent set {bedroom|Room} volume to {one hundred|Level}
+VolumeIntent set {dining room|Room} volume to {ten|Level}
+VolumeIntent set {dining room|Room} volume to {fifty|Level}
+VolumeIntent set {dining room|Room} volume to {twenty five|Level}
+VolumeIntent set {dining room|Room} volume to {one hundred|Level}
+VolumeIntent set {bathroom|Room} volume to {ten|Level}
+VolumeIntent set {bathroom|Room} volume to {fifty|Level}
+VolumeIntent set {bathroom|Room} volume to {twenty five|Level}
+VolumeIntent set {bathroom|Room} volume to {one hundred|Level}
+VolumeIntent change {living room|Room} volume to {ten|Level}
+VolumeIntent change {living room|Room} volume to {fifty|Level}
+VolumeIntent change {living room|Room} volume to {twenty five|Level}
+VolumeIntent change {living room|Room} volume to {one hundred|Level}
+VolumeIntent change {kitchen|Room} volume to {ten|Level}
+VolumeIntent change {kitchen|Room} volume to {fifty|Level}
+VolumeIntent change {kitchen|Room} volume to {twenty five|Level}
+VolumeIntent change {kitchen|Room} volume to {one hundred|Level}
+VolumeIntent change {bedroom|Room} volume to {ten|Level}
+VolumeIntent change {bedroom|Room} volume to {fifty|Level}
+VolumeIntent change {bedroom|Room} volume to {twenty five|Level}
+VolumeIntent change {bedroom|Room} volume to {one hundred|Level}
+VolumeIntent change {dining room|Room} volume to {ten|Level}
+VolumeIntent change {dining room|Room} volume to {fifty|Level}
+VolumeIntent change {dining room|Room} volume to {twenty five|Level}
+VolumeIntent change {dining room|Room} volume to {one hundred|Level}
+VolumeIntent change {bathroom|Room} volume to {ten|Level}
+VolumeIntent change {bathroom|Room} volume to {fifty|Level}
+VolumeIntent change {bathroom|Room} volume to {twenty five|Level}
+VolumeIntent change {bathroom|Room} volume to {one hundred|Level}
 
 PauseIntent pause
 PauseIntent stop
 PauseIntent stop the music
 PauseIntent pause the music
+PauseIntent shut up
+
+NextIntent skip
+NextIntent skip track
+NextIntent next track
+NextIntent go to next track
+
+PrevIntent go back
+PrevIntent go to previous track
+PrevIntent previous track
 
 VolumeUpIntent turn it up
 VolumeUpIntent turn the volume up
 VolumeUpIntent louder
 VolumeUpIntent volume up
+VolumeUpIntent crank it up
+VolumeUpIntent turn up {living room|Room}
+VolumeUpIntent turn up {living room|Room} volume
+VolumeUpIntent turn up the {living room|Room}
+VolumeUpIntent turn up the {living room|Room} volume
+VolumeUpIntent turn up {dining room|Room}
+VolumeUpIntent turn up {dining room|Room} volume
+VolumeUpIntent turn up the {dining room|Room}
+VolumeUpIntent turn up the {dining room|Room} volume
+VolumeUpIntent turn up {bathroom|Room}
+VolumeUpIntent turn up {bathroom|Room} volume
+VolumeUpIntent turn up the {bathroom|Room}
+VolumeUpIntent turn up the {bathroom|Room} volume
+VolumeUpIntent turn up {bedroom|Room}
+VolumeUpIntent turn up {bedroom|Room} volume
+VolumeUpIntent turn up the {bedroom|Room}
+VolumeUpIntent turn up the {bedroom|Room} volume
+VolumeUpIntent turn up {kitchen|Room}
+VolumeUpIntent turn up {kitchen|Room} volume
+VolumeUpIntent turn up the {kitchen|Room}
+VolumeUpIntent turn up the {kitchen|Room} volume
 
 VolumeDownIntent turn it down
 VolumeDownIntent turn the volume down
 VolumeDownIntent softer
 VolumeDownIntent quieter
+VolumeDownIntent be quiet
 VolumeDownIntent volume down
+VolumeDownIntent turn down {living room|Room}
+VolumeDownIntent turn down {living room|Room} volume
+VolumeDownIntent turn down the {living room|Room}
+VolumeDownIntent turn down the {living room|Room} volume
+VolumeDownIntent turn down {dining room|Room}
+VolumeDownIntent turn down {dining room|Room} volume
+VolumeDownIntent turn down the {dining room|Room}
+VolumeDownIntent turn down the {dining room|Room} volume
+VolumeDownIntent turn down {bathroom|Room}
+VolumeDownIntent turn down {bathroom|Room} volume
+VolumeDownIntent turn down the {bathroom|Room}
+VolumeDownIntent turn down the {bathroom|Room} volume
+VolumeDownIntent turn down {bedroom|Room}
+VolumeDownIntent turn down {bedroom|Room} volume
+VolumeDownIntent turn down the {bedroom|Room}
+VolumeDownIntent turn down the {bedroom|Room} volume
+VolumeDownIntent turn down {kitchen|Room}
+VolumeDownIntent turn down {kitchen|Room} volume
+VolumeDownIntent turn down the {kitchen|Room}
+VolumeDownIntent turn down the {kitchen|Room} volume

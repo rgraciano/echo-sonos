@@ -1,0 +1,31 @@
+{
+  "session": {
+    "new": true,
+    "sessionId": "session1234",
+    "attributes": {},
+    "user": {
+      "userId": null
+    },
+    "application": {
+      "applicationId": "amzn1.echo-sdk-ams.app.dc99e20d-bd2b-49dd-a13d-c457aba8ebee"
+    }
+  },
+  "version": "1.0",
+  "request": {
+    "intent": {
+      "slots": {
+        "Room": {
+          "name": "Room",
+          "value": "Dining Room"
+        },
+        "Level": {
+            "name": "Level",
+            "value": 50
+        }
+      },
+      "name": "VolumeIntent"
+    },
+    "type": "IntentRequest",
+    "requestId": "request5678"
+  }
+}
