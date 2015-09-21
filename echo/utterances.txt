@@ -18,3 +18,17 @@ VolumeDownIntent turn the volume down
 VolumeDownIntent softer
 VolumeDownIntent quieter
 VolumeDownIntent volume down
+
+NextTrackIntent go to next track
+NextTrackIntent skip to next track
+NextTrackIntent skip
+NextTrackIntent skip this track
+
+PreviousTrackIntent go to previous track
+PreviousTrackIntent go back
+
+WhatsPlayingIntent what's playing
+WhatsPlayingIntent what's this
+WhatsPlayingIntent what is this
+WhatsPlayingIntent what song is this
+WhatsPlayingIntent what am i hearing
