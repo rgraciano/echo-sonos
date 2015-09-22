@@ -20,6 +20,18 @@
     {
       "intent": "VolumeUpIntent",
       "slots": []
+    },
+    {
+      "intent": "NextTrackIntent",
+      "slots": []
+    },
+    {
+      "intent": "PreviousTrackIntent",
+      "slots": []
+    },
+    {
+      "intent": "WhatsPlayingIntent",
+      "slots": []
     }
   ]
 }
