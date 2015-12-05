@@ -66,15 +66,15 @@ To set it up, you need to do the following:
 The files in the server folder are shell scripts to automatically update the server when the presets file is changed. There are 2 versions, a generic version and the a version for use on a Raspberry Pi. Both versions require the installation of `inotify-tools`.
 1. Copy the shell scripts to your server, (I used the home directory), 
 2. Add the following lines to /etc/rc.local before `exit 0`
-	node /[dir]/[to]/node-sonos-http-api-master/server.js&
-	echo "started node" > /[log location]/startup.log
-	bash /[dir]/[to]/daemon.sh&
-	echo "started daemon" > /[log location]/startup.log
+    node /[dir]/[to]/node-sonos-http-api-master/server.js&
+    echo "started node" > /[log location]/startup.log
+    bash /[dir]/[to]/daemon.sh&
+    echo "started daemon" > /[log location]/startup.log
 For example, on rasperry pi it might look like:
-	node /home/pi/node-sonos-http-api-master/server.js&
-	echo "started node" > /home/pi/startup.log
-	bash /home/pi/daemon.sh&
-	echo "started daemon" > /home/pi/startup.log
+    node /home/pi/node-sonos-http-api-master/server.js&
+    echo "started node" > /home/pi/startup.log
+    bash /home/pi/daemon.sh&
+    echo "started daemon" > /home/pi/startup.log
 3. Restart the server
 
 # Troubleshooting
