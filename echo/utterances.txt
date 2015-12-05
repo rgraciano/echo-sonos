@@ -3,6 +3,10 @@ PlayIntent play {rock|Preset}
 PlayIntent play {rap|Preset}
 PlayIntent play {pop rap|Preset}
 
+ResumeIntent continue
+ResumeIntent resume
+ResumeIntent play
+
 PauseIntent pause
 PauseIntent stop
 PauseIntent stop the music
@@ -44,3 +48,4 @@ WhatsPlayingIntent what song is this
 WhatsPlayingIntent what band is this
 WhatsPlayingIntent who is this
 WhatsPlayingIntent what am i hearing
+
