@@ -71,12 +71,14 @@ The files in the server folder are shell scripts to automatically update the ser
     echo "started node" > /[log location]/startup.log
     bash /[dir]/[to]/daemon.sh&
     echo "started daemon" > /[log location]/startup.log```
+
 For example, on rasperry pi it might look like:
 
 ```    node /home/pi/node-sonos-http-api-master/server.js&
     echo "started node" > /home/pi/startup.log
     bash /home/pi/daemon.sh&
     echo "started daemon" > /home/pi/startup.log```
+
 3. Restart the server
 
 # Troubleshooting
