@@ -12,6 +12,7 @@ Other commands:
 
 * "Alexa, tell Sonos to turn it up (or down)"
 * "Alexa, tell Sonos to pause"
+* "Alexa, tell Sonos to resume"
 * "Alexa, tell Sonos next track"
 * "Alexa, tell Sonos previous track"
 * "Alexa, ask Sonos what's playing"
