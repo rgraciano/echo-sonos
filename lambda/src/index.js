@@ -60,6 +60,11 @@ EchoSonos.prototype.intentHandlers = {
         console.log("WhatsPlayingIntent received");
         options.path = '/state';
         stateHttpreq(options, response);
+    }, 
+    ResumeIntent: function (intent, session, response) {
+        console.log("ResumeIntent received");
+        options.path = '/play';
+        httpreq(options, response, "OK");
     }
 };
 
