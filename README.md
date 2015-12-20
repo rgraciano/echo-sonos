@@ -1,7 +1,5 @@
 # echo-sonos
-Amazon Echo / Alexa integration with Sonos
-
-All of the pieces for an Amazon Echo (Alexa) <-> Sonos integration.  Originally I wanted to use IFTTT with the Maker plugin, but Maker's triggers weren't configurable enough.
+All of the pieces for an Amazon Echo (Alexa) <-> Sonos integration.
 
 Here's how it's used:
 
@@ -26,6 +24,7 @@ Room-specific commands, where "ROOM" could be any of your Sonos room names (eg K
 * Next: "Alexa, tell Sonos go to the next track in the ROOM"
 * Previous: "Alexa, tell Sonos to go back in the ROOM"
 * What's playing: "Alexa, ask Sonos what's playing in the ROOM"
+* Many other natural phrasings are supported for each command. The file "echo/utterances.txt" has all of the examples.
 
 When you say the command to Alexa, it triggers the Alexa skill with invocation name Sonos. The Alexa skill calls a web service running on AWS Lambda, passing it the preset name ("rock" in the example). Lambda then fires an HTTP request to a node.js server running node-sonos-http-api on your local network. node-sonos-http-api gathers all of the settings from the preset named "rock" in presets.json, sending them all to Sonos over your local network.
 
