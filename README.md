@@ -65,8 +65,10 @@ To set it up, you need to do the following:
 
 # Optional Server Setup
 The files in the server folder are shell scripts to automatically update the server when the presets file is changed. There are 2 versions, a generic version and the a version for use on a Raspberry Pi. Both versions require the installation of `inotify-tools`.
-1. Copy the shell scripts to your server, (I used the home directory), 
-2. Add the following lines to /etc/rc.local before `exit 0`
+
+1\. Copy the shell scripts to your server
+
+2\. Add the following lines to /etc/rc.local before `exit 0`
 
 
     node /[dir]/[to]/node-sonos-http-api-master/server.js&
@@ -74,15 +76,14 @@ The files in the server folder are shell scripts to automatically update the ser
     bash /[dir]/[to]/daemon.sh&
     echo "started daemon" > /[log location]/startup.log
 
-For example, on rasperry pi it might look like:
-
+For example, on Raspberry Pi it might look like:
 
     node /home/pi/node-sonos-http-api-master/server.js&
     echo "started node" > /home/pi/startup.log
     bash /home/pi/daemon.sh&
     echo "started daemon" > /home/pi/startup.log
 
-3. Restart the server
+3\. Restart the server
 
 # Troubleshooting
 1. If you have trouble with your node server not triggering the music even when you hit it on localhost, it probably can't find Sonos. If it crashes with a message about "discovery" being "null" then that's definitely the case. Usually you're on the wrong wifi network, you forgot to close your Sonos application (which screws everything up), or your server died for some reason and you didn't notice.
