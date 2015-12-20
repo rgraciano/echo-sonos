@@ -8,14 +8,24 @@ Here's how it's used:
 1. I pre-define typical use-cases for my Sonos, like playing my Rock favorite on all speakers at typical volume
 2. I say "Alexa, use Sonos to play Rock"
  
-Other commands:
+Global commands (no rooms required):
 
-* "Alexa, tell Sonos to turn it up (or down)"
-* "Alexa, tell Sonos to pause"
-* "Alexa, tell Sonos to resume"
-* "Alexa, tell Sonos next track"
-* "Alexa, tell Sonos previous track"
-* "Alexa, ask Sonos what's playing"
+* Presets: "Alexa, tell Sonos to play Rock"
+* Pause all: "Alexa, tell Sonos to pause"
+* Resume all: "Alexa, tell Sonos to resume"
+
+Room-specific commands, where "ROOM" could be any of your Sonos room names (eg Kitchen, Master Bedroom, and so on):
+
+* Playlists: "Alexa, tell Sonos to start playlist MY PLAYLIST in the ROOM"
+* Favorites: "Alexa, tell Sonos to play favorite MY FAVORITE in the ROOM"
+* Volume up: "Alexa, tell Sonos to turn it up in the ROOM"
+* Volume down: "Alexa, tell Sonos to turn it down in the ROOM"
+* Set volume: "Alexa, tell Sonos to change the volume to 22 in the ROOM"
+* Mute: "Alexa, tell Sonos to mute in the ROOM"
+* Unmute: "Alexa, tell Sonos to unmute in the ROOM"
+* Next: "Alexa, tell Sonos go to the next track in the ROOM"
+* Previous: "Alexa, tell Sonos to go back in the ROOM"
+* What's playing: "Alexa, ask Sonos what's playing in the ROOM"
 
 When you say the command to Alexa, it triggers the Alexa skill with invocation name Sonos. The Alexa skill calls a web service running on AWS Lambda, passing it the preset name ("rock" in the example). Lambda then fires an HTTP request to a node.js server running node-sonos-http-api on your local network. node-sonos-http-api gathers all of the settings from the preset named "rock" in presets.json, sending them all to Sonos over your local network.
 
@@ -43,7 +53,8 @@ To set it up, you need to do the following:
 2. Name can be whatever you want. "Invocation" is what you say (I used "Sonos").
 3. Put a dummy value in the Endpoint. We'll come back to this.
 4. Click Next, taking you to Interaction Model. Copy this repo's "echo/intents.json" into the "Intent Schema" field, and "echo/utterances.txt" into "Sample Utterances".
-5. Don't test yet, just save. Click back to "Skill Information" and copy the "Application ID". You'll need this for Lambda.
+5. Still in Interaction Model, create a Custom Slot Type ("Add Slot Type"). Add a new type for PRESETS and another for ROOMS. Into each, copy/paste the contents of "echo/custom_slots/PRESETS.slot.txt" and "echo/custom_slots/ROOMS.slot.txt".
+6. Don't test yet, just save. Click back to "Skill Information" and copy the "Application ID". You'll need this for Lambda.
 
 # Configure the AWS Lambda service that will trigger your node-sonos-http-api server
 1. Create an AWS Lambda account if you don't have one already. It's free!
@@ -90,5 +101,11 @@ For example, on Raspberry Pi it might look like:
 2. If your Lambda test doesn't work, then you might have a case mis-match between the preset name in presets.json and the value in the Lambda test. It's also possible Lambda can't reach your host because your DynDNS setup isn't working, or a firewall is blocking it. If you're unsure, try the Maker plugin on IFTTT, to see if you can get it working externally from someplace else.
 3. If Alexa says something about not being able to use your skill, then Lambda is probably returning an error. Check the Lambda logs. Alexa will say this if she doesn't see a proper response from the Lambda server.
 
+# Upgrade Checklist
+When upgrading your code to the latest version, make sure you do the following:
 
-Hope this helps somebody. Feel free to drop me a line with questions.
+1. In the Interaction Model under the Alexa Skills Kit console, update the Intents, the Utterances, and the two Custom Slot Types
+2. Zip all of the .js files (without the folder - just the .js) and update them in Lambda
+
+# Contributing
+Lots of people are forking echo-sonos, which is awesome. I'd love to bring some of that innovation back into the project, so don't be shy about submitting pull requests!

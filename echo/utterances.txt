@@ -1,51 +1,130 @@
-PlayIntent play {test|Preset}
-PlayIntent play {rock|Preset}
-PlayIntent play {rap|Preset}
-PlayIntent play {pop rap|Preset}
+PlayIntent play {Preset}
+
+PlaylistIntent playlist {Preset} in {Room}
+PlaylistIntent playlist {Preset} in the {Room}
+PlaylistIntent play playlist {Preset} in {Room}
+PlaylistIntent play playlist {Preset} in the {Room}
+PlaylistIntent start playlist {Preset} in {Room}
+PlaylistIntent start playlist {Preset} in the {Room}
+
+FavoriteIntent favorite {Preset} in {Room}
+FavoriteIntent favorite {Preset} in the {Room}
+FavoriteIntent play favorite {Preset} in {Room}
+FavoriteIntent play favorite {Preset} in the {Room}
+FavoriteIntent start favorite {Preset} in {Room}
+FavoriteIntent start favorite {Preset} in the {Room}
 
 ResumeIntent continue
+ResumeIntent continue playing
+ResumeIntent continue playing the music
 ResumeIntent resume
-ResumeIntent play
+ResumeIntent resume the music
 
 PauseIntent pause
 PauseIntent stop
 PauseIntent stop the music
 PauseIntent pause the music
 
-VolumeUpIntent turn it up
-VolumeUpIntent turn the volume up
-VolumeUpIntent louder
-VolumeUpIntent volume up
+VolumeUpIntent turn it up in {Room}
+VolumeUpIntent turn it up in the {Room}
+VolumeUpIntent turn the volume up in {Room}
+VolumeUpIntent turn the volume up in the {Room}
+VolumeUpIntent louder in {Room}
+VolumeUpIntent louder in the {Room}
+VolumeUpIntent volume up in {Room}
+VolumeUpIntent volume up in the {Room}
 
-VolumeDownIntent turn it down
-VolumeDownIntent turn the volume down
-VolumeDownIntent softer
-VolumeDownIntent quieter
-VolumeDownIntent volume down
+VolumeDownIntent turn it down in {Room}
+VolumeDownIntent turn it down in the {Room}
+VolumeDownIntent turn the volume down in {Room}
+VolumeDownIntent turn the volume down in the {Room}
+VolumeDownIntent softer in {Room}
+VolumeDownIntent softer in the {Room}
+VolumeDownIntent quieter in {Room}
+VolumeDownIntent quieter in the {Room}
+VolumeDownIntent volume down in {Room}
+VolumeDownIntent volume down in the {Room}
 
-NextTrackIntent go to next track
-NextTrackIntent skip to next track
-NextTrackIntent skip
-NextTrackIntent skip song
-NextTrackIntent next
-NextTrackIntent next track
-NextTrackIntent next song
-NextTrackIntent skip this track
-NextTrackIntent skip this song
+SetVolumeIntent set volume to {Percent} in {Room}
+SetVolumeIntent set volume to {Percent} percent in {Room}
+SetVolumeIntent set volume to {Percent} in the {Room}
+SetVolumeIntent set volume to {Percent} percent in the {Room}
+SetVolumeIntent change volume to {Percent} in {Room}
+SetVolumeIntent change volume to {Percent} percent in {Room}
+SetVolumeIntent change volume to {Percent} in the {Room}
+SetVolumeIntent change volume to {Percent} percent in the {Room}
+SetVolumeIntent change the volume to {Percent} in {Room}
+SetVolumeIntent change the volume to {Percent} percent in {Room}
+SetVolumeIntent change the volume to {Percent} in the {Room}
+SetVolumeIntent change the volume to {Percent} percent in the {Room}
+SetVolumeIntent turn it up to {Percent} in {Room}
+SetVolumeIntent turn it up to {Percent} percent in {Room}
+SetVolumeIntent turn it up to {Percent} in the {Room}
+SetVolumeIntent turn it up to {Percent} percent in the {Room}
+SetVolumeIntent turn it down to {Percent} in {Room}
+SetVolumeIntent turn it down to {Percent} percent in {Room}
+SetVolumeIntent turn it down to {Percent} in the {Room}
+SetVolumeIntent turn it down to {Percent} percent in the {Room}
 
-PreviousTrackIntent go to previous track
-PreviousTrackIntent go to the last song
-PreviousTrackIntent go back
-PreviousTrackIntent last track
-PreviousTrackIntent last song
-PreviousTrackIntent previous track
-PreviousTrackIntent previous song
+NextTrackIntent go to next track in {Room}
+NextTrackIntent go to next track in the {Room}
+NextTrackIntent go to the next track in {Room}
+NextTrackIntent go to the next track in the {Room}
+NextTrackIntent skip to next track in {Room}
+NextTrackIntent skip to next track in the {Room}
+NextTrackIntent skip to the next track in {Room}
+NextTrackIntent skip to the next track in the {Room}
+NextTrackIntent skip in {Room}
+NextTrackIntent skip in the {Room}
+NextTrackIntent next in {Room}
+NextTrackIntent next in the {Room}
+NextTrackIntent next track in {Room}
+NextTrackIntent next track in the {Room}
+NextTrackIntent next song in {Room}
+NextTrackIntent next song in the {Room}
+NextTrackIntent skip this track in {Room}
+NextTrackIntent skip this track in the {Room}
+NextTrackIntent skip song in {Room}
+NextTrackIntent skip song in the {Room}
+NextTrackIntent skip this song in {Room}
+NextTrackIntent skip this song in the {Room}
 
-WhatsPlayingIntent what's playing
-WhatsPlayingIntent what's this
-WhatsPlayingIntent what is this
-WhatsPlayingIntent what song is this
-WhatsPlayingIntent what band is this
-WhatsPlayingIntent who is this
-WhatsPlayingIntent what am i hearing
+PreviousTrackIntent go to previous track in {Room}
+PreviousTrackIntent go to previous track in the {Room}
+PreviousTrackIntent go to the previous track in {Room}
+PreviousTrackIntent go to the previous track in the {Room}
+PreviousTrackIntent go to the last song in {Room}
+PreviousTrackIntent go to the last song in the {Room}
+PreviousTrackIntent go back in {Room}
+PreviousTrackIntent go back in the {Room}
+PreviousTrackIntent go back to the previous track in {Room}
+PreviousTrackIntent go back to the previous track in the {Room}
+PreviousTrackIntent last track in {Room}
+PreviousTrackIntent last track in the {Room}
+PreviousTrackIntent last song in {Room}
+PreviousTrackIntent last song in the {Room}
+PreviousTrackIntent previous track in {Room}
+PreviousTrackIntent previous track in the {Room}
+PreviousTrackIntent previous song in {Room}
+PreviousTrackIntent previous song in the {Room}
+
+WhatsPlayingIntent what's playing in {Room}
+WhatsPlayingIntent what's playing in the {Room}
+WhatsPlayingIntent what song is this in {Room}
+WhatsPlayingIntent what song is this in the {Room}
+WhatsPlayingIntent what band is this in {Room}
+WhatsPlayingIntent what band is this in the {Room}
+WhatsPlayingIntent who's playing in {Room}
+WhatsPlayingIntent who's playing in the {Room}
+WhatsPlayingIntent what am i hearing in the {Room}
+
+MuteIntent mute in {Room}
+MuteIntent mute in the {Room}
+MuteIntent mute {Room}
+MuteIntent mute the {Room}
+
+UnmuteIntent unmute in {Room}
+UnmuteIntent unmute in the {Room}
+UnmuteIntent unmute {Room}
+UnmuteIntent unmute the {Room}
 

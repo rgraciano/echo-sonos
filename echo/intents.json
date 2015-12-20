@@ -1,41 +1,145 @@
 {
-  "intents": [
+    "intents": [
     {
-     "intent": "PlayIntent",
-     "slots": [
+        "intent": "PlayIntent",
+        "slots": [
+            {
+                "name": "Preset",
+                "type": "PRESETS"
+            }
+        ]
+    },
+ 
+    {
+      "intent": "PlaylistIntent",
+      "slots": [
         {
-          "name": "Preset",
-          "type": "LITERAL"
+            "name": "Preset",
+            "type": "PRESETS"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+  
+    {
+      "intent": "FavoriteIntent",
+      "slots": [
+        {
+            "name": "Preset",
+            "type": "PRESETS"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+
+    {
+      "intent": "PauseIntent",
+      "slots": [
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+   
+    {
+      "intent": "ResumeIntent",
+      "slots": [
+         {
+            "name": "Room",
+            "type": "ROOMS"
+         }   
+      ] 
+    },
+
+    {
+      "intent": "VolumeDownIntent",
+      "slots": [
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+    
+    {
+      "intent": "VolumeUpIntent",
+      "slots": [
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+
+    {
+      "intent": "SetVolumeIntent",
+      "slots": [
+        {
+            "name": "Percent",
+            "type": "AMAZON.NUMBER"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
         }
       ]
     },
-    {
-      "intent": "PauseIntent",
-      "slots": []
-    },
-    {
-      "intent": "ResumeIntent",
-      "slots": []
-    },
-    {
-      "intent": "VolumeDownIntent",
-      "slots": []
-    },
-    {
-      "intent": "VolumeUpIntent",
-      "slots": []
-    },
+  
     {
       "intent": "NextTrackIntent",
-      "slots": []
+      "slots": [
+          {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
     },
+  
     {
       "intent": "PreviousTrackIntent",
-      "slots": []
+      "slots": [
+          {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
     },
+   
     {
       "intent": "WhatsPlayingIntent",
-      "slots": []
+      "slots": [
+          {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+
+    {
+      "intent": "MuteIntent",
+      "slots": [
+          {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+
+    {
+      "intent": "UnmuteIntent",
+      "slots": [
+          {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
     }
   ]
 }

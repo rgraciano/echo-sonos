@@ -1,8 +1,22 @@
-// Alexa SDK for JavaScript v1.0.00
-// Copyright (c) 2014-2015 Amazon.com, Inc. or its affiliates. All Rights Reserved. Use is subject to license terms.
+/**
+    Copyright 2014-2015 Amazon.com, Inc. or its affiliates. All Rights Reserved.
+
+    Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at
+
+        http://aws.amazon.com/apache2.0/
+
+    or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+*/
+
 'use strict';
+
 function AlexaSkill(appId) {
     this._appId = appId;
+}
+
+AlexaSkill.speechOutputType = {
+    PLAIN_TEXT: 'PlainText',
+    SSML: 'SSML'
 }
 
 AlexaSkill.prototype.requestHandlers = {
@@ -32,7 +46,7 @@ AlexaSkill.prototype.eventHandlers = {
     },
 
     /**
-     * Called when the user launches the skill without specifying what they want.
+     * Called when the user invokes the skill without specifying what they want.
      * The subclass must override this function and provide feedback to the user.
      */
     onLaunch: function (launchRequest, session, response) {
@@ -100,21 +114,29 @@ var Response = function (context, session) {
     this._session = session;
 };
 
+function createSpeechObject(optionsParam) {
+    if (optionsParam && optionsParam.type === 'SSML') {
+        return {
+            type: optionsParam.type,
+            ssml: optionsParam.speech
+        };
+    } else {
+        return {
+            type: optionsParam.type || 'PlainText',
+            text: optionsParam.speech || optionsParam
+        }
+    }
+}
+
 Response.prototype = (function () {
     var buildSpeechletResponse = function (options) {
         var alexaResponse = {
-            outputSpeech: {
-                type: 'PlainText',
-                text: options.output
-            },
+            outputSpeech: createSpeechObject(options.output),
             shouldEndSession: options.shouldEndSession
         };
         if (options.reprompt) {
             alexaResponse.reprompt = {
-                outputSpeech: {
-                    type: 'PlainText',
-                    text: options.reprompt
-                }
+                outputSpeech: createSpeechObject(options.reprompt)
             };
         }
         if (options.cardTitle && options.cardContent) {
@@ -125,8 +147,8 @@ Response.prototype = (function () {
             };
         }
         var returnResult = {
-            version: '1.0',
-            response: alexaResponse
+                version: '1.0',
+                response: alexaResponse
         };
         if (options.session && options.session.attributes) {
             returnResult.sessionAttributes = options.session.attributes;

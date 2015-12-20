@@ -1,0 +1,19 @@
+living room
+dining room
+family room
+office
+bedroom
+kitchen
+pool
+den
+master bedroom
+tv room
+kitchen main
+kitchen wall
+foyer
+hallway
+bathroom
+guest bathroom
+deck
+porch
+patio
