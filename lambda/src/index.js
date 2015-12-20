@@ -26,48 +26,56 @@ EchoSonos.prototype.intentHandlers = {
         console.log("PlayIntent received");
         options.path = '/preset/'+encodeURIComponent(intent.slots.Preset.value);
         httpreq(options, function() {});
+        response.tell("");
     },
 
     PlaylistIntent: function (intent, session, response) {
         console.log("PlaylistIntent received");
         options.path = '/' + encodeURIComponent(intent.slots.Room.value) + '/playlist/' + encodeURIComponent(intent.slots.Preset.value);
         httpreq(options, function() {});
+        response.tell("");
     },
 
     FavoriteIntent: function (intent, session, response) {
         console.log("FavoriteIntent received");
         options.path = '/' + encodeURIComponent(intent.slots.Room.value) + '/favorite/' + encodeURIComponent(intent.slots.Preset.value);
         httpreq(options, function() {});
+        response.tell("");
     },
 
     ResumeIntent: function (intent, session, response) {
         console.log("ResumeIntent received");
         options.path = '/resumeall';
         httpreq(options, function() {});
+        response.tell("");
     },
 
     PauseIntent: function (intent, session, response) {
         console.log("PauseIntent received");
         options.path = '/pauseall';
         httpreq(options, function() {});
+        response.tell("");
     },
 
     VolumeDownIntent: function (intent, session, response) {
         console.log("VolumeDownIntent received");
         options.path = '/' + encodeURIComponent(intent.slots.Room.value) + '/volume/-10';
         httpreq(options, function() {});
+        response.tell("");
     },
 
     VolumeUpIntent: function (intent, session, response) {
         console.log("VolumeUpIntent received");
         options.path = '/' + encodeURIComponent(intent.slots.Room.value) + '/volume/+10';
         httpreq(options, function() {});
+        response.tell("");
     },
 
     SetVolumeIntent: function (intent, session, response) {
         console.log("SetVolumeIntent received");
         options.path = '/'  + encodeURIComponent(intent.slots.Room.value) + '/volume/' + encodeURIComponent(intent.slots.Percent.value);
         httpreq(options, function() {});
+        response.tell("");
     },
 
     NextTrackIntent: function (intent, session, response) {
@@ -76,6 +84,7 @@ EchoSonos.prototype.intentHandlers = {
         actOnCoordinator(options, '/next', intent.slots.Room.value,  function (responseBodyJson) {
             // do nothing on response; hearing the track change is ample confirmation
         });
+        response.tell("");
     },
 
     PreviousTrackIntent: function (intent, session, response) {
@@ -83,6 +92,7 @@ EchoSonos.prototype.intentHandlers = {
         actOnCoordinator(options, '/previous', intent.slots.Room.value,  function (responseBodyJson) {
             // do nothing on response; hearing the track change is ample confirmation
         });
+        response.tell("");
     },
 
     WhatsPlayingIntent: function (intent, session, response) {
@@ -102,12 +112,14 @@ EchoSonos.prototype.intentHandlers = {
         console.log("MuteIntent received");
         options.path = '/' + encodeURIComponent(intent.slots.Room.value) + '/mute';
         httpreq(options, function() {});
+        response.tell("");
     },
 
     UnmuteIntent: function (intent, session, response) {
         console.log("UnmuteIntent received");
         options.path = '/' + encodeURIComponent(intent.slots.Room.value) + '/unmute';
         httpreq(options, function() {});
+        response.tell("");
     },
 }
 
