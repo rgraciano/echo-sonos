@@ -153,6 +153,7 @@ function actOnCoordinator(options, actionPath, room, onCompleteFun) {
     options.path = '/zones';
 
     var handleZonesResponse = function (responseJson) {
+        responseJson = JSON.parse(responseJson);
         var coordinatorRoomName = findCoordinatorForRoom(responseJson, room);
         options.path = '/' + encodeURIComponent(coordinatorRoomName) + actionPath;
         httpreq(options, onCompleteFun);
