@@ -1,11 +1,8 @@
 # echo-sonos
 All of the pieces for an Amazon Echo (Alexa) <-> Sonos integration.
 
-Here's how it's used:
+# Usage
 
-1. I pre-define typical use-cases for my Sonos, like playing my Rock favorite on all speakers at typical volume
-2. I say "Alexa, use Sonos to play Rock"
- 
 Global commands (no rooms required):
 
 * Presets: "Alexa, tell Sonos to play Rock"
@@ -27,7 +24,16 @@ Room-specific commands, where "ROOM" could be any of your Sonos room names (eg K
 * Set volume (all in group): "Alexa, tell Sonos to change the volume to 22 in the ROOM group"
 * Many other natural phrasings are supported for each command. The file "echo/utterances.txt" has all of the examples.
 
-When you say the command to Alexa, it triggers the Alexa skill with invocation name Sonos. The Alexa skill calls a web service running on AWS Lambda, passing it the preset name ("rock" in the example). Lambda then fires an HTTP request to a node.js server running node-sonos-http-api on your local network. node-sonos-http-api gathers all of the settings from the preset named "rock" in presets.json, sending them all to Sonos over your local network.
+Everything's dynamic - rooms and playlists are taken dynamically from your speech. There are common room names in utterances.txt to help the Alexa engine recognize valid entries, but it's not necessary to add more. 
+
+The service is also smart enough to control your whole group when given only a room name, even if that room isn't the Sonos coordinator, so you can change the volume in an entire group without having to remember which speaker is the coordinator.
+
+# How it works
+
+1. When you say the command to Alexa, it triggers the Alexa skill with invocation name Sonos. 
+2. The Alexa skill calls a web service running on AWS Lambda, passing it the preset name ("rock" in the example). 
+3. Lambda then fires an HTTP request to a node.js server running node-sonos-http-api on your local network. 
+4. node-sonos-http-api interprets the command and relays to Sonos over your local network.
 
 Included here are the Alexa API definitions, the Lambda AWS service that catches the Alexa requests, and an example preset configuration for jishi's node-sonos-http-api to actually play the music.
 
@@ -36,9 +42,9 @@ To set it up, you need to do the following:
 # Get jishi's node-sonos-http-api working
 1. Install node.js on a server on the same network as your Sonos.
 2. Grab https://github.com/jishi/node-sonos-http-api and run it on that server.
-3. Take the node-sonos-http-api/presets.json that I have here and drop it into your node-sonos-http-api root directory. Modify it to use your speaker names and your favorite stations. Don't worry about the "uri" field - it's unused. Make sure the preset names are lowercase (like "test" and "rock" in my example).
+3. Take the node-sonos-http-api/presets.json that I have here and drop it into your node-sonos-http-api root directory. Modify it to use your speaker names and your favorite stations. Don't worry about the "uri" field - it's unused. Make sure the preset names are lowercase (like "test" and "rock" in my example). NOTE: You can skip this step if you only want to use Playlists and Favorites, which require no configuration.
 4. Test it by hitting http://yourserverip:5005/zones
-5. If you get a response, great! Now try playing something: http://yourserverip:5005/preset/[your_preset_name]. To stop, use /pauseall.
+5. If you get a response, great! Now try playing something: http://yourserverip:5005/preset/[your_preset_name]. Or, play a Playlist or Favorite (example: http://yourserverip:5005/kitchen/playlist/myplaylist). To stop, use /pauseall.
 6. If you have problems, make sure you are on the same network as your Sonos AND make sure you don't have a Sonos client running on the same machine. The client can interfere with the node.js server.
 
 # Expose your server to the outside world
