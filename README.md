@@ -16,14 +16,16 @@ Room-specific commands, where "ROOM" could be any of your Sonos room names (eg K
 
 * Playlists: "Alexa, tell Sonos to start playlist MY PLAYLIST in the ROOM"
 * Favorites: "Alexa, tell Sonos to play favorite MY FAVORITE in the ROOM"
-* Volume up: "Alexa, tell Sonos to turn it up in the ROOM"
-* Volume down: "Alexa, tell Sonos to turn it down in the ROOM"
-* Set volume: "Alexa, tell Sonos to change the volume to 22 in the ROOM"
-* Mute: "Alexa, tell Sonos to mute in the ROOM"
-* Unmute: "Alexa, tell Sonos to unmute in the ROOM"
 * Next: "Alexa, tell Sonos go to the next track in the ROOM"
 * Previous: "Alexa, tell Sonos to go back in the ROOM"
 * What's playing: "Alexa, ask Sonos what's playing in the ROOM"
+* Mute: "Alexa, tell Sonos to mute in the ROOM"
+* Unmute: "Alexa, tell Sonos to unmute in the ROOM"
+* Volume up or down (single room): "Alexa, tell Sonos to turn it [up,down] in the ROOM"
+* Volume up or down (all in group): "Alexa, tell Sonos to turn it [up,down] in the ROOM group"
+* Set volume (single room): "Alexa, tell Sonos to change the volume to 22 in the ROOM"
+* Set volume (all in group): "Alexa, tell Sonos to change the volume to 22 in the ROOM group"
+
 * Many other natural phrasings are supported for each command. The file "echo/utterances.txt" has all of the examples.
 
 When you say the command to Alexa, it triggers the Alexa skill with invocation name Sonos. The Alexa skill calls a web service running on AWS Lambda, passing it the preset name ("rock" in the example). Lambda then fires an HTTP request to a node.js server running node-sonos-http-api on your local network. node-sonos-http-api gathers all of the settings from the preset named "rock" in presets.json, sending them all to Sonos over your local network.

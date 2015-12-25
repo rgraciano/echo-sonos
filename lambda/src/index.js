@@ -64,26 +64,17 @@ EchoSonos.prototype.intentHandlers = {
 
     VolumeDownIntent: function (intent, session, response) {
         console.log("VolumeDownIntent received");
-        options.path = '/' + encodeURIComponent(intent.slots.Room.value) + '/volume/-10';
-        httpreq(options, function() {
-            response.tell("OK");
-        });
+        volumeHandler(intent.slots.Room.value, response, '-10');
     },
 
     VolumeUpIntent: function (intent, session, response) {
         console.log("VolumeUpIntent received");
-        options.path = '/' + encodeURIComponent(intent.slots.Room.value) + '/volume/+10';
-        httpreq(options, function() {
-            response.tell("OK");
-        });
+        volumeHandler(intent.slots.Room.value, response, '+10');
     },
 
     SetVolumeIntent: function (intent, session, response) {
         console.log("SetVolumeIntent received");
-        options.path = '/'  + encodeURIComponent(intent.slots.Room.value) + '/volume/' + encodeURIComponent(intent.slots.Percent.value);
-        httpreq(options, function() {
-            response.tell("OK");
-        });
+        volumeHandler(intent.slots.Room.value, response, intent.slots.Percent.value);
     },
 
     NextTrackIntent: function (intent, session, response) {
@@ -133,6 +124,56 @@ EchoSonos.prototype.intentHandlers = {
     },
 }
 
+function volumeHandler(roomValue, response, volume) {
+    var roomAndGroup = parseRoomAndGroup(roomValue);
+
+    if (!roomAndGroup.room) {
+        response.tell("Please specify a room. For example, turn the volume down in the KITCHEN");
+        return;
+    }
+
+    if (!roomAndGroup.group) {
+        options.path = '/' + encodeURIComponent(roomAndGroup.room) + '/volume/' + volume;
+
+        httpreq(options, function() {
+            response.tell("OK");
+        });
+    }
+
+    else {
+        actOnCoordinator(options, '/groupVolume/' + volume, roomAndGroup.room,  function (responseBodyJson) {
+            response.tell("OK");
+        });
+    }
+}
+
+/* Given a string roomArgument that either looks like "my room" or "my room group",
+ * returns an object with two members:
+ *   obj.group: true if roomArgument ends with "group", false otherwise.
+ *   obj.room: if roomArgument is "my room group", returns "my room"
+ */
+function parseRoomAndGroup(roomArgument) {
+    var roomAndGroupParsed = new Object();
+    roomAndGroupParsed.group = false;
+    roomAndGroupParsed.room = false;
+
+    if (!roomArgument) {
+        return roomAndGroupParsed;
+    }
+
+    var groupIndex = roomArgument.indexOf("group");
+
+    if (groupIndex && (groupIndex + 4 == (roomArgument.length - 1)) && roomArgument.length >= 7) {
+        roomAndGroupParsed.group = true;
+        roomAndGroupParsed.room = roomArgument.substr(0, groupIndex - 1);
+    }
+    else {
+        roomAndGroupParsed.room = roomArgument;
+    }
+
+    return roomAndGroupParsed;
+}
+
 function httpreq(options, responseCallback) {
   http.request(options, function(httpResponse) {
       var body = '';
@@ -151,11 +192,13 @@ function httpreq(options, responseCallback) {
 // 2) perform an action on that coordinator 
 function actOnCoordinator(options, actionPath, room, onCompleteFun) {
     options.path = '/zones';
+    console.log("getting zones...");
 
     var handleZonesResponse = function (responseJson) {
         responseJson = JSON.parse(responseJson);
         var coordinatorRoomName = findCoordinatorForRoom(responseJson, room);
         options.path = '/' + encodeURIComponent(coordinatorRoomName) + actionPath;
+        console.log(options.path);
         httpreq(options, onCompleteFun);
     }
 
@@ -164,6 +207,8 @@ function actOnCoordinator(options, actionPath, room, onCompleteFun) {
 
 // Given a room name, returns the name of the coordinator for that room
 function findCoordinatorForRoom(responseJson, room) {
+    console.log("finding coordinator for room: " + room);
+    
     for (var i = 0; i < responseJson.length; i++) {
         var zone = responseJson[i];
 
