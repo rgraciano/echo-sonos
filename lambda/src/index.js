@@ -24,7 +24,7 @@ EchoSonos.prototype.intentHandlers = {
     // register custom intent handlers
     PlayIntent: function (intent, session, response) {
         console.log("PlayIntent received");
-        options.path = '/preset/'+encodeURIComponent(intent.slots.Preset.value);
+        options.path = '/preset/' + encodeURIComponent(intent.slots.Preset.value);
         httpreq(options, function() {
             response.tell("OK");
         });
@@ -122,8 +122,45 @@ EchoSonos.prototype.intentHandlers = {
             response.tell("OK");
         });
     },
+
+    ClearQueueIntent: function (intent, session, response) {
+        console.log("ClearQueueIntent received");
+        actOnCoordinator(options, '/clearqueue', intent.slots.Room.value,  function (responseBodyJson) {
+            response.tell("OK");
+        });
+    },
+
+    RepeatIntent: function (intent, session, response) {
+        console.log("RepeatIntent received");
+        toggleHandler(intent.slots.Room.value, intent.slots.Toggle.value, "repeat", response);
+    },
+
+    ShuffleIntent: function (intent, session, response) {
+        console.log("ShuffleIntent received");
+        toggleHandler(intent.slots.Room.value, intent.slots.Toggle.value, "shuffle", response);
+    },
+
+    CrossfadeIntent: function (intent, session, response) {
+        console.log("CrossfadeIntent received");
+        toggleHandler(intent.slots.Room.value, intent.slots.Toggle.value, "crossfade", response);
+    },
 }
 
+/** Handles all skills of the form /roomname/toggle/[on,off] */
+function toggleHandler(roomValue, toggleValue, skillName, response) {
+    if (!toggleValue || (toggleValue != 'on' && toggleValue != 'off')) {
+        response.tell("I need to know if I should turn  " + skillName + " on or off. Example: Alexa, tell Sonos to turn " + skillName + " on");
+        return;
+    }
+
+    options.path = '/' + encodeURIComponent(roomValue) + '/' + skillName + '/' + toggleValue;
+
+    httpreq(options, function() {
+        response.tell("Turned " + skillName + " " + toggleValue + " in " + roomValue);
+    });
+}
+
+/** Handles up, down, & absolute volume for either an individual room or an entire group */
 function volumeHandler(roomValue, response, volume) {
     var roomAndGroup = parseRoomAndGroup(roomValue);
 
@@ -175,6 +212,8 @@ function parseRoomAndGroup(roomArgument) {
 }
 
 function httpreq(options, responseCallback) {
+  console.log("Sending HTTP request to: " + options.path);
+
   http.request(options, function(httpResponse) {
       var body = '';
       

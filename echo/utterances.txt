@@ -108,6 +108,13 @@ PreviousTrackIntent previous track in the {Room}
 PreviousTrackIntent previous song in {Room}
 PreviousTrackIntent previous song in the {Room}
 
+ClearQueueIntent clear the queue in {Room}
+ClearQueueIntent clear the queue in the {Room}
+ClearQueueIntent clear queue in {Room}
+ClearQueueIntent clear queue in the {Room}
+ClearQueueIntent clear playlist in {Room}
+ClearQueueIntent clear playlist in the {Room}
+
 WhatsPlayingIntent what's playing in {Room}
 WhatsPlayingIntent what's playing in the {Room}
 WhatsPlayingIntent what song is this in {Room}
@@ -128,3 +135,23 @@ UnmuteIntent unmute in the {Room}
 UnmuteIntent unmute {Room}
 UnmuteIntent unmute the {Room}
 
+RepeatIntent turn {Toggle} repeat in {Room}
+RepeatIntent turn {Toggle} repeat in the {Room}
+RepeatIntent turn repeat {Toggle} in {Room}
+RepeatIntent turn repeat {Toggle} in the {Room}
+RepeatIntent repeat {Toggle} in {Room}
+RepeatIntent repeat {Toggle} in the {Room}
+
+ShuffleIntent turn {Toggle} shuffle in {Room}
+ShuffleIntent turn {Toggle} shuffle in the {Room}
+ShuffleIntent turn shuffle {Toggle} in {Room}
+ShuffleIntent turn shuffle {Toggle} in the {Room}
+ShuffleIntent shuffle {Toggle} in {Room}
+ShuffleIntent shuffle {Toggle} in the {Room}
+
+CrossfadeIntent turn {Toggle} crossfade in {Room}
+CrossfadeIntent turn {Toggle} crossfade in the {Room}
+CrossfadeIntent turn crossfade {Toggle} in {Room}
+CrossfadeIntent turn crossfade {Toggle} in the {Room}
+CrossfadeIntent crossfade {Toggle} in {Room}
+CrossfadeIntent crossfade {Toggle} in the {Room}

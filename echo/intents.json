@@ -55,7 +55,7 @@
             "name": "Room",
             "type": "ROOMS"
          }   
-      ] 
+       ] 
     },
 
     {
@@ -95,7 +95,7 @@
     {
       "intent": "NextTrackIntent",
       "slots": [
-          {
+        {
             "name": "Room",
             "type": "ROOMS"
         }   
@@ -105,17 +105,28 @@
     {
       "intent": "PreviousTrackIntent",
       "slots": [
-          {
+        {
             "name": "Room",
             "type": "ROOMS"
         }   
       ]
     },
+
+    {
+      "intent": "ClearQueueIntent",
+      "slots": [
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+
    
     {
       "intent": "WhatsPlayingIntent",
       "slots": [
-          {
+        {
             "name": "Room",
             "type": "ROOMS"
         }   
@@ -125,7 +136,7 @@
     {
       "intent": "MuteIntent",
       "slots": [
-          {
+        {
             "name": "Room",
             "type": "ROOMS"
         }   
@@ -135,10 +146,52 @@
     {
       "intent": "UnmuteIntent",
       "slots": [
-          {
+        {
             "name": "Room",
             "type": "ROOMS"
         }   
+      ]
+    },
+
+    {
+      "intent":  "RepeatIntent",
+      "slots": [
+        {
+            "name": "Toggle",
+            "type": "TOGGLES"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }
+      ]
+    },
+
+    {
+      "intent":  "ShuffleIntent",
+      "slots": [
+        {
+            "name": "Toggle",
+            "type": "TOGGLES"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }
+      ]
+    },
+
+    {
+      "intent":  "CrossfadeIntent",
+      "slots": [
+        {
+            "name": "Toggle",
+            "type": "TOGGLES"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }
       ]
     }
   ]
