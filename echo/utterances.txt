@@ -9,21 +9,44 @@ PlaylistIntent start playlist {Preset} in the {Room}
 
 FavoriteIntent favorite {Preset} in {Room}
 FavoriteIntent favorite {Preset} in the {Room}
+FavoriteIntent play {Preset} in {Room}
+FavoriteIntent play {Preset} in the {Room}
 FavoriteIntent play favorite {Preset} in {Room}
 FavoriteIntent play favorite {Preset} in the {Room}
 FavoriteIntent start favorite {Preset} in {Room}
 FavoriteIntent start favorite {Preset} in the {Room}
 
-ResumeIntent continue
-ResumeIntent continue playing
-ResumeIntent continue playing the music
-ResumeIntent resume
-ResumeIntent resume the music
+ResumeAllIntent resume all
+ResumeAllIntent continue all
+ResumeAllIntent continue playing all
+ResumeAllIntent continue playing all the music
 
-PauseIntent pause
-PauseIntent stop
-PauseIntent stop the music
-PauseIntent pause the music
+
+ResumeIntent continue the {Room}
+ResumeIntent continue in the {Room}
+ResumeIntent continue the music in {Room}
+ResumeIntent continue the music in the {Room}
+ResumeIntent continue playing the {Room}
+ResumeIntent continue playing in the {Room}
+ResumeIntent continue playing the music in {Room}
+ResumeIntent continue playing the music in the {Room}
+ResumeIntent resume the {Room}
+ResumeIntent resume in the {Room}
+ResumeIntent resume the music in {Room}
+ResumeIntent resume the music in the {Room}
+
+PauseAllIntent pause all
+PauseAllIntent pause all the music
+PauseAllIntent stop all
+PauseAllIntent stop all the music 
+
+PauseIntent pause in the {Room}
+PauseIntent pause in {Room}
+PauseIntent pause the music in {Room}
+PauseIntent stop in the {Room}
+PauseIntent stop in {Room}
+PauseIntent stop the music in {Room}
+
 
 VolumeUpIntent turn it up in {Room}
 VolumeUpIntent turn it up in the {Room}

@@ -47,6 +47,10 @@
         }   
       ]
     },
+    
+    {
+      "intent": "PauseAllIntent"
+    },
    
     {
       "intent": "ResumeIntent",
@@ -56,6 +60,10 @@
             "type": "ROOMS"
          }   
        ] 
+    },
+    
+    {
+      "intent": "ResumeAllIntent"
     },
 
     {
