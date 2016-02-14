@@ -87,10 +87,14 @@ To set it up, you need to do the following:
 3. Now you're ready to put it all together. Try "Alexa, use Sonos to play test"
 
 # Optional Security Features
-HTTPS and basic auth are both available for those concerned with opening their Sonos server to the Internet.
+echo-sonos supports both HTTPS and basic auth, for those concerned with opening their Sonos server to the Internet.  options.example.js has flags and configuration information for both features. For HTTPS support, set "useHttps" to "true" and check to make sure the port is still correct.  For basic auth, change the "auth" variable and replace the username and password with your own.
 
 ## Configuring node-sonos-http-api
-Both HTTPS and basic auth need to be configured on node-sonos-http-api before echo-sonos can use them.  You can configure one without the other, but both are recommended.  In your node-sonos-http-api directory, create a file called settings.json that looks like this:
+Securing node-sonos-http-api, HTTPS, and your home server are outside the bounds of this project. The below documentation is provided for convenience because so many people have asked me about it.  You could certainly do much more to secure your home server.  For starters, you could pin certificates to the client or put more effort behind secure key and credential storage.  This is a DIY hobbyist project, and it's up to your discretion to determine how much effort to put into security.
+
+Both HTTPS and basic auth need to be configured on node-sonos-http-api before echo-sonos can use them.  You can configure one without the other, but they are recommended together.  In your node-sonos-http-api directory, create a file called settings.json according to the node-sonos-http-api documentation.  
+
+An example might look like this:
 
     {
         "port": 5004,
@@ -107,19 +111,8 @@ Both HTTPS and basic auth need to be configured on node-sonos-http-api before ec
         }
     }
 
-## Self-signing a certificate
-In the above example, HTTPS is configured using "yourserver.key" and "yourserver.crt".  For utmost security, it's best to purchase a certificate from a certificate authority, but if you know what you're doing and you prefer to self-sign, then you can use the following commands on a Raspberry Pi:
-
-    openssl genrsa -out yourserver.key 2048
-    openssl req -new -key yourserver.key -out yourserver.csr
-    openssl x509 -req -days 3650 -in yourserver.csr -signkey yourserver.key -out yourserver.crt 
-
-Again, it would be preferred to purchase a certificate rather than self-sign, but echo-sonos will support both options.
-
-If you chose to self-sign your certificate, then you must set "rejectUnauthorized" to "false" in options.js.
-
-## Editing options.js
-Once everything is setup, edit your options.js.  For basic auth, all you need to do is change the username and password on the "auth" line.  For HTTPS, you need to change "useHttps" to true, make sure the port is still correct, and set "rejectUnauthorized" according to whether or not you purchased your certificate. When finished, zip up the lambda/src folder again and upload it to AWS Lambda.
+## Certificate creation
+In the above example, HTTPS is configured using "yourserver.key" and "yourserver.crt".  For utmost security, it's best to purchase a certificate from a reputable certificate authority such as [Digicert](https://www.digicert.com).  You could also use a free one from a service like [LetsEncrypt.org](https://letsencrypt.org).  A final option for those who know what they're doing is to self-sign, and if you choose this route, then you must set "rejectUnauthorized" to "false" in options.js.
 
 # Troubleshooting
 1. If you have trouble with your node server not triggering the music even when you hit it on localhost, it probably can't find Sonos. If it crashes with a message about "discovery" being "null" then that's definitely the case. Usually you're on the wrong wifi network, you forgot to close your Sonos application (which screws everything up), or your server died for some reason and you didn't notice.
