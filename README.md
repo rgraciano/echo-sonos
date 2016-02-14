@@ -6,8 +6,8 @@ All of the pieces for an Amazon Echo (Alexa) <-> Sonos integration.
 Global commands (no rooms required):
 
 * Presets: "Alexa, tell Sonos to play Rock"
-* Pause all: "Alexa, tell Sonos to pause"
-* Resume all: "Alexa, tell Sonos to resume"
+* Pause all: "Alexa, tell Sonos to pause all"
+* Resume all: "Alexa, tell Sonos to resume all"
 
 Room-specific commands, where "ROOM" could be any of your Sonos room names (eg Kitchen, Master Bedroom, and so on):
 
@@ -16,6 +16,8 @@ Room-specific commands, where "ROOM" could be any of your Sonos room names (eg K
 * Next: "Alexa, tell Sonos go to the next track in the ROOM"
 * Previous: "Alexa, tell Sonos to go back in the ROOM"
 * What's playing: "Alexa, ask Sonos what's playing in the ROOM"
+* Pause: "Alexa, tell Sonos to pause in the ROOM"
+* Resume: "Alexa, tell Sonos to resume in the ROOM"
 * Mute: "Alexa, tell Sonos to mute in the ROOM"
 * Unmute: "Alexa, tell Sonos to unmute in the ROOM"
 * Repeat: "Alexa, tell Sonos to turn repeat [on,off] in the ROOM"
