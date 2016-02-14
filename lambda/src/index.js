@@ -28,20 +28,14 @@ EchoSonos.prototype.intentHandlers = {
         });
     },
 
-    PlaylistIntent: function (intent, session, response) {
+    PlaylistIntent: function (intent, session, response) {  
         console.log("PlaylistIntent received");
-        options.path = '/' + encodeURIComponent(intent.slots.Room.value) + '/playlist/' + encodeURIComponent(intent.slots.Preset.value);
-        httpreq(options, function(error) {
-            genericResponse(error, response);
-        });
+        playlistHandler(intent.slots.Room.value, intent.slots.Preset.value, 'playlist', response);
     },
 
     FavoriteIntent: function (intent, session, response) {
         console.log("FavoriteIntent received");
-        options.path = '/' + encodeURIComponent(intent.slots.Room.value) + '/favorite/' + encodeURIComponent(intent.slots.Preset.value);
-        httpreq(options, function(error) {
-            genericResponse(error, response);
-        });
+        playlistHandler(intent.slots.Room.value, intent.slots.Preset.value, 'favorite', response);
     },
 
     ResumeAllIntent: function (intent, session, response) {
@@ -112,13 +106,14 @@ EchoSonos.prototype.intentHandlers = {
 
         httpreq(options, function (error, responseJson) {
             if (!error) {
-              responseJson = JSON.parse(responseJson);
-              var randResponse = Math.floor(Math.random() * STATE_RESPONSES.length);
-              var responseText = STATE_RESPONSES[randResponse].replace("$currentTitle", responseJson.currentTrack.title).replace("$currentArtist", responseJson.currentTrack.artist);
-              response.tell(responseText);
+                responseJson = JSON.parse(responseJson);
+                var randResponse = Math.floor(Math.random() * STATE_RESPONSES.length);
+                var responseText = STATE_RESPONSES[randResponse].replace("$currentTitle", responseJson.currentTrack.title).replace("$currentArtist", responseJson.currentTrack.artist);
+                response.tell(responseText);
             }
-            else 
-              response.tell(error.message);
+            else { 
+                response.tell(error.message);
+            }
         });
     },
 
@@ -161,6 +156,23 @@ EchoSonos.prototype.intentHandlers = {
     },
 }
 
+/** Handles playlists and favorites */
+function playlistHandler(roomValue, presetValue, skillName, response) {
+    var skillPath = '/' + skillName + '/' + encodeURIComponent(presetValue);
+    
+    // This first action queues up the playlist / favorite, and it shouldn't say anything unless there's an error
+    actOnCoordinator(options, skillPath, roomValue, function(error, responseBodyJson) {
+        if (error) {
+            genericResponse(error, response);
+        }
+    });
+    
+    // The 2nd action actually plays the playlist / favorite
+    actOnCoordinator(options, '/play', roomValue, function(error, responseBodyJson) {
+        genericResponse(error, response, "Queued and started " + presetValue);
+    });
+}
+
 /** Handles all skills of the form /roomname/toggle/[on,off] */
 function toggleHandler(roomValue, toggleValue, skillName, response) {
     if (!toggleValue || (toggleValue != 'on' && toggleValue != 'off')) {
@@ -171,10 +183,12 @@ function toggleHandler(roomValue, toggleValue, skillName, response) {
     options.path = '/' + encodeURIComponent(roomValue) + '/' + skillName + '/' + toggleValue;
 
     httpreq(options, function(error) {
-        if (!error)
-          response.tell("Turned " + skillName + " " + toggleValue + " in " + roomValue);
-        else 
+        if (!error) {
+            response.tell("Turned " + skillName + " " + toggleValue + " in " + roomValue);
+        }
+        else { 
           response.tell(error.message);
+        }
     });
 }
 
@@ -259,24 +273,32 @@ function actOnCoordinator(options, actionPath, room, onCompleteFun) {
 
     var handleZonesResponse = function (error, responseJson) {
         if (!error) { 
-          responseJson = JSON.parse(responseJson);
-          var coordinatorRoomName = findCoordinatorForRoom(responseJson, room);
-          options.path = '/' + encodeURIComponent(coordinatorRoomName) + actionPath;
-          console.log(options.path);
-          httpreq(options, onCompleteFun);
+            responseJson = JSON.parse(responseJson);
+            var coordinatorRoomName = findCoordinatorForRoom(responseJson, room);
+            options.path = '/' + encodeURIComponent(coordinatorRoomName) + actionPath;
+            console.log(options.path);
+            httpreq(options, onCompleteFun);
         }
-        else 
-          onCompleteFun(error);
+        else { 
+            onCompleteFun(error);
+        }
     }
 
     httpreq(options, handleZonesResponse);
 }
 
-function genericResponse(error, response) {
-  if (!error)
-    response.tell("OK");
-  else 
-    response.tell(error.message);
+function genericResponse(error, response, success) {
+    if (!error) {
+        if (!success) {
+            response.tell("OK");
+        }
+        else {
+            response.tell(success);
+        }
+    }
+    else {
+        response.tell("The Lambda service encountered an error: " + error.message);
+    }
 }
 
 // Given a room name, returns the name of the coordinator for that room
