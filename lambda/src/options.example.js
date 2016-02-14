@@ -9,7 +9,9 @@ var options = {
   headers: {
       'Authorization': 'Basic ' + auth,
       'Content-Type': 'application/json'
-  }
+  },
+  useHttps: false, // Change to true if you setup node-sonos-http-api with HTTPS
+  rejectUnauthorized: true, // Change to false if you self-signed your certificate
 };
 
 module.exports = options;

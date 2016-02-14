@@ -1,6 +1,7 @@
 'use strict';
 
 var http = require('http');
+var https = require('https');
 
 var options = require('./options');
 
@@ -244,25 +245,27 @@ function parseRoomAndGroup(roomArgument) {
 }
 
 function httpreq(options, responseCallback) {
-  console.log("Sending HTTP request to: " + options.path);
+    var transport = options.useHttps ? https : http;
+    
+    console.log("Sending " + (options.useHttps ? "HTTPS" : "HTTP" ) + " request to: " + options.path);
+  
+    var req = transport.request(options, function(httpResponse) {
+        var body = '';
+        
+        httpResponse.on('data', function(data) {
+            body += data;
+        });
+        
+        httpResponse.on('end', function() {
+            responseCallback(undefined, body);
+        });
+    });
 
-  var req = http.request(options, function(httpResponse) {
-      var body = '';
-      
-      httpResponse.on('data', function(data) {
-          body += data;
-      });
-      
-      httpResponse.on('end', function() {
-          responseCallback(undefined, body);
-      });
-  });
+    req.on('error', function(e) {
+        responseCallback(e);
+    });
 
-  req.on('error', function(e) {
-    responseCallback(e);
-  });
-
-  req.end();
+    req.end();
 }
 
 // 1) grab /zones and find the coordinator for the room being asked for

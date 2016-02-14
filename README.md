@@ -86,27 +86,40 @@ To set it up, you need to do the following:
 2. Go back into the Alexa Skill console, open your skill, click "Skill Information", choose Lambda ARN and paste that ARN string in.
 3. Now you're ready to put it all together. Try "Alexa, use Sonos to play test"
 
-# Optional Server Setup
-The files in the server folder are shell scripts to automatically update the server when the presets file is changed. There are 2 versions, a generic version and the a version for use on a Raspberry Pi. Both versions require the installation of `inotify-tools`.
+# Optional Security Features
+HTTPS and basic auth are both available for those concerned with opening their Sonos server to the Internet.
 
-1\. Copy the shell scripts to your server
+## Configuring node-sonos-http-api
+Both HTTPS and basic auth need to be configured on node-sonos-http-api before echo-sonos can use them.  You can configure one without the other, but both are recommended.  In your node-sonos-http-api directory, create a file called settings.json that looks like this:
 
-2\. Add the following lines to /etc/rc.local before `exit 0`
+    {
+        "port": 5004,
+        "securePort": 5005,
 
+        "https": {
+            "key": "/home/pi/node-sonos-http-api/yourserver.key",
+            "cert": "/home/pi/node-sonos-http-api/yourserver.crt"
+        },
 
-    node /[dir]/[to]/node-sonos-http-api-master/server.js&
-    echo "started node" > /[log location]/startup.log
-    bash /[dir]/[to]/daemon.sh&
-    echo "started daemon" > /[log location]/startup.log
+        "auth": {
+            "username": "yourusernamegoeshere",
+            "password": "yourpasswordgoeshere"
+        }
+    }
 
-For example, on Raspberry Pi it might look like:
+## Self-signing a certificate
+In the above example, HTTPS is configured using "yourserver.key" and "yourserver.crt".  For utmost security, it's best to purchase a certificate from a certificate authority, but if you know what you're doing and you prefer to self-sign, then you can use the following commands on a Raspberry Pi:
 
-    node /home/pi/node-sonos-http-api-master/server.js&
-    echo "started node" > /home/pi/startup.log
-    bash /home/pi/daemon.sh&
-    echo "started daemon" > /home/pi/startup.log
+    openssl genrsa -out yourserver.key 2048
+    openssl req -new -key yourserver.key -out yourserver.csr
+    openssl x509 -req -days 3650 -in yourserver.csr -signkey yourserver.key -out yourserver.crt 
 
-3\. Restart the server
+Again, it would be preferred to purchase a certificate rather than self-sign, but echo-sonos will support both options.
+
+If you chose to self-sign your certificate, then you must set "rejectUnauthorized" to "false" in options.js.
+
+## Editing options.js
+Once everything is setup, edit your options.js.  For basic auth, all you need to do is change the username and password on the "auth" line.  For HTTPS, you need to change "useHttps" to true, make sure the port is still correct, and set "rejectUnauthorized" according to whether or not you purchased your certificate. When finished, zip up the lambda/src folder again and upload it to AWS Lambda.
 
 # Troubleshooting
 1. If you have trouble with your node server not triggering the music even when you hit it on localhost, it probably can't find Sonos. If it crashes with a message about "discovery" being "null" then that's definitely the case. Usually you're on the wrong wifi network, you forgot to close your Sonos application (which screws everything up), or your server died for some reason and you didn't notice.
