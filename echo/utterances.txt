@@ -1,5 +1,53 @@
 PlayIntent play {Preset}
 
+AppleMusicIntent play {crash|SongName} in {Room} from apple music
+AppleMusicIntent play {Ho Hey|SongName} in {Room} from apple music
+AppleMusicIntent play {beast of burden|SongName} in {Room} from apple music
+AppleMusicIntent play {I knew you were trouble|SongName} in the {Room} from apple music
+AppleMusicIntent play {Sgt. Peppers lonley heart club band|SongName} in the {Room} from apple music
+AppleMusicIntent play {Macarena|SongName} in the {Room} from apple music
+AppleMusicIntent play {my heart will go on|SongName} in the {Room} from apple music
+AppleMusicIntent play {every breathe you take|SongName} in the {Room} from apple music
+
+AppleMusicIntent play {crash|SongName} from apple music
+AppleMusicIntent play {Ho Hey|SongName} from apple music
+AppleMusicIntent play {beast of burden|SongName} from apple music
+AppleMusicIntent play {I knew you were trouble|SongName} from apple music
+AppleMusicIntent play {Sgt. Peppers lonley heart club band|SongName} from apple music
+AppleMusicIntent play {Macarena|SongName} from apple music
+AppleMusicIntent play {my heart will go on|SongName} from apple music
+AppleMusicIntent play {every breathe you take|SongName} from apple music
+
+AppleMusicIntent play {crash|SongName} by {Dave Matthews Band|ArtistName} in {Room} from apple music
+AppleMusicIntent play {Ho Hey|SongName} by {The Lumineers|ArtistName} in {Room} from apple music
+AppleMusicIntent play {beat of our noisy hearts|SongName} by {Matt Nathanson|ArtistName} in {Room} from apple music
+AppleMusicIntent play {trouble|SongName} by {Taylor Swift|ArtistName} in {Room} from apple music
+AppleMusicIntent play {sixty four|SongName} by {the beatles|ArtistName} in the {Room} from apple music
+AppleMusicIntent play {beast of burden|SongName} by {the rolling stones|ArtistName} in the {Room} from apple music
+AppleMusicIntent play {the twist|SongName} by {chubby checker|ArtistName} in the {Room} from apple music
+
+AppleMusicIntent play {crash|SongName} by {Dave Matthews Band|ArtistName} from apple music
+AppleMusicIntent play {Ho Hey|SongName} by {The Lumineers|ArtistName} from apple music
+AppleMusicIntent play {beat of our noisy hearts|SongName} by {Matt Nathanson|ArtistName} from apple music
+AppleMusicIntent play {trouble|SongName} by {Taylor Swift|ArtistName} from apple music
+AppleMusicIntent play {sixty four|SongName} by {the beatles|ArtistName} from apple music
+AppleMusicIntent play {beast of burden|SongName} by {the rolling stones|ArtistName} from apple music
+AppleMusicIntent play {the twist|SongName} by {chubby checker|ArtistName} from apple music
+
+AppleMusicAlbumIntent play album {crash|AlbumName} by {Dave Matthews Band|ArtistName} in {Room} from apple music
+AppleMusicAlbumIntent play album {Sublime|AlbumName} by {Sublime|ArtistName} in {Room} from apple music
+AppleMusicAlbumIntent play album {Modern Love|AlbumName} by {Matt Nathanson|ArtistName} in {Room} from apple music
+AppleMusicAlbumIntent play album {Red|AlbumName} by {Taylor Swift|ArtistName} in the {Room} from apple music
+AppleMusicAlbumIntent play album {Sgt. Peppers lonley heart club band|AlbumName} by {the beatles|ArtistName} in the {Room} from apple music
+AppleMusicAlbumIntent play album {Exile on main street|AlbumName} by {the rolling stones|ArtistName} in the {Room} from apple music
+
+AppleMusicAlbumIntent play album {crash|AlbumName} by {Dave Matthews Band|ArtistName} from apple music
+AppleMusicAlbumIntent play album {Sublime|AlbumName} by {Sublime|ArtistName} from apple music
+AppleMusicAlbumIntent play album {Modern Love|AlbumName} by {Matt Nathanson|ArtistName} from apple music
+AppleMusicAlbumIntent play album {Red|AlbumName} by {Taylor Swift|ArtistName} from apple music
+AppleMusicAlbumIntent play album {Sgt. Peppers lonley heart club band|AlbumName} by {the beatles|ArtistName} from apple music
+AppleMusicAlbumIntent play album {Exile on main street|AlbumName} by {the rolling stones|ArtistName} from apple music
+
 PlaylistIntent playlist {Preset} in {Room}
 PlaylistIntent playlist {Preset} in the {Room}
 PlaylistIntent play playlist {Preset} in {Room}

@@ -2,6 +2,7 @@
 
 var http = require('http');
 var https = require('https');
+var qs = require('querystring');
 
 var options = require('./options');
 
@@ -29,7 +30,25 @@ EchoSonos.prototype.intentHandlers = {
         });
     },
 
-    PlaylistIntent: function (intent, session, response) {  
+    AppleMusicIntent: function (intent, session, response) {
+        console.log("AppleMusicIntent received");
+        var roomName = intent.slots.Room && intent.slots.Room.value;
+        var artistName = intent.slots.ArtistName && intent.slots.ArtistName.value;
+        var songName = intent.slots.SongName && intent.slots.SongName.value;
+
+        appleMusicHandler(roomName, artistName, songName, 'song', response);
+    },
+
+    AppleMusicAlbumIntent: function (intent, session, response) {
+        console.log("AppleMusicAlbumIntent received");
+        var roomName = intent.slots.Room && intent.slots.Room.value;
+        var artistName = intent.slots.ArtistName && intent.slots.ArtistName.value;
+        var albumName = intent.slots.AlbumName && intent.slots.AlbumName.value;
+
+        appleMusicHandler(roomName, artistName, albumName, 'album', response);
+    },
+
+    PlaylistIntent: function (intent, session, response) {
         console.log("PlaylistIntent received");
         playlistHandler(intent.slots.Room.value, intent.slots.Preset.value, 'playlist', response);
     },
@@ -54,7 +73,7 @@ EchoSonos.prototype.intentHandlers = {
             genericResponse(error, response);
         });
     },
-    
+
     PauseAllIntent: function (intent, session, response) {
         console.log("PauseAllIntent received");
         options.path = '/pauseAll';
@@ -112,7 +131,7 @@ EchoSonos.prototype.intentHandlers = {
                 var responseText = STATE_RESPONSES[randResponse].replace("$currentTitle", responseJson.currentTrack.title).replace("$currentArtist", responseJson.currentTrack.artist);
                 response.tell(responseText);
             }
-            else { 
+            else {
                 response.tell(error.message);
             }
         });
@@ -160,17 +179,77 @@ EchoSonos.prototype.intentHandlers = {
 /** Handles playlists and favorites */
 function playlistHandler(roomValue, presetValue, skillName, response) {
     var skillPath = '/' + skillName + '/' + encodeURIComponent(presetValue);
-    
+
     // This first action queues up the playlist / favorite, and it shouldn't say anything unless there's an error
     actOnCoordinator(options, skillPath, roomValue, function(error, responseBodyJson) {
         if (error) {
             genericResponse(error, response);
         }
     });
-    
+
     // The 2nd action actually plays the playlist / favorite
     actOnCoordinator(options, '/play', roomValue, function(error, responseBodyJson) {
         genericResponse(error, response, "Queued and started " + presetValue);
+    });
+}
+
+/** Performs searches in the iTunes store
+ *
+ * terms is a generic string to search for
+ * type is either 'song' or 'album'
+ **/
+function iTunesSearch(terms, type, callback) {
+    var searchRequestOptions = {
+        action: 'GET',
+        host: 'itunes.apple.com',
+        port: '80',
+        path: '/search?' + qs.stringify({
+            term: terms,
+            entity: type === 'song'? 'musicTrack' : type
+        })
+    };
+
+    httpreq(searchRequestOptions, function(err, body) {
+        if (err) {
+          return callback(err);
+        }
+        callback(null, JSON.parse(body));
+    });
+}
+
+/** Handles Apple Music */
+function appleMusicHandler(roomValue, artistName, songName, type, response) {
+    var search = (artistName? artistName + ' ' : '') + songName;
+    iTunesSearch(search, type, function(err, results) {
+        if (err) {
+            return genericResponse(err, results);
+        }
+
+        if (!(results && results.results && results.results.length)) {
+            return genericResponse(err, results);
+        }
+
+        var item = results.results[0];
+        var uri = type === 'song'? 'song:' + item.trackId :
+                                   'album:' + item.collectionId;
+
+        var skillPath = '/applemusic/now/' + uri;
+        if (roomValue) {
+            skillPath = '/' + roomValue + skillPath;
+        }
+
+        // This first action queues up the song / album and doesn't say anything unless there's an error
+        actOnCoordinator(options, skillPath, roomValue, function(error, responseBodyJson) {
+            if (error) {
+                return genericResponse(error, response);
+            }
+            // This 2nd action actually plays the song / album
+            actOnCoordinator(options, '/play', roomValue, function(error, responseBodyJson) {
+                var name = item.trackName || item.collectionName;
+                genericResponse(error, response, "Now playing " + name + " by " + item.artistName);
+            });
+        });
+
     });
 }
 
@@ -187,7 +266,7 @@ function toggleHandler(roomValue, toggleValue, skillName, response) {
         if (!error) {
             response.tell("Turned " + skillName + " " + toggleValue + " in " + roomValue);
         }
-        else { 
+        else {
           response.tell(error.message);
         }
     });
@@ -246,16 +325,16 @@ function parseRoomAndGroup(roomArgument) {
 
 function httpreq(options, responseCallback) {
     var transport = options.useHttps ? https : http;
-    
+
     console.log("Sending " + (options.useHttps ? "HTTPS" : "HTTP" ) + " request to: " + options.path);
-  
+
     var req = transport.request(options, function(httpResponse) {
         var body = '';
-        
+
         httpResponse.on('data', function(data) {
             body += data;
         });
-        
+
         httpResponse.on('end', function() {
             responseCallback(undefined, body);
         });
@@ -269,20 +348,25 @@ function httpreq(options, responseCallback) {
 }
 
 // 1) grab /zones and find the coordinator for the room being asked for
-// 2) perform an action on that coordinator 
+// 2) perform an action on that coordinator
 function actOnCoordinator(options, actionPath, room, onCompleteFun) {
+    if (!room) {
+      options.path = actionPath;
+      return httpreq(options, onCompleteFun);
+    }
+
     options.path = '/zones';
     console.log("getting zones...");
 
     var handleZonesResponse = function (error, responseJson) {
-        if (!error) { 
+        if (!error) {
             responseJson = JSON.parse(responseJson);
             var coordinatorRoomName = findCoordinatorForRoom(responseJson, room);
             options.path = '/' + encodeURIComponent(coordinatorRoomName) + actionPath;
             console.log(options.path);
             httpreq(options, onCompleteFun);
         }
-        else { 
+        else {
             onCompleteFun(error);
         }
     }
@@ -307,7 +391,7 @@ function genericResponse(error, response, success) {
 // Given a room name, returns the name of the coordinator for that room
 function findCoordinatorForRoom(responseJson, room) {
     console.log("finding coordinator for room: " + room);
-    
+
     for (var i = 0; i < responseJson.length; i++) {
         var zone = responseJson[i];
 

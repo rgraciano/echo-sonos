@@ -8,11 +8,13 @@ Global commands (no rooms required):
 * Presets: "Alexa, tell Sonos to play Rock"
 * Pause all: "Alexa, tell Sonos to pause all"
 * Resume all: "Alexa, tell Sonos to resume all"
+* Apple Music: "Alexa, tell Sonos to play SONGNAME by ARTISTNAME from Apple Music"
 
 Room-specific commands, where "ROOM" could be any of your Sonos room names (eg Kitchen, Master Bedroom, and so on):
 
 * Playlists: "Alexa, tell Sonos to start playlist MY PLAYLIST in the ROOM"
 * Favorites: "Alexa, tell Sonos to play favorite MY FAVORITE in the ROOM"
+* Apple Music: "Alexa, tell Sonos to play SONGNAME by ARTISTNAME in the ROOM from Apple Music"
 * Next: "Alexa, tell Sonos go to the next track in the ROOM"
 * Previous: "Alexa, tell Sonos to go back in the ROOM"
 * What's playing: "Alexa, ask Sonos what's playing in the ROOM"
