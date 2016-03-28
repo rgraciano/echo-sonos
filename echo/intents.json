@@ -9,7 +9,43 @@
             }
         ]
     },
- 
+      
+    {
+        "intent": "AppleMusicIntent",
+        "slots": [
+            {
+                "name": "SongName",
+                "type": "AMAZON.LITERAL"
+            },
+            {
+                "name": "ArtistName",
+                "type": "AMAZON.LITERAL"
+            },
+            {
+                "name": "Room",
+                "type": "ROOMS"
+            }
+        ]
+    },
+
+    {
+        "intent": "AppleMusicAlbumIntent",
+        "slots": [
+            {
+                "name": "AlbumName",
+                "type": "AMAZON.LITERAL"
+            },
+            {
+                "name": "ArtistName",
+                "type": "AMAZON.LITERAL"
+            },
+            {
+                "name": "Room",
+                "type": "ROOMS"
+            }
+        ]
+    },
+
     {
       "intent": "PlaylistIntent",
       "slots": [
@@ -204,4 +240,3 @@
     }
   ]
 }
-
