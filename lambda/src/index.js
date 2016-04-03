@@ -159,7 +159,7 @@ EchoSonos.prototype.intentHandlers = {
 
 /** Handles playlists and favorites */
 function playlistHandler(roomValue, presetValue, skillName, response) {
-    var skillPath = '/' + skillName + '/' + encodeURIComponent(presetValue);
+    var skillPath = '/' + skillName + '/' + encodeURIComponent(presetValue.toLowerCase());
     
     // This first action queues up the playlist / favorite, and it shouldn't say anything unless there's an error
     actOnCoordinator(options, skillPath, roomValue, function(error, responseBodyJson) {
