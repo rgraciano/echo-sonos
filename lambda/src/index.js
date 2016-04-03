@@ -23,7 +23,7 @@ EchoSonos.prototype.intentHandlers = {
     // register custom intent handlers
     PlayIntent: function (intent, session, response) {
         console.log("PlayIntent received");
-        options.path = '/preset/' + encodeURIComponent(intent.slots.Preset.value);
+        options.path = '/preset/' + encodeURIComponent(intent.slots.Preset.value.toLowerCase());
         httpreq(options, function(error) {
             genericResponse(error, response);
         });
