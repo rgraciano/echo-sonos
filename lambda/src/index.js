@@ -23,7 +23,7 @@ EchoSonos.prototype.intentHandlers = {
     // register custom intent handlers
     PlayIntent: function (intent, session, response) {
         console.log("PlayIntent received");
-        options.path = '/preset/' + encodeURIComponent(intent.slots.Preset.value);
+        options.path = '/preset/' + encodeURIComponent(intent.slots.Preset.value.toLowerCase());
         httpreq(options, function(error) {
             genericResponse(error, response);
         });
@@ -159,7 +159,7 @@ EchoSonos.prototype.intentHandlers = {
 
 /** Handles playlists and favorites */
 function playlistHandler(roomValue, presetValue, skillName, response) {
-    var skillPath = '/' + skillName + '/' + encodeURIComponent(presetValue);
+    var skillPath = '/' + skillName + '/' + encodeURIComponent(presetValue.toLowerCase());
     
     // This first action queues up the playlist / favorite, and it shouldn't say anything unless there's an error
     actOnCoordinator(options, skillPath, roomValue, function(error, responseBodyJson) {
