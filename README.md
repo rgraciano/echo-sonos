@@ -64,7 +64,7 @@ To set it up, you need to do the following:
 1. Create a new Skill in the Alexa Skills control panel on Amazon. You need a developer account to do this.
 2. Name can be whatever you want. "Invocation" is what you say (I used "Sonos").
 3. Put a dummy value in the Endpoint. We'll come back to this.
-4. Click Next, taking you to Interaction Model. Create a Custom Slot Type ("Add Slot Type"). Add a new type for PRESETS and another for ROOMS. Into each, copy/paste the contents of "echo/custom_slots/PRESETS.slot.txt" and "echo/custom_slots/ROOMS.slot.txt".
+4. Click Next, taking you to Interaction Model. Create a Custom Slot Type ("Add Slot Type"). Add a new type for PRESETS, another for ROOMS, and a final one for TOGGLES. Into each, copy/paste the contents of "echo/custom_slots/PRESETS.slot.txt", "echo/custom_slots/ROOMS.slot.txt" and "echo/custom_slots/TOGGLES.slot.txt".
 5. Still in Interaction Model, copy this repo's "echo/intents.json" into the "Intent Schema" field, and "echo/utterances.txt" into "Sample Utterances".
 6. Don't test yet, just save. Click back to "Skill Information" and copy the "Application ID". You'll need this for Lambda.
 
