@@ -155,6 +155,23 @@ EchoSonos.prototype.intentHandlers = {
         console.log("CrossfadeIntent received");
         toggleHandler(intent.slots.Room.value, intent.slots.Toggle.value, "crossfade", response);
     },
+    
+    UngroupIntent: function (intent, session, response) {
+        console.log("UngroupIntent received");
+        options.path = '/' + encodeURIComponent(intent.slots.Room.value) + '/isolate';
+        httpreq(options, function(error) {
+            genericResponse(error, response);
+        });
+    },
+   
+    JoinGroupIntent: function (intent, session, response) {
+        console.log("JoinGroupIntent received");
+        options.path = '/' + encodeURIComponent(intent.slots.JoiningRoom.value) + '/join/' 
+                + encodeURIComponent(intent.slots.PlayingRoom.value);
+        httpreq(options, function(error) {
+            genericResponse(error, response);
+        });
+    }
 }
 
 /** Handles playlists and favorites */

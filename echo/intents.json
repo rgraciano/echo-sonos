@@ -201,7 +201,32 @@
             "type": "ROOMS"
         }
       ]
+    },
+    
+    {
+      "intent": "JoinGroupIntent",
+      "slots": [
+        {
+          "name": "JoiningRoom",
+          "type": "ROOMS"
+        },
+        {
+          "name": "PlayingRoom",
+          "type": "ROOMS"
+        }
+      ]
+    },
+    
+    {
+      "intent" : "UngroupIntent",
+      "slots" : [
+        {
+          "name" : "Room",
+          "type" : "ROOMS"
+        }
+      ]
     }
+    
   ]
 }
 

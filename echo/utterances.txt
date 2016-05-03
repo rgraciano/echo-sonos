@@ -183,3 +183,14 @@ CrossfadeIntent turn crossfade {Toggle} in {Room}
 CrossfadeIntent turn crossfade {Toggle} in the {Room}
 CrossfadeIntent crossfade {Toggle} in {Room}
 CrossfadeIntent crossfade {Toggle} in the {Room}
+
+JoinGroupIntent join {JoiningRoom} to {PlayingRoom}
+JoinGroupIntent join the {JoiningRoom} to {PlayingRoom}
+JoinGroupIntent join {JoiningRoom} to the {PlayingRoom}
+JoinGroupIntent join the {JoiningRoom} to the {PlayingRoom}
+
+UngroupIntent ungroup {Room}
+UngroupIntent ungroup the {Room}
+UngroupIntent isolate {Room}
+UngroupIntent isolate the {Room}
+
