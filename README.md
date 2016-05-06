@@ -28,6 +28,8 @@ Room-specific commands, where "ROOM" could be any of your Sonos room names (eg K
 * Volume up or down (all in group): "Alexa, tell Sonos to turn it [up,down] in the ROOM group"
 * Set volume (single room): "Alexa, tell Sonos to change the volume to 22 in the ROOM"
 * Set volume (all in group): "Alexa, tell Sonos to change the volume to 22 in the ROOM group"
+* Add room to the group: "Alexa, tell Sonos to join NEW_ROOM to the ROOM"
+* Remove room from the group: "Alexa, tell Sonos to ungroup ROOM"
 * Many other natural phrasings are supported for each command. The file "echo/utterances.txt" has all of the examples.
 
 Everything's dynamic - rooms and playlists are taken dynamically from your speech. There are common room names in utterances.txt to help the Alexa engine recognize valid entries, but it's not necessary to add more. 
