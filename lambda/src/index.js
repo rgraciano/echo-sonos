@@ -41,7 +41,7 @@ EchoSonos.prototype.intentHandlers = {
 
     ResumeAllIntent: function (intent, session, response) {
         console.log("ResumeAllIntent received");
-        options.path = '/resumeAll';
+        options.path = '/resumeall';
         httpreq(options, function(error) {
             genericResponse(error, response);
         });
@@ -57,7 +57,7 @@ EchoSonos.prototype.intentHandlers = {
     
     PauseAllIntent: function (intent, session, response) {
         console.log("PauseAllIntent received");
-        options.path = '/pauseAll';
+        options.path = '/pauseall';
         httpreq(options, function(error) {
             genericResponse(error, response);
         });
