@@ -65,9 +65,9 @@ To set it up, you need to do the following:
 # Create the Alexa Skill that will send events to AWS Lambda
 1. Create a new Skill in the Alexa Skills control panel on Amazon. You need a developer account to do this.
 2. Name can be whatever you want. "Invocation" is what you say (I used "Sonos").
-3. Put a dummy value in the Endpoint. We'll come back to this.
-4. Click Next, taking you to Interaction Model. Create a Custom Slot Type ("Add Slot Type"). Add a new type for PRESETS, another for ROOMS, and a final one for TOGGLES. Into each, copy/paste the contents of "echo/custom_slots/PRESETS.slot.txt", "echo/custom_slots/ROOMS.slot.txt" and "echo/custom_slots/TOGGLES.slot.txt".
-5. Still in Interaction Model, copy this repo's "echo/intents.json" into the "Intent Schema" field, and "echo/utterances.txt" into "Sample Utterances".
+3. Check Custom Interaction Model if it is not already checked. Click Next
+4. Click Next, taking you to Interaction Model. Create a Custom Slot Type ("Add Slot Type"). Add a new type for PRESETS, another for ROOMS, and a final one for TOGGLES. Into each, copy/paste the contents of [echo/custom_slots/PRESETS.slot.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/custom_slots/PRESETS.slot.txt), [echo/custom_slots/ROOMS.slot.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/custom_slots/ROOMS.slot.txt) and [echo/custom_slots/TOGGLES.slot.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/custom_slots/TOGGLES.slot.txt).
+5. Still in Interaction Model, copy this repo's [echo/intents.json](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/intents.json) into the "Intent Schema" field, and [echo/utterances.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/utterances.txt) into "Sample Utterances".
 6. Don't test yet, just save. Click back to "Skill Information" and copy the "Application ID". You'll need this for Lambda.
 
 # Configure the AWS Lambda service that will trigger your node-sonos-http-api server
@@ -75,13 +75,13 @@ To set it up, you need to do the following:
 2. In the Lambda console, look to the upper right. Make sure "N. Virginia" is selected, because not every zone supports Alexa yet.
 3. Create a new Lambda function. Skip the blueprint. 
 4. Pick any name you want, and choose runtime Node.js.
-5. Go into this repo's "lambda/src" directory and copy options.example.js to options.js. Edit options.js to have your DynDNS hostname, your port, and the Alexa App ID you just copied.
-6. In lambda/src, zip up everything. On Mac, "cd src; zip -r src.zip *.js".  Make sure you don't capture the folder, just the files.
+5. Go into this repo's [lambda/src](lamda/src) directory and copy options.example.js to options.js. Edit options.js to have your DynDNS hostname, your port, and the Alexa App ID you just copied.
+6. In lambda/src, zip up everything. On Mac/Linux, `cd src; chmod a+r *.js; zip src.zip *.js`.  Make sure you don't capture the folder, just the files.
 7. Choose to upload the zip file for src.zip.
 8. The default handler is fine. Create a new role of type Basic Execution Role. Pick smallest possible memory and so on.
 9. Click Next to proceed. Once created, click "Event Sources".
 10. Add a source.  Choose "Alexa Skills Kit".
-11. Test it out. I included a test blueprint in this repo. Click "Test" and copy/paste this repo's "lambda/play_intent_testreq.json" to test. It will trigger the "test" preset in your presets.json file on your Sonos server. Don't forget to replace the Alexa App Id again.
+11. Test it out. I included a test blueprint in this repo. Click "Test" and copy/paste this repo's [lambda/play_intent_testreq.json](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/lambda/play_intent_testreq.json) to test. It will trigger the "test" preset in your presets.json file on your Sonos server. Don't forget to replace the Alexa App Id again.
 
 # Connect Alexa Skill to AWS Lambda
 1. In the Lambda console, copy the long "ARN" string in the upper right.  
