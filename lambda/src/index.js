@@ -20,13 +20,26 @@ EchoSonos.prototype = Object.create(AlexaSkill.prototype);
 EchoSonos.prototype.constructor = EchoSonos;
 
 EchoSonos.prototype.intentHandlers = {
-    // register custom intent handlers
-    PlayIntent: function (intent, session, response) {
-        console.log("PlayIntent received");
-        options.path = '/preset/' + encodeURIComponent(intent.slots.Preset.value.toLowerCase());
-        httpreq(options, function(error) {
-            genericResponse(error, response);
-        });
+
+
+    MusicIntent: function (intent, session, response) {
+        console.log("MusicIntent received");
+        musicHandler(intent.slots.Room.value, '/queue/name:', intent.slots.Name.value, response);
+    },
+
+    MusicRadioIntent: function (intent, session, response) {
+        console.log("MusicRadioIntent received");
+        musicHandler(intent.slots.Room.value, '/radio/radio:', intent.slots.Name.value, response);
+    },
+
+    PlayMoreByArtistIntent: function (intent, session, response) {
+        console.log("PlayMoreByArtist received");
+        moreMusicHandler(intent.slots.Room.value, '/queue/name:', response);
+    },
+
+    PlayMoreLikeTrackIntent: function (intent, session, response) {
+        console.log("PlayMoreLikeTrackIntent received");
+        moreMusicHandler(intent.slots.Room.value, '/radio/radio:', response);
     },
 
     PlaylistIntent: function (intent, session, response) {  
@@ -38,10 +51,10 @@ EchoSonos.prototype.intentHandlers = {
         console.log("FavoriteIntent received");
         playlistHandler(intent.slots.Room.value, intent.slots.Preset.value, 'favorite', response);
     },
-
+ 
     ResumeAllIntent: function (intent, session, response) {
         console.log("ResumeAllIntent received");
-        options.path = '/resumeall';
+        options.path = '/resumeAll';
         httpreq(options, function(error) {
             genericResponse(error, response);
         });
@@ -57,7 +70,7 @@ EchoSonos.prototype.intentHandlers = {
     
     PauseAllIntent: function (intent, session, response) {
         console.log("PauseAllIntent received");
-        options.path = '/pauseall';
+        options.path = '/pauseAll';
         httpreq(options, function(error) {
             genericResponse(error, response);
         });
@@ -174,6 +187,38 @@ EchoSonos.prototype.intentHandlers = {
     }
 }
 
+/** Handles Apple Music */
+function musicHandler(roomValue, cmdpath, name, response) {
+    var skillPath = '/applemusic' + cmdpath + encodeURIComponent(name.replace(' ','+'));
+    var msgStart = (cmdpath.startsWith('/radio'))?'Started ':'Queued and started ';
+    var msgEnd = (cmdpath.startsWith('/radio'))?' radio':'';
+    
+    actOnCoordinator(options, skillPath, roomValue, function(error, responseBodyJson) {
+        if (error) {
+            genericResponse(error, response);
+        } else {
+            genericResponse(error, response, msgStart + name + msgEnd);
+        }
+    });
+
+}
+
+/** Handles Apple Music - plays artist tracks or plays a radio station for the current track */
+function moreMusicHandler(roomValue, cmdpath, response) {
+    options.path = '/' + encodeURIComponent(roomValue) + '/state';
+
+    httpreq(options, function (error, responseJson) {
+        if (!error) {
+            responseJson = JSON.parse(responseJson);
+            var name = cmdpath.startsWith('/queue')?responseJson.currentTrack.artist : (responseJson.currentTrack.artist + '+' + responseJson.currentTrack.title);
+
+            musicHandler(roomValue, cmdpath, name, response);
+        } else { 
+            genericResponse(error, response);
+        }
+    });
+}
+
 /** Handles playlists and favorites */
 function playlistHandler(roomValue, presetValue, skillName, response) {
     var skillPath = '/' + skillName + '/' + encodeURIComponent(presetValue.toLowerCase());
@@ -284,6 +329,7 @@ function httpreq(options, responseCallback) {
 
     req.end();
 }
+
 
 // 1) grab /zones and find the coordinator for the room being asked for
 // 2) perform an action on that coordinator 
