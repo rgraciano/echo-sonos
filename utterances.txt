@@ -1,0 +1,242 @@
+PlayMoreByArtistIntent play more by this artist in the {Room}
+PlayMoreByArtistIntent play more songs by this artist in the {Room}
+PlayMoreByArtistIntent play more tracks by this artist in the {Room}
+PlayMoreByArtistIntent play more music by this artist in the {Room}
+
+PlayMoreLikeTrackIntent play more like this in the {Room}
+PlayMoreLikeTrackIntent play more songs like this in the {Room}
+PlayMoreLikeTrackIntent play more tracks like this in the {Room}
+PlayMoreLikeTrackIntent play more music like this in the {Room}
+
+
+MusicIntent play {madona|Name} in the {Room}
+MusicIntent play {van morrison|Name} in the {Room}
+MusicIntent play {the rolling stones|Name} in the {Room}
+MusicIntent play {toad the wet sproket|Name} in the {Room}
+MusicIntent play {KC and the sunshine band|Name} in the {Room}
+MusicIntent play {john travolta and olivia newton john|Name} in the {Room}
+MusicIntent play {DJ jazzy jeff and the fresh prince|Name} in the {Room}
+
+MusicIntent play {lola|Name} in the {Room}
+MusicIntent play {hello dolly|Name} in the {Room}
+MusicIntent play {love me tender|Name} in the {Room}
+MusicIntent play {when fools rush in|Name} in the {Room}
+MusicIntent play {take me to the river|Name} in the {Room}
+MusicIntent play {killing me softly with his song|Name} in the {Room}
+MusicIntent play {i just called to say i love you|Name} in the {Room}
+
+MusicIntent play {the kinks lola|Name} in the {Room}
+MusicIntent play {louis armstrong hello dolly|Name} in the {Room}
+MusicIntent play {elvis presley love me tender|Name} in the {Room}
+MusicIntent play {UB forty fools rush in|Name} in the {Room}
+MusicIntent play {talking heads take me to the river|Name} in the {Room}
+MusicIntent play {roberta flack killing me softly with his song|Name} in the {Room}
+MusicIntent play {stevie wonder i just called to say i love you|Name} in the {Room}
+MusicIntent play {toad the wet sproket i will not Take these things for granted|Name} in the {Room}
+
+MusicRadioIntent play {madona|Name} radio in the {Room}
+MusicRadioIntent play {van morrison|Name} radio in the {Room}
+MusicRadioIntent play {the rolling stones|Name} radio in the {Room}
+MusicRadioIntent play {toad the wet sproket|Name} radio in the {Room}
+MusicRadioIntent play {KC and the sunshine band|Name} radio in the {Room}
+MusicRadioIntent play {john travolta and olivia newton john|Name} radio in the {Room}
+MusicRadioIntent play {DJ jazzy jeff and the fresh prince|Name} radio in the {Room}
+
+MusicRadioIntent play {lola|Name} radio in the {Room}
+MusicRadioIntent play {hello dolly|Name} radio in the {Room}
+MusicRadioIntent play {love me tender|Name} radio in the {Room}
+MusicRadioIntent play {when fools rush in|Name} radio in the {Room}
+MusicRadioIntent play {take me to the river|Name} radio in the {Room}
+MusicRadioIntent play {killing me softly with his song|Name} radio in the {Room}
+MusicRadioIntent play {i just called to say i love you|Name} radio in the {Room}
+
+PlaylistIntent playlist {Preset} in {Room}
+PlaylistIntent playlist {Preset} in the {Room}
+PlaylistIntent play playlist {Preset} in {Room}
+PlaylistIntent play playlist {Preset} in the {Room}
+PlaylistIntent start playlist {Preset} in {Room}
+PlaylistIntent start playlist {Preset} in the {Room}
+
+FavoriteIntent favorite {Preset} in {Room}
+FavoriteIntent favorite {Preset} in the {Room}
+FavoriteIntent play favorite {Preset} in {Room}
+FavoriteIntent play favorite {Preset} in the {Room}
+FavoriteIntent start favorite {Preset} in {Room}
+FavoriteIntent start favorite {Preset} in the {Room}
+
+ResumeAllIntent resume all
+ResumeAllIntent continue all
+ResumeAllIntent continue playing all
+ResumeAllIntent continue playing all the music
+
+ResumeIntent continue the {Room}
+ResumeIntent continue in the {Room}
+ResumeIntent continue the music in {Room}
+ResumeIntent continue the music in the {Room}
+ResumeIntent continue playing the {Room}
+ResumeIntent continue playing in the {Room}
+ResumeIntent continue playing the music in {Room}
+ResumeIntent continue playing the music in the {Room}
+ResumeIntent resume the {Room}
+ResumeIntent resume in the {Room}
+ResumeIntent resume the music in {Room}
+ResumeIntent resume the music in the {Room}
+
+PauseAllIntent pause all
+PauseAllIntent pause all the music
+PauseAllIntent stop all
+PauseAllIntent stop all the music 
+
+PauseIntent pause in the {Room}
+PauseIntent pause in {Room}
+PauseIntent pause the music in {Room}
+PauseIntent stop in the {Room}
+PauseIntent stop in {Room}
+PauseIntent stop the music in {Room}
+
+
+VolumeUpIntent turn it up in {Room}
+VolumeUpIntent turn it up in the {Room}
+VolumeUpIntent turn the volume up in {Room}
+VolumeUpIntent turn the volume up in the {Room}
+VolumeUpIntent louder in {Room}
+VolumeUpIntent louder in the {Room}
+VolumeUpIntent volume up in {Room}
+VolumeUpIntent volume up in the {Room}
+VolumeUpIntent raise volume in the {Room}
+VolumeUpIntent raise volume in {Room}
+
+VolumeDownIntent turn it down in {Room}
+VolumeDownIntent turn it down in the {Room}
+VolumeDownIntent turn the volume down in {Room}
+VolumeDownIntent turn the volume down in the {Room}
+VolumeDownIntent softer in {Room}
+VolumeDownIntent softer in the {Room}
+VolumeDownIntent quieter in {Room}
+VolumeDownIntent quieter in the {Room}
+VolumeDownIntent volume down in {Room}
+VolumeDownIntent volume down in the {Room}
+VolumeDownIntent lower volume in the {Room}
+VolumeDownIntent lower volume in {Room}
+
+
+SetVolumeIntent set volume to {Percent} in {Room}
+SetVolumeIntent set volume to {Percent} percent in {Room}
+SetVolumeIntent set volume to {Percent} in the {Room}
+SetVolumeIntent set volume to {Percent} percent in the {Room}
+SetVolumeIntent change volume to {Percent} in {Room}
+SetVolumeIntent change volume to {Percent} percent in {Room}
+SetVolumeIntent change volume to {Percent} in the {Room}
+SetVolumeIntent change volume to {Percent} percent in the {Room}
+SetVolumeIntent change the volume to {Percent} in {Room}
+SetVolumeIntent change the volume to {Percent} percent in {Room}
+SetVolumeIntent change the volume to {Percent} in the {Room}
+SetVolumeIntent change the volume to {Percent} percent in the {Room}
+SetVolumeIntent turn it up to {Percent} in {Room}
+SetVolumeIntent turn it up to {Percent} percent in {Room}
+SetVolumeIntent turn it up to {Percent} in the {Room}
+SetVolumeIntent turn it up to {Percent} percent in the {Room}
+SetVolumeIntent turn it down to {Percent} in {Room}
+SetVolumeIntent turn it down to {Percent} percent in {Room}
+SetVolumeIntent turn it down to {Percent} in the {Room}
+SetVolumeIntent turn it down to {Percent} percent in the {Room}
+
+NextTrackIntent go to next track in {Room}
+NextTrackIntent go to next track in the {Room}
+NextTrackIntent go to the next track in {Room}
+NextTrackIntent go to the next track in the {Room}
+NextTrackIntent skip to next track in {Room}
+NextTrackIntent skip to next track in the {Room}
+NextTrackIntent skip to the next track in {Room}
+NextTrackIntent skip to the next track in the {Room}
+NextTrackIntent skip in {Room}
+NextTrackIntent skip in the {Room}
+NextTrackIntent next in {Room}
+NextTrackIntent next in the {Room}
+NextTrackIntent next track in {Room}
+NextTrackIntent next track in the {Room}
+NextTrackIntent next song in {Room}
+NextTrackIntent next song in the {Room}
+NextTrackIntent skip this track in {Room}
+NextTrackIntent skip this track in the {Room}
+NextTrackIntent skip song in {Room}
+NextTrackIntent skip song in the {Room}
+NextTrackIntent skip this song in {Room}
+NextTrackIntent skip this song in the {Room}
+
+PreviousTrackIntent go to previous track in {Room}
+PreviousTrackIntent go to previous track in the {Room}
+PreviousTrackIntent go to the previous track in {Room}
+PreviousTrackIntent go to the previous track in the {Room}
+PreviousTrackIntent go to the last song in {Room}
+PreviousTrackIntent go to the last song in the {Room}
+PreviousTrackIntent go back in {Room}
+PreviousTrackIntent go back in the {Room}
+PreviousTrackIntent go back to the previous track in {Room}
+PreviousTrackIntent go back to the previous track in the {Room}
+PreviousTrackIntent last track in {Room}
+PreviousTrackIntent last track in the {Room}
+PreviousTrackIntent last song in {Room}
+PreviousTrackIntent last song in the {Room}
+PreviousTrackIntent previous track in {Room}
+PreviousTrackIntent previous track in the {Room}
+PreviousTrackIntent previous song in {Room}
+PreviousTrackIntent previous song in the {Room}
+
+ClearQueueIntent clear the queue in {Room}
+ClearQueueIntent clear the queue in the {Room}
+ClearQueueIntent clear queue in {Room}
+ClearQueueIntent clear queue in the {Room}
+ClearQueueIntent clear playlist in {Room}
+ClearQueueIntent clear playlist in the {Room}
+
+WhatsPlayingIntent what's playing in {Room}
+WhatsPlayingIntent what's playing in the {Room}
+WhatsPlayingIntent what song is this in {Room}
+WhatsPlayingIntent what song is this in the {Room}
+WhatsPlayingIntent what band is this in {Room}
+WhatsPlayingIntent what band is this in the {Room}
+WhatsPlayingIntent who's playing in {Room}
+WhatsPlayingIntent who's playing in the {Room}
+WhatsPlayingIntent what am i hearing in the {Room}
+
+MuteIntent mute in {Room}
+MuteIntent mute in the {Room}
+MuteIntent mute {Room}
+MuteIntent mute the {Room}
+
+UnmuteIntent unmute in {Room}
+UnmuteIntent unmute in the {Room}
+UnmuteIntent unmute {Room}
+UnmuteIntent unmute the {Room}
+
+RepeatIntent turn {Toggle} repeat in {Room}
+RepeatIntent turn {Toggle} repeat in the {Room}
+RepeatIntent turn repeat {Toggle} in {Room}
+RepeatIntent turn repeat {Toggle} in the {Room}
+RepeatIntent repeat {Toggle} in {Room}
+RepeatIntent repeat {Toggle} in the {Room}
+
+ShuffleIntent turn {Toggle} shuffle in {Room}
+ShuffleIntent turn {Toggle} shuffle in the {Room}
+ShuffleIntent turn shuffle {Toggle} in {Room}
+ShuffleIntent turn shuffle {Toggle} in the {Room}
+ShuffleIntent shuffle {Toggle} in {Room}
+ShuffleIntent shuffle {Toggle} in the {Room}
+
+CrossfadeIntent turn {Toggle} crossfade in {Room}
+CrossfadeIntent turn {Toggle} crossfade in the {Room}
+CrossfadeIntent turn crossfade {Toggle} in {Room}
+CrossfadeIntent turn crossfade {Toggle} in the {Room}
+CrossfadeIntent crossfade {Toggle} in {Room}
+CrossfadeIntent crossfade {Toggle} in the {Room}
+
+JoinGroupIntent join {JoiningRoom} to {PlayingRoom}
+JoinGroupIntent join the {JoiningRoom} to {PlayingRoom}
+JoinGroupIntent join {JoiningRoom} to the {PlayingRoom}
+JoinGroupIntent join the {JoiningRoom} to the {PlayingRoom}
+
+UngroupIntent ungroup {Room}
+UngroupIntent ungroup the {Room}
+UngroupIntent isolate {Room}
+UngroupIntent isolate the {Room}
