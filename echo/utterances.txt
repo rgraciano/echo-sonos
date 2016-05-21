@@ -1,4 +1,54 @@
-PlayIntent play {Preset}
+PlayMoreByArtistIntent play more by this artist in the {Room}
+PlayMoreByArtistIntent play more songs by this artist in the {Room}
+PlayMoreByArtistIntent play more tracks by this artist in the {Room}
+PlayMoreByArtistIntent play more music by this artist in the {Room}
+
+PlayMoreLikeTrackIntent play more like this in the {Room}
+PlayMoreLikeTrackIntent play more songs like this in the {Room}
+PlayMoreLikeTrackIntent play more tracks like this in the {Room}
+PlayMoreLikeTrackIntent play more music like this in the {Room}
+
+
+MusicIntent play {madona|Name} in the {Room}
+MusicIntent play {van morrison|Name} in the {Room}
+MusicIntent play {the rolling stones|Name} in the {Room}
+MusicIntent play {toad the wet sproket|Name} in the {Room}
+MusicIntent play {KC and the sunshine band|Name} in the {Room}
+MusicIntent play {john travolta and olivia newton john|Name} in the {Room}
+MusicIntent play {DJ jazzy jeff and the fresh prince|Name} in the {Room}
+
+MusicIntent play {lola|Name} in the {Room}
+MusicIntent play {hello dolly|Name} in the {Room}
+MusicIntent play {love me tender|Name} in the {Room}
+MusicIntent play {when fools rush in|Name} in the {Room}
+MusicIntent play {take me to the river|Name} in the {Room}
+MusicIntent play {killing me softly with his song|Name} in the {Room}
+MusicIntent play {i just called to say i love you|Name} in the {Room}
+
+MusicIntent play {the kinks lola|Name} in the {Room}
+MusicIntent play {louis armstrong hello dolly|Name} in the {Room}
+MusicIntent play {elvis presley love me tender|Name} in the {Room}
+MusicIntent play {UB forty fools rush in|Name} in the {Room}
+MusicIntent play {talking heads take me to the river|Name} in the {Room}
+MusicIntent play {roberta flack killing me softly with his song|Name} in the {Room}
+MusicIntent play {stevie wonder i just called to say i love you|Name} in the {Room}
+MusicIntent play {toad the wet sproket i will not Take these things for granted|Name} in the {Room}
+
+MusicRadioIntent play {madona|Name} radio in the {Room}
+MusicRadioIntent play {van morrison|Name} radio in the {Room}
+MusicRadioIntent play {the rolling stones|Name} radio in the {Room}
+MusicRadioIntent play {toad the wet sproket|Name} radio in the {Room}
+MusicRadioIntent play {KC and the sunshine band|Name} radio in the {Room}
+MusicRadioIntent play {john travolta and olivia newton john|Name} radio in the {Room}
+MusicRadioIntent play {DJ jazzy jeff and the fresh prince|Name} radio in the {Room}
+
+MusicRadioIntent play {lola|Name} radio in the {Room}
+MusicRadioIntent play {hello dolly|Name} radio in the {Room}
+MusicRadioIntent play {love me tender|Name} radio in the {Room}
+MusicRadioIntent play {when fools rush in|Name} radio in the {Room}
+MusicRadioIntent play {take me to the river|Name} radio in the {Room}
+MusicRadioIntent play {killing me softly with his song|Name} radio in the {Room}
+MusicRadioIntent play {i just called to say i love you|Name} radio in the {Room}
 
 PlaylistIntent playlist {Preset} in {Room}
 PlaylistIntent playlist {Preset} in the {Room}
@@ -9,8 +59,6 @@ PlaylistIntent start playlist {Preset} in the {Room}
 
 FavoriteIntent favorite {Preset} in {Room}
 FavoriteIntent favorite {Preset} in the {Room}
-FavoriteIntent play {Preset} in {Room}
-FavoriteIntent play {Preset} in the {Room}
 FavoriteIntent play favorite {Preset} in {Room}
 FavoriteIntent play favorite {Preset} in the {Room}
 FavoriteIntent start favorite {Preset} in {Room}
@@ -20,7 +68,6 @@ ResumeAllIntent resume all
 ResumeAllIntent continue all
 ResumeAllIntent continue playing all
 ResumeAllIntent continue playing all the music
-
 
 ResumeIntent continue the {Room}
 ResumeIntent continue in the {Room}
@@ -193,4 +240,3 @@ UngroupIntent ungroup {Room}
 UngroupIntent ungroup the {Room}
 UngroupIntent isolate {Room}
 UngroupIntent isolate the {Room}
-
