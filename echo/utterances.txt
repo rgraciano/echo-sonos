@@ -49,6 +49,14 @@ MusicRadioIntent play {take me to the river|Name} radio in the {Room}
 MusicRadioIntent play {killing me softly with his song|Name} radio in the {Room}
 MusicRadioIntent play {i just called to say i love you|Name} radio in the {Room}
 
+MusicRadioIntent play {the kinks lola|Name} radio in the {Room}
+MusicRadioIntent play {louis armstrong hello dolly|Name} radio in the {Room}
+MusicRadioIntent play {elvis presley love me tender|Name} radio in the {Room}
+MusicRadioIntent play {UB forty when fools rush in|Name} radio in the {Room}
+MusicRadioIntent play {talking heads take me to the river|Name} radio in the {Room}
+MusicRadioIntent play {roberta flack killing me softly with his song|Name} radio in the {Room}
+MusicRadioIntent play {stevie wonder i just called to say i love you|Name} radio in the {Room}
+
 PlaylistIntent playlist {Preset} in {Room}
 PlaylistIntent playlist {Preset} in the {Room}
 PlaylistIntent play playlist {Preset} in {Room}
