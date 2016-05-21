@@ -21,7 +21,6 @@ EchoSonos.prototype.constructor = EchoSonos;
 
 EchoSonos.prototype.intentHandlers = {
 
-
     MusicIntent: function (intent, session, response) {
         console.log("MusicIntent received");
         musicHandler(intent.slots.Room.value, '/queue/name:', intent.slots.Name.value, response);
