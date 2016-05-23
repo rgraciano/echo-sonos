@@ -41,6 +41,14 @@ EchoSonos.prototype.intentHandlers = {
         moreMusicHandler(intent.slots.Room.value, '/radio/radio:', response);
     },
 
+    PlayIntent: function (intent, session, response) {
+        console.log("PlayIntent received");
+        options.path = '/preset/' + encodeURIComponent(intent.slots.Preset.value.toLowerCase());
+        httpreq(options, function(error) {
+            genericResponse(error, response);
+        });
+    },
+
     PlaylistIntent: function (intent, session, response) {  
         console.log("PlaylistIntent received");
         playlistHandler(intent.slots.Room.value, intent.slots.Preset.value, 'playlist', response);
