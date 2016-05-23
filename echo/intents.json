@@ -48,6 +48,15 @@
       ]
     },
   
+    "intent": "PlayIntent",
+        "slots": [
+            {
+                "name": "Preset",
+                "type": "PRESETS"
+            }
+        ]
+    },
+
     {
       "intent": "PlaylistIntent",
       "slots": [
