@@ -55,6 +55,14 @@ EchoSonos.prototype.intentHandlers = {
         });
     },
     
+    PlayAllIntent: function (intent, session, response) {
+        console.log("PlayAllIntent received");
+        options.path = '/play';
+        httpreq(options, function(error) {
+            genericResponse(error, response);
+        });
+    },
+
     PauseAllIntent: function (intent, session, response) {
         console.log("PauseAllIntent received");
         options.path = '/pauseall';
@@ -249,15 +257,15 @@ function parseRoomAndGroup(roomArgument) {
     }
 
     var groupIndex = roomArgument.indexOf("group");
-
-    if (groupIndex && (groupIndex + 4 == (roomArgument.length - 1)) && roomArgument.length >= 7) {
+    
+    if (groupIndex != -1) {
         roomAndGroupParsed.group = true;
-        roomAndGroupParsed.room = roomArgument.substr(0, groupIndex - 1);
+        roomAndGroupParsed.room = roomArgument.replace("group","").trim();
     }
     else {
         roomAndGroupParsed.room = roomArgument;
     }
-
+    
     return roomAndGroupParsed;
 }
 

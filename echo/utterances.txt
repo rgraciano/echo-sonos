@@ -21,6 +21,7 @@ ResumeAllIntent continue all
 ResumeAllIntent continue playing all
 ResumeAllIntent continue playing all the music
 
+PlayAllIntent play all
 
 ResumeIntent continue the {Room}
 ResumeIntent continue in the {Room}
