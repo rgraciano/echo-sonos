@@ -57,6 +57,7 @@ MusicRadioIntent play {talking heads take me to the river|Name} radio in the {Ro
 MusicRadioIntent play {roberta flack killing me softly with his song|Name} radio in the {Room}
 MusicRadioIntent play {stevie wonder i just called to say i love you|Name} radio in the {Room}
 
+PlayIntent play {Preset}
 PlayIntent play preset {Preset}
 
 PlaylistIntent playlist {Preset} in {Room}
