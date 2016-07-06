@@ -12,6 +12,7 @@ var options = {
   },
   useHttps: false, // Change to true if you setup node-sonos-http-api with HTTPS
   rejectUnauthorized: true, // Change to false if you self-signed your certificate
+  musicService: "apple" // Supports apple, spotify, or deezer
 };
 
 module.exports = options;
