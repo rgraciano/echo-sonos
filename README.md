@@ -75,7 +75,7 @@ To set it up, you need to do the following:
 2. In the Lambda console, look to the upper right. Make sure "N. Virginia" is selected, because not every zone supports Alexa yet.
 3. Create a new Lambda function. Skip the blueprint. 
 4. Pick any name you want, and choose runtime Node.js.
-5. Go into this repo's [lambda/src](lamda/src) directory and copy options.example.js to options.js. Edit options.js to have your DynDNS hostname, your port, and the Alexa App ID you just copied.
+5. Go into this repo's [lambda/src](lambda/src) directory and copy options.example.js to options.js. Edit options.js to have your DynDNS hostname, your port, and the Alexa App ID you just copied.
 6. In lambda/src, zip up everything. On Mac/Linux, `cd src; chmod a+r *.js; zip src.zip *.js`.  Make sure you don't capture the folder, just the files.
 7. Choose to upload the zip file for src.zip.
 8. The default handler is fine. Create a new role of type Basic Execution Role. Pick smallest possible memory and so on.
