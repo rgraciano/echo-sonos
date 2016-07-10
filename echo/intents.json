@@ -1,7 +1,54 @@
 {
     "intents": [
     {
-        "intent": "PlayIntent",
+      "intent": "MusicIntent",
+      "slots": [
+        {
+            "name": "Name",
+            "type": "AMAZON.LITERAL"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+
+    {
+      "intent": "MusicRadioIntent",
+      "slots": [
+        {
+            "name": "Name",
+            "type": "AMAZON.LITERAL"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+  
+    {
+      "intent": "PlayMoreByArtistIntent",
+      "slots": [
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+  
+    {
+      "intent": "PlayMoreLikeTrackIntent",
+      "slots": [
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+  
+    "intent": "PlayIntent",
         "slots": [
             {
                 "name": "Preset",
@@ -9,7 +56,7 @@
             }
         ]
     },
- 
+
     {
       "intent": "PlaylistIntent",
       "slots": [
