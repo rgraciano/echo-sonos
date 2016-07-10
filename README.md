@@ -63,7 +63,7 @@ To set it up, you need to do the following:
 5. Test it by hitting http://yourdyndnsaddress:5005/zones.
 
 # Create the Alexa Skill that will send events to AWS Lambda
-1. Create a new Skill in the Alexa Skills control panel on Amazon. You need a developer account to do this.
+1. Create a new Skill in the [Alexa Skills control panel](https://developer.amazon.com/edw/home.html) on Amazon. You need a developer account to do this. The account must be the same as bound to your Echo, and make sure you are logged into that account on amazon.com. You will get access denied if the two accounts are different.
 2. Name can be whatever you want. "Invocation" is what you say (I used "Sonos").
 3. Check Custom Interaction Model if it is not already checked. Click Next
 4. Click Next, taking you to Interaction Model. Create a Custom Slot Type ("Add Slot Type"). Add a new type for PRESETS, another for ROOMS, and a final one for TOGGLES. Into each, copy/paste the contents of [echo/custom_slots/PRESETS.slot.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/custom_slots/PRESETS.slot.txt), [echo/custom_slots/ROOMS.slot.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/custom_slots/ROOMS.slot.txt) and [echo/custom_slots/TOGGLES.slot.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/custom_slots/TOGGLES.slot.txt).
