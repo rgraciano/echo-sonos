@@ -67,6 +67,10 @@
     },
 
     {
+      "intent": "PlayAllIntent"
+    },
+    
+    {
       "intent": "VolumeDownIntent",
       "slots": [
         {
