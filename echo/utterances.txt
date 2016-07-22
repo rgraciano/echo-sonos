@@ -68,7 +68,7 @@ MusicIntent play {roberta flack killing me softly with his song|Name}
 MusicIntent play {stevie wonder i just called to say i love you|Name}
 MusicIntent play {toad the wet sproket i will not Take these things for granted|Name}
 
-PlayIntent play preset {Preset}
+PlayPresetIntent play preset {Preset}
 
 PlaylistIntent playlist {Preset} in {Room}
 PlaylistIntent playlist {Preset} in the {Room}
