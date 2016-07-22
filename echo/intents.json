@@ -1,5 +1,6 @@
 {
     "intents": [
+    
     {
       "intent": "MusicIntent",
       "slots": [
@@ -13,7 +14,7 @@
         }   
       ]
     },
-
+    
     {
       "intent": "MusicRadioIntent",
       "slots": [
@@ -27,7 +28,7 @@
         }   
       ]
     },
-  
+
     {
       "intent": "PlayMoreByArtistIntent",
       "slots": [
@@ -47,16 +48,83 @@
         }   
       ]
     },
-  
-    "intent": "PlayIntent",
-        "slots": [
-            {
-                "name": "Preset",
-                "type": "PRESETS"
-            }
-        ]
+      
+    {  
+      "intent": "SiriusXMStationIntent",
+      "slots": [
+        {
+            "name": "Station",
+            "type": "SXMSTATIONS"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
     },
-
+      
+    {  
+      "intent": "SiriusXMChannelIntent",
+      "slots": [
+        {
+            "name": "Channel",
+            "type": "SXMCHANNELS"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+      
+    {
+      "intent": "PandoraMusicIntent",
+      "slots": [
+        {
+            "name": "Name",
+            "type": "AMAZON.LITERAL"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+   
+    {
+      "intent": "PandoraThumbsUpIntent",
+      "slots": [
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+    
+    {
+      "intent": "PandoraThumbsDownIntent",
+      "slots": [
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+      
+    {
+      "intent": "PlayPresetIntent",
+      "slots": [
+        {
+            "name": "Preset",
+            "type": "PRESETS"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+  
     {
       "intent": "PlaylistIntent",
       "slots": [
@@ -85,6 +153,40 @@
       ]
     },
 
+    {
+      "intent": "ChangeRoomIntent",
+      "slots": [
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+    
+    {
+      "intent": "ChangeServiceIntent",
+      "slots": [
+        {
+            "name": "Service",
+            "type": "SERVICES"
+        }   
+      ]
+    },
+    
+    {
+      "intent": "ChangeRoomAndServiceIntent",
+      "slots": [
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        },   
+        {
+            "name": "Service",
+            "type": "SERVICES"
+        }   
+      ]
+    },
+    
     {
       "intent": "PauseIntent",
       "slots": [
@@ -276,4 +378,5 @@
     
   ]
 }
+
 
