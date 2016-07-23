@@ -11,14 +11,16 @@ Global commands (no rooms required):
 
 Room-specific commands, where "ROOM" could be any of your Sonos room names (eg Kitchen, Master Bedroom, and so on):
 
-* Play songs from an artist: "Alex, tell Sonos to play ARTIST NAME in the ROOM
-* Play a song: "Alex, tell Sonos to play SONG NAME in the ROOM
-* Play a specific artist's song: "Alex, tell Sonos to play ARTIST NAME SONG NAME in the ROOM
-* Play "radio" songs like this artist: Alexa, tell Sonos to play ARTIST NAME radio in the ROOM
-* Play "radio" songs like this track: Alexa, tell Sonos to play SONG NAME radio in the ROOM
-* Play "radio" songs like this track from a specific artist: Alexa, tell Sonos to play ARTIST NAME SONG NAME radio in the ROOM
-* Play more "radio" songs like this song: Alexa, play more songs by this artist in the ROOM
-* Play more "radio" songs like this track: Alexa, play more songs like this in the ROOM
+* Play songs from an artist: "Alex, tell Sonos to play ARTIST NAME in the ROOM"
+* Play a song: "Alex, tell Sonos to play SONG NAME in the ROOM"
+* Play a specific artist's song: "Alex, tell Sonos to play ARTIST NAME SONG NAME in the ROOM"
+* Play "radio" songs like this artist: "Alexa, tell Sonos to play ARTIST NAME radio in the ROOM"
+* Play "radio" songs like this track: Alexa, tell Sonos to play SONG NAME radio in the ROOM"
+* Play "radio" songs like this track from a specific artist: "Alexa, tell Sonos to play ARTIST NAME SONG NAME radio in the ROOM"
+* Play more "radio" songs like this song: "Alexa, play more songs by this artist in the ROOM"
+* Play more "radio" songs like this track: "Alexa, play more songs like this in the ROOM"
+* SiriusXM: "Alexa, play SiriusXM channel CHANNEL in the ROOM"
+* SiriusXM: "Alexa, play SiriusXM station STATION in the ROOM"
 * Playlists: "Alexa, tell Sonos to start playlist MY PLAYLIST in the ROOM"
 * Favorites: "Alexa, tell Sonos to play favorite MY FAVORITE in the ROOM"
 * Next: "Alexa, tell Sonos go to the next track in the ROOM"
@@ -40,7 +42,13 @@ Room-specific commands, where "ROOM" could be any of your Sonos room names (eg K
 * Remove room from the group: "Alexa, tell Sonos to ungroup ROOM"
 * Many other natural phrasings are supported for each command. The file "echo/utterances.txt" has all of the examples.
 
-Everything's dynamic - rooms and playlists are taken dynamically from your speech. There are common room names in utterances.txt to help the Alexa engine recognize valid entries, but it's not necessary to add more. 
+Everything's dynamic - rooms and playlists are taken dynamically from your speech. There are common room names in utterances.txt to help the Alexa engine recognize valid entries, but it's not necessary to add more. You can specify a default room in options.js and that room will be used when no room is specified in the utterance. You can also specify a default service in options.js to be used for the music search functionality which supports Apple Music, Spotify, Deezer, and the local Sonos music library. The default for the music service is to use the presets.
+
+Turning on Advanced Mode in options.js will allow you to dynamically change the current room and/or current music service through utterances (below). The solution will also remember the last room that was used in a normal command and set the current room to that room. 
+
+* Change room: "Alexa, tell Sonos to change room to ROOM"
+* Change service: "Alexa, tell Sonos to change music to SERVICE" (SERVICE = Presets, Library, Apple, Spotify, or Deezer)
+* Change room and service: "Alexa, tell Sonos to change room to ROOM and music to SERVICE"
 
 The service is also smart enough to control your whole group when given only a room name, even if that room isn't the Sonos coordinator, so you can change the volume in an entire group without having to remember which speaker is the coordinator.
 
@@ -74,7 +82,10 @@ To set it up, you need to do the following:
 1. Create a new Skill in the Alexa Skills control panel on Amazon. You need a developer account to do this.
 2. Name can be whatever you want. "Invocation" is what you say (I used "Sonos").
 3. Check Custom Interaction Model if it is not already checked. Click Next
-4. Click Next, taking you to Interaction Model. Create a Custom Slot Type ("Add Slot Type"). Add a new type for PRESETS, another for ROOMS, and a final one for TOGGLES. Into each, copy/paste the contents of [echo/custom_slots/PRESETS.slot.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/custom_slots/PRESETS.slot.txt), [echo/custom_slots/ROOMS.slot.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/custom_slots/ROOMS.slot.txt) and [echo/custom_slots/TOGGLES.slot.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/custom_slots/TOGGLES.slot.txt).
+4. Click Next, taking you to Interaction Model. Create a Custom Slot Type ("Add Slot Type"). Add a new types for PRESETS, ROOMS, SXMCHANNELS, SXMSTATIONS, SERVICES, and a final one for TOGGLES. Into each, copy/paste the contents of [echo/custom_slots/PRESETS.slot.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/custom_slots/PRESETS.slot.txt), [echo/custom_slots/ROOMS.slot.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/custom_slots/ROOMS.slot.txt) and [echo/custom_slots/SXMCHANNELS.slot.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/custom_slots/SXMCHANNELS.slot.txt).
+[echo/custom_slots/SXMSTATIONS.slot.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/custom_slots/SXMSTATIONS.slot.txt).
+[echo/custom_slots/SERVICES.slot.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/custom_slots/SERVICES.slot.txt).
+[echo/custom_slots/TOGGLES.slot.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/custom_slots/TOGGLES.slot.txt).
 5. Still in Interaction Model, copy this repo's [echo/intents.json](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/intents.json) into the "Intent Schema" field, and [echo/utterances.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/utterances.txt) into "Sample Utterances".
 6. Don't test yet, just save. Click back to "Skill Information" and copy the "Application ID". You'll need this for Lambda.
 
@@ -83,18 +94,24 @@ To set it up, you need to do the following:
 2. In the Lambda console, look to the upper right. Make sure "N. Virginia" is selected, because not every zone supports Alexa yet.
 3. Create a new Lambda function. Skip the blueprint. 
 4. Pick any name you want, and choose runtime Node.js.
-5. Go into this repo's [lambda/src](lamda/src) directory and copy options.example.js to options.js. Edit options.js to have your DynDNS hostname, your port, and the Alexa App ID you just copied.
+5. Go into this repo's [lambda/src](lamda/src) directory and copy options.example.js to options.js. Edit options.js to have your DynDNS hostname, your port, and the Alexa App ID you just copied. Also specify the default room, service, and if you want Advanced Mode turned on.
 6. In lambda/src, zip up everything. On Mac/Linux, `cd src; chmod a+r *.js; zip src.zip *.js`.  Make sure you don't capture the folder, just the files.
 7. Choose to upload the zip file for src.zip.
 8. The default handler is fine. Create a new role of type Basic Execution Role. Pick smallest possible memory and so on.
 9. Click Next to proceed. Once created, click "Event Sources".
 10. Add a source.  Choose "Alexa Skills Kit".
 11. Test it out. I included a test blueprint in this repo. Click "Test" and copy/paste this repo's [lambda/play_intent_testreq.json](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/lambda/play_intent_testreq.json) to test. It will trigger the "test" preset in your presets.json file on your Sonos server. Don't forget to replace the Alexa App Id again.
+12. For Advanced Mode you also need to give Lambda permission to access DynamoDB for storing the current room and service settings. Simply click on your AWS Dashboard account name in the upper right corner, Security Credentials, close the popup message, click Roles on the left, click on lambda_basic_execution, click Attach Policy, click the checkbox next to AmazonDynamoDBFullAccess, and click Attach Policy at the bottom of the screen.
 
 # Connect Alexa Skill to AWS Lambda
 1. In the Lambda console, copy the long "ARN" string in the upper right.  
 2. Go back into the Alexa Skill console, open your skill, click "Skill Information", choose Lambda ARN and paste that ARN string in.
 3. Now you're ready to put it all together. Try "Alexa, use Sonos to play test"
+
+# Optonal Features can be enabled in options.js
+  defaultRoom: 'Kitchen',	      // Allows you to specify a default room to use when one is not specified in the utterance 	
+  defaultMusicService: 'apple',   // Supports presets, library, apple, spotify, or deezer
+  advancedMode: true              // Allows you to specify and change default rooms and music services. Requires additional AWS setup
 
 # Optional Security Features
 echo-sonos supports both HTTPS and basic auth, for those concerned with opening their Sonos server to the Internet.  options.example.js has flags and configuration information for both features. For HTTPS support, set "useHttps" to "true" and check to make sure the port is still correct.  For basic auth, change the "auth" variable and replace the username and password with your own.
