@@ -86,7 +86,7 @@ To set it up, you need to do the following:
 [echo/custom_slots/SXMSTATIONS.slot.txt](https://raw.githubusercontent.com/jplourde5/echo-sonos/master/echo/custom_slots/SXMSTATIONS.slot.txt),
 [echo/custom_slots/SERVICES.slot.txt](https://raw.githubusercontent.com/jplourde5/echo-sonos/master/echo/custom_slots/SERVICES.slot.txt), and
 [echo/custom_slots/TOGGLES.slot.txt](https://raw.githubusercontent.com/jplourde5/echo-sonos/master/echo/custom_slots/TOGGLES.slot.txt).
-5. Still in Interaction Model, copy this repo's [echo/intents.json](https://raw.githubusercontent.com/jplourde5/master/echo-sonos/echo/intents.json) into the "Intent Schema" field, and [echo/utterances.txt](https://raw.githubusercontent.com/jplourde5/master/echo-sonos/echo/utterances.txt) into "Sample Utterances".
+5. Still in Interaction Model, copy this repo's [echo/intents.json](https://raw.githubusercontent.com/jplourde5/echo-sonos/master/echo/intents.json) into the "Intent Schema" field, and [echo/utterances.txt](https://raw.githubusercontent.com/jplourde5/echo-sonos/master/echo/utterances.txt) into "Sample Utterances".
 6. Don't test yet, just save. Click back to "Skill Information" and copy the "Application ID". You'll need this for Lambda.
 
 # Configure the AWS Lambda service that will trigger your node-sonos-http-api server
