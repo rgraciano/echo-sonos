@@ -34,7 +34,7 @@ EchoSonos.prototype.intentHandlers = {
     },
 
     MusicIntent: function (intent, session, response) {
-        console.log("MusicIntent received");
+        console.log("MusicIntent received for room " + intent.slots.Room.value);
         loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
 	        musicHandler(room, service, '/song/', intent.slots.Name.value, response);
         });  
@@ -120,23 +120,35 @@ EchoSonos.prototype.intentHandlers = {
  
     ChangeRoomIntent: function (intent, session, response) {
         console.log("ChangeRoomIntent received");
-        changeCurrent('DefaultEcho', intent.slots.Room.value, '', function(room, service) {
-        	genericResponse('', response);
-        });
+        if (!options.advancedMode) {
+           	response.tell("This command does not work unless advanced mode is turned on");
+        } else {
+    		changeCurrent('DefaultEcho', intent.slots.Room.value, '', function() {
+        		genericResponse('', response);
+        	});
+        }
     },
 
     ChangeServiceIntent: function (intent, session, response) {
         console.log("ChangeSERVICEIntent received");
-        changeCurrent('DefaultEcho', '', intent.slots.Service.value, function(room, service) {
-        	genericResponse('', response);
-        });
+        if (!options.advancedMode) {
+           	response.tell("This command does not work unless advanced mode is turned on");
+        } else {
+	        changeCurrent('DefaultEcho', '', intent.slots.Service.value, function() {
+    	    	genericResponse('', response);
+        	});
+        }
     },
 
     ChangeRoomAndServiceIntent: function (intent, session, response) {
         console.log("ChangeRoomAndServiceIntent received");
-        changeCurrent('DefaultEcho', intent.slots.Room.value, intent.slots.Service.value, function(room, service) {
-        	genericResponse('', response);
-        });
+        if (!options.advancedMode) {
+           	response.tell("This command does not work unless advanced mode is turned on");
+        } else {
+	        changeCurrent('DefaultEcho', intent.slots.Room.value, intent.slots.Service.value, function() {
+    	    	genericResponse('', response);
+        	});
+        }
     },
 
     ResumeAllIntent: function (intent, session, response) {
@@ -313,7 +325,7 @@ function musicHandler(roomValue, service, cmdpath, name, response) {
         	genericResponse(error, response);
         });
     } else { 
-        var skillPath = '/musicsearch/' + service + cmdpath + encodeURIComponent(name);
+        var skillPath = '/musicsearch/' + service.toLowerCase() + cmdpath + encodeURIComponent(name);
         var msgStart = (cmdpath.startsWith('/station'))?'Started ':'Queued and started ';
         var msgEnd = (cmdpath.startsWith('/station'))?' radio':'';
     
@@ -477,7 +489,7 @@ var values = {};
 
     if (options.advancedMode) {
 		if (!isBlank(room) && !isBlank(service)) {
-    		updateExpression = "set currentRoom=:r, currentService=:s";
+    		updateExpression = "set currentRoom=:r, currentMusicService=:s";
     		values = {":r":room, "s:":service};
     	} else
     	if (!isBlank(room)) {
@@ -485,8 +497,8 @@ var values = {};
     		values = {":r":room};
     	} else
     	if (!isBlank(service)) {
-    		updateExpression = "set currentService=:s";
-    		values = {"s:":service};
+    		updateExpression = "set currentMusicService=:s";
+    		values = {":s":service};
    		}	
 	
 		if (updateExpression != '') {
@@ -508,11 +520,11 @@ var values = {};
     			} else {
         			console.log("Update of current defaults succeeded:", JSON.stringify(data, null, 2));
    				}
-				OnCompleteFun(room, service);
+				OnCompleteFun();
 			});
 		}
 	} else {
-		OnCompleteFun(room, service);
+		console.error("Unable to change defaults when not in Advanced Mode");
 	}
 }
 
@@ -533,7 +545,7 @@ var service = '';
     console.log("Advanced Mode = " + options.advancedMode);
     if (options.advancedMode) {
 
-    	function addDefault()
+    	function addCurrent(OnCompleteFun)
     	{
         	checkDefaults();
            				
@@ -547,8 +559,10 @@ var service = '';
     			}
 			};
 
-			console.log("Adding defaults");
+			console.log("Adding current settings record");
 			docClient.put(params, function(err, data) {
+				console.log("err=" + JSON.stringify(err, null, 2));			
+				console.log("data=" + JSON.stringify(data, null, 2));			
 				if (err) {
 					console.error("Unable to add default. Error JSON:", JSON.stringify(err, null, 2));
     			} else {
@@ -557,7 +571,7 @@ var service = '';
 			});    				
     	}
 
-    	function readCurrent()
+    	function readCurrent(OnCompleteFun)
     	{
 	    	var newRoom = '';
 	    	var newService = '';
@@ -571,8 +585,10 @@ var service = '';
 
 			console.log("Reading current settings");
 			docClient.get(params, function(err, data) {
-				if (err) {
-					addDefault();
+				//console.log("err=" + JSON.stringify(err, null, 2));			
+				//console.log("data=" + JSON.stringify(data, null, 2));			
+				if (err || (data.Item == undefined)) {
+					addCurrent(OnCompleteFun);
     			} else {
     		    	if (isBlank(room)) {
     		    		room = data.Item.currentRoom;
@@ -586,10 +602,13 @@ var service = '';
     		    	if (service != data.Item.currentMusicService) {
     		    		newService = service;
     		    	}
+ 					console.log("room=" + room +" newRoom=" + newRoom + "  service=" + service + " newService=" + newService);   		    	
     		    	if (isBlank(newRoom) && isBlank(newService)) {
         				OnCompleteFun(room, service);
         			} else {
-        				changeCurrent(echoId, newRoom, newService, OnCompleteFun);
+        				changeCurrent(echoId, newRoom, newService, function() {
+	        				OnCompleteFun(room, service);
+        				});
         			}
    	 			}
 			});    				
@@ -597,7 +616,7 @@ var service = '';
 
         AWS.config.update({
             region: process.env.AWS_REGION,
-            endpoint: "https://dynamodb." + process.env.AWS_REGION + ".amazonaws.com"            
+            endpoint: "https://dynamodb." + process.env.AWS_REGION + ".amazonaws.com"
         });
         var dynamodb = new AWS.DynamoDB();
 
@@ -625,12 +644,22 @@ var service = '';
     				if (err) {
         				console.error("Unable to create table. Error JSON:", JSON.stringify(err, null, 2));
     				} else {
-    			    	addDefault();
+    					params = {
+                    		TableName : "echo-sonos"
+                    	};
+                    
+						dynamodb.waitFor('tableExists', params, function(err, data) {
+  							if (err) {
+        						console.error("Unable to wait for table table. Error JSON:", JSON.stringify(err, null, 2));
+  							} else {
+  								addCurrent(OnCompleteFun);
+  							}
+						});
     				}
 				});
             } else 
             if (isBlank(service) || isBlank(room)) {
-            	readCurrent();
+            	readCurrent(OnCompleteFun);
             }
         });
     } else {
