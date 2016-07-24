@@ -346,13 +346,16 @@ function moreMusicHandler(roomValue, service, cmdpath, response) {
     httpreq(options, function (error, responseJson) {
         if (!error) {
             responseJson = JSON.parse(responseJson);
-            var name = responseJson.currentTrack.artist;
-            
-            if (cmdpath.startsWith('/station') && (['apple','spotify','deezer'].indexOf(service) != -1)) {
-                name += ' ' + responseJson.currentTrack.title;
-            }    
-
-            musicHandler(roomValue, service, cmdpath, name, response);
+			console.log("Currently Playing = " + JSON.stringify(responseJson, null, 2));            
+            if (responseJson.currentTrack.artist != undefined) {
+           		var name = responseJson.currentTrack.artist;
+            	if (cmdpath.startsWith('/station') && (['apple','spotify','deezer'].indexOf(service) != -1)) {
+                	name += ' ' + responseJson.currentTrack.title;
+            	}    
+	            musicHandler(roomValue, service, cmdpath, name, response);
+	        } else {
+            	response.tell("The current artist is not identified");
+	        }
         } else { 
             genericResponse(error, response);
         }
