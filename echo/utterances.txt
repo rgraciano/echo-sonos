@@ -68,6 +68,22 @@ MusicIntent play {roberta flack killing me softly with his song|Name}
 MusicIntent play {stevie wonder i just called to say i love you|Name}
 MusicIntent play {toad the wet sproket i will not Take these things for granted|Name}
 
+MusicRadioIntent play {coldplay|Name} radio in the {Room}
+MusicRadioIntent play {the fray|Name} radio in the {Room}
+MusicRadioIntent play {the rolling stones|Name} radio in the {Room}
+MusicRadioIntent play {toad the wet sproket|Name} radio in the {Room}
+MusicRadioIntent play {KC and the sunshine band|Name} radio in the {Room}
+MusicRadioIntent play {john travolta and olivia newton john|Name} radio in the {Room}
+MusicRadioIntent play {DJ jazzy jeff and the fresh prince|Name} radio in the {Room}
+
+MusicRadioIntent play {coldplay|Name} radio
+MusicRadioIntent play {the fray|Name} radio
+MusicRadioIntent play {the rolling stones|Name} radio
+MusicRadioIntent play {toad the wet sproket|Name} radio
+MusicRadioIntent play {KC and the sunshine band|Name} radio
+MusicRadioIntent play {john travolta and olivia newton john|Name} radio
+MusicRadioIntent play {DJ jazzy jeff and the fresh prince|Name} radio
+
 PlayPresetIntent play preset {Preset}
 
 PlaylistIntent playlist {Preset} in {Room}
