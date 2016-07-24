@@ -352,7 +352,7 @@ function moreMusicHandler(roomValue, service, cmdpath, response) {
                 name += ' ' + responseJson.currentTrack.title;
             }    
 
-            musicHandler(roomValue, service, '/musicsearch/', cmdpath, name, response);
+            musicHandler(roomValue, service, cmdpath, name, response);
         } else { 
             genericResponse(error, response);
         }
