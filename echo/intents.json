@@ -30,6 +30,20 @@
     },
 
     {
+      "intent": "AlbumIntent",
+      "slots": [
+        {
+            "name": "Name",
+            "type": "AMAZON.LITERAL"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+      
+    {
       "intent": "PlayMoreByArtistIntent",
       "slots": [
         {
