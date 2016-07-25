@@ -68,6 +68,22 @@ MusicIntent play {roberta flack killing me softly with his song|Name}
 MusicIntent play {stevie wonder i just called to say i love you|Name}
 MusicIntent play {toad the wet sproket i will not Take these things for granted|Name}
 
+AlbumIntent play album {boston|Name} in the {Room}
+AlbumIntent play album {full circle|Name} in the {Room}
+AlbumIntent play album {stranger to stranger|Name} in the {Room}
+AlbumIntent play album {a cure for loneliness|Name} in the {Room}
+AlbumIntent play album {a sailor's guide to earth|Name} in the {Room}
+AlbumIntent play album {you will never be one of us|Name} in the {Room}
+AlbumIntent play album {for those of you that have never|Name} in the {Room}
+
+AlbumIntent play album {boston|Name}
+AlbumIntent play album {full circle|Name}
+AlbumIntent play album {stranger to stranger|Name}
+AlbumIntent play album {a cure for loneliness|Name}
+AlbumIntent play album {a sailor's guide to earth|Name}
+AlbumIntent play album {you will never be one of us|Name}
+AlbumIntent play album {for those of you that have never|Name}
+
 MusicRadioIntent play {coldplay|Name} radio in the {Room}
 MusicRadioIntent play {the fray|Name} radio in the {Room}
 MusicRadioIntent play {the rolling stones|Name} radio in the {Room}
