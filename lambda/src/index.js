@@ -33,6 +33,20 @@ EchoSonos.prototype.intentHandlers = {
         });  
     },
 
+    ArtistIntent: function (intent, session, response) {
+        console.log("MusicIntent received for room " + intent.slots.Room.value);
+        loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
+	        musicHandler(room, service, '/song/', 'artist:' + intent.slots.Name.value, response);
+        });  
+    },
+
+    TrackIntent: function (intent, session, response) {
+        console.log("MusicIntent received for room " + intent.slots.Room.value);
+        loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
+	        musicHandler(room, service, '/song/', 'track:' + intent.slots.Name.value, response);
+        });  
+    },
+
     MusicIntent: function (intent, session, response) {
         console.log("MusicIntent received for room " + intent.slots.Room.value);
         loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
