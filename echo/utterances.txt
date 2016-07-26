@@ -26,6 +26,14 @@ MusicIntent play {KC and the sunshine band|Name} in the {Room}
 MusicIntent play {john travolta and olivia newton john|Name} in the {Room}
 MusicIntent play {DJ jazzy jeff and the fresh prince|Name} in the {Room}
 
+MusicIntent play {coldplay|Name}
+MusicIntent play {the fray|Name}
+MusicIntent play {the rolling stones|Name}
+MusicIntent play {toad the wet sproket|Name}
+MusicIntent play {KC and the sunshine band|Name}
+MusicIntent play {john travolta and olivia newton john|Name}
+MusicIntent play {DJ jazzy jeff and the fresh prince|Name}
+
 MusicIntent play {lola|Name} in the {Room}
 MusicIntent play {hello dolly|Name} in the {Room}
 MusicIntent play {love me tender|Name} in the {Room}
@@ -33,6 +41,14 @@ MusicIntent play {when fools rush in|Name} in the {Room}
 MusicIntent play {take me to the river|Name} in the {Room}
 MusicIntent play {killing me softly with his song|Name} in the {Room}
 MusicIntent play {i just called to say i love you|Name} in the {Room}
+
+MusicIntent play {lola|Name}
+MusicIntent play {hello dolly|Name}
+MusicIntent play {love me tender|Name}
+MusicIntent play {when fools rush in|Name}
+MusicIntent play {take me to the river|Name}
+MusicIntent play {killing me softly with his song|Name}
+MusicIntent play {i just called to say i love you|Name}
 
 MusicIntent play {the kinks lola|Name} in the {Room}
 MusicIntent play {louis armstrong hello dolly|Name} in the {Room}
@@ -42,22 +58,6 @@ MusicIntent play {talking heads take me to the river|Name} in the {Room}
 MusicIntent play {roberta flack killing me softly with his song|Name} in the {Room}
 MusicIntent play {stevie wonder i just called to say i love you|Name} in the {Room}
 MusicIntent play {toad the wet sproket i will not Take these things for granted|Name} in the {Room}
-
-MusicIntent play {coldplay|Name}
-MusicIntent play {the fray|Name}
-MusicIntent play {the rolling stones|Name}
-MusicIntent play {toad the wet sproket|Name}
-MusicIntent play {KC and the sunshine band|Name}
-MusicIntent play {john travolta and olivia newton john|Name}
-MusicIntent play {DJ jazzy jeff and the fresh prince|Name}
-
-MusicIntent play {lola|Name}
-MusicIntent play {hello dolly|Name}
-MusicIntent play {love me tender|Name}
-MusicIntent play {when fools rush in|Name}
-MusicIntent play {take me to the river|Name}
-MusicIntent play {killing me softly with his song|Name}
-MusicIntent play {i just called to say i love you|Name}
 
 MusicIntent play {the kinks lola|Name}
 MusicIntent play {louis armstrong hello dolly|Name}
@@ -83,6 +83,38 @@ AlbumIntent play album {a cure for loneliness|Name}
 AlbumIntent play album {a sailor's guide to earth|Name}
 AlbumIntent play album {you will never be one of us|Name}
 AlbumIntent play album {for those of you that have never|Name}
+
+ArtistIntent play artist {coldplay|Name} in the {Room}
+ArtistIntent play artist {the fray|Name} in the {Room}
+ArtistIntent play artist {the rolling stones|Name} in the {Room}
+ArtistIntent play artist {toad the wet sproket|Name} in the {Room}
+ArtistIntent play artist {KC and the sunshine band|Name} in the {Room}
+ArtistIntent play artist {john travolta and olivia newton john|Name} in the {Room}
+ArtistIntent play artist {DJ jazzy jeff and the fresh prince|Name} in the {Room}
+
+ArtistIntent play artist {coldplay|Name}
+ArtistIntent play artist {the fray|Name}
+ArtistIntent play artist {the rolling stones|Name}
+ArtistIntent play artist {toad the wet sproket|Name}
+ArtistIntent play artist {KC and the sunshine band|Name}
+ArtistIntent play artist {john travolta and olivia newton john|Name}
+ArtistIntent play artist {DJ jazzy jeff and the fresh prince|Name}
+
+TrackIntent play {lola|Name} in the {Room}
+TrackIntent play {hello dolly|Name} in the {Room}
+TrackIntent play {love me tender|Name} in the {Room}
+TrackIntent play {when fools rush in|Name} in the {Room}
+TrackIntent play {take me to the river|Name} in the {Room}
+TrackIntent play {killing me softly with his song|Name} in the {Room}
+TrackIntent play {i just called to say i love you|Name} in the {Room}
+
+TrackIntent play track {lola|Name}
+TrackIntent play track {hello dolly|Name}
+TrackIntent play track {love me tender|Name}
+TrackIntent play track {when fools rush in|Name}
+TrackIntent play track {take me to the river|Name}
+TrackIntent play track {killing me softly with his song|Name}
+TrackIntent play track {i just called to say i love you|Name}
 
 MusicRadioIntent play {coldplay|Name} radio in the {Room}
 MusicRadioIntent play {the fray|Name} radio in the {Room}
