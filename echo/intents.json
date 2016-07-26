@@ -16,20 +16,6 @@
     },
     
     {
-      "intent": "MusicRadioIntent",
-      "slots": [
-        {
-            "name": "Name",
-            "type": "AMAZON.LITERAL"
-        },
-        {
-            "name": "Room",
-            "type": "ROOMS"
-        }   
-      ]
-    },
-
-    {
       "intent": "AlbumIntent",
       "slots": [
         {
@@ -43,6 +29,48 @@
       ]
     },
       
+    {
+      "intent": "ArtistIntent",
+      "slots": [
+        {
+            "name": "Name",
+            "type": "AMAZON.LITERAL"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+      
+    {
+      "intent": "TrackIntent",
+      "slots": [
+        {
+            "name": "Name",
+            "type": "AMAZON.LITERAL"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+      
+    {
+      "intent": "MusicRadioIntent",
+      "slots": [
+        {
+            "name": "Name",
+            "type": "AMAZON.LITERAL"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+
     {
       "intent": "PlayMoreByArtistIntent",
       "slots": [
