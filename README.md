@@ -80,7 +80,7 @@ To set it up, you need to do the following:
 
 # Create the Alexa Skill that will send events to AWS Lambda
 1. Create a new Skill in the Alexa Skills control panel on Amazon. You need a developer account to do this.
-2. Name can be whatever you want. "Invocation" is what you say (I used "Sonos").
+2. Name can be whatever you want. "Invocation" is what you say and it must be all LOWERCASE (I used "sonos").
 3. Check Custom Interaction Model if it is not already checked. Click Next
 4. Click Next, taking you to Interaction Model. Create a Custom Slot Type ("Add Slot Type"). Add a new types for PRESETS, ROOMS, SXMCHANNELS, SXMSTATIONS, SERVICES, and a final one for TOGGLES. Into each, copy/paste the contents of [echo/custom_slots/PRESETS.slot.txt](https://raw.githubusercontent.com/jplourde5/echo-sonos/master/echo/custom_slots/PRESETS.slot.txt), [echo/custom_slots/ROOMS.slot.txt](https://raw.githubusercontent.com/jplourde5/echo-sonos/master/echo/custom_slots/ROOMS.slot.txt), [echo/custom_slots/SXMCHANNELS.slot.txt](https://raw.githubusercontent.com/jplourde5/echo-sonos/master/echo/custom_slots/SXMCHANNELS.slot.txt),
 [echo/custom_slots/SXMSTATIONS.slot.txt](https://raw.githubusercontent.com/jplourde5/echo-sonos/master/echo/custom_slots/SXMSTATIONS.slot.txt),
