@@ -47,7 +47,7 @@ Everything's dynamic - rooms and playlists are taken dynamically from your speec
 Turning on Advanced Mode in options.js will allow you to dynamically change the current room and/or current music service through utterances (below). The solution will also remember the last room that was used in a normal command and set the current room to that room. 
 
 * Change room: "Alexa, tell Sonos to change room to ROOM"
-* Change service: "Alexa, tell Sonos to change music to SERVICE" (SERVICE = Presets, Library, Apple, Spotify, or Deezer)
+* Change service: "Alexa, tell Sonos to change music to SERVICE" (SERVICE = Presets, Library, Apple, Spotify, Deezer, or Elite)
 * Change room and service: "Alexa, tell Sonos to change room to ROOM and music to SERVICE"
 
 The service is also smart enough to control your whole group when given only a room name, even if that room isn't the Sonos coordinator, so you can change the volume in an entire group without having to remember which speaker is the coordinator.
