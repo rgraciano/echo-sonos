@@ -3,3 +3,4 @@ library
 apple
 spotify
 deezer
+deezere
