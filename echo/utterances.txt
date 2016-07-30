@@ -162,11 +162,11 @@ FavoriteIntent play favorite {Preset}
 FavoriteIntent start favorite {Preset}
 FavoriteIntent start favorite {Preset}
 
-SiriusXMStationIntent play sirius XM {Station} in the {Room}
-SiriusXMStationIntent play sirius XM {Station}
+SiriusXMStationIntent start sirius XM {Station} in the {Room}
+SiriusXMStationIntent start sirius XM {Station}
 
-SiriusXMChannelIntent play sirius XM channel {Channel} in the {Room}
-SiriusXMChannelIntent play sirius XM channel {Channel}
+SiriusXMChannelIntent start sirius XM channel {Channel} in the {Room}
+SiriusXMChannelIntent start sirius XM channel {Channel}
 
 ChangeRoomIntent change room to {Room}
 ChangeRoomIntent change room to the {Room}
