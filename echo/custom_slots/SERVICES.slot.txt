@@ -3,4 +3,4 @@ library
 apple
 spotify
 deezer
-deezere
+elite
