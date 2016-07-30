@@ -19,7 +19,7 @@
           "value": "test"
         }
       },
-      "name": "PlayIntent"
+      "name": "PlayPresetIntent"
     },
     "type": "IntentRequest",
     "requestId": "request5678"
