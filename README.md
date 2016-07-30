@@ -110,7 +110,7 @@ To set it up, you need to do the following:
 
 # Optonal Features can be enabled in options.js
   defaultRoom: 'Kitchen',	      // Allows you to specify a default room to use when one is not specified in the utterance 	
-  defaultMusicService: 'apple',   // Supports presets, library, apple, spotify, deezer, or deezere  (deezere = Deezer Elite FLAC)
+  defaultMusicService: 'apple',   // Supports presets, library, apple, spotify, deezer, or elite  (elite = Deezer Elite FLAC)
   advancedMode: true              // Allows you to specify and change default rooms and music services. Requires additional AWS setup
 
 # Optional Security Features
