@@ -42,7 +42,7 @@ Room-specific commands, where "ROOM" could be any of your Sonos room names (eg K
 * Remove room from the group: "Alexa, tell Sonos to ungroup ROOM"
 * Many other natural phrasings are supported for each command. The file "echo/utterances.txt" has all of the examples.
 
-Everything's dynamic - rooms and playlists are taken dynamically from your speech. There are common room names in utterances.txt to help the Alexa engine recognize valid entries, but it's not necessary to add more. You can specify a default room in options.js and that room will be used when no room is specified in the utterance. You can also specify a default service in options.js to be used for the music search functionality which supports Apple Music, Spotify, Deezer, and the local Sonos music library. The default for the music service is to use the presets.
+Everything's dynamic - rooms and playlists are taken dynamically from your speech. There are common room names in utterances.txt to help the Alexa engine recognize valid entries, but it's not necessary to add more. You can specify a default room in options.js and that room will be used when no room is specified in the utterance. You can also specify a default service in options.js to be used for the music search functionality which supports Apple Music, Spotify, Deezer, Deezer Elite, and the local Sonos music library. The default for the music service is to use the presets.
 
 Turning on Advanced Mode in options.js will allow you to dynamically change the current room and/or current music service through utterances (below). The solution will also remember the last room that was used in a normal command and set the current room to that room. 
 
@@ -110,7 +110,7 @@ To set it up, you need to do the following:
 
 # Optonal Features can be enabled in options.js
   defaultRoom: 'Kitchen',	      // Allows you to specify a default room to use when one is not specified in the utterance 	
-  defaultMusicService: 'apple',   // Supports presets, library, apple, spotify, or deezer
+  defaultMusicService: 'apple',   // Supports presets, library, apple, spotify, deezer, or deezere  (deezere = Deezer Elite FLAC)
   advancedMode: true              // Allows you to specify and change default rooms and music services. Requires additional AWS setup
 
 # Optional Security Features
