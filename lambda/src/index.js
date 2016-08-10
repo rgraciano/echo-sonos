@@ -9,6 +9,12 @@ var options = require('./options');
 var defaultMusicService = ((options.defaultMusicService != undefined) && (options.defaultMusicService > ''))?options.defaultMusicService:'presets';
 var defaultRoom = (options.defaultRoom != undefined)?options.defaultRoom:'';
 
+var serverUrl = '';
+var clientUrl = '';
+var sqsServer = null;
+var sqsClient = null;
+
+
 var AlexaSkill = require('./AlexaSkill');
 var EchoSonos = function () {
     AlexaSkill.call(this, options.appid);
@@ -363,7 +369,7 @@ function moreMusicHandler(roomValue, service, cmdpath, response) {
 			console.log("Currently Playing = " + JSON.stringify(responseJson, null, 2));            
             if (responseJson.currentTrack.artist != undefined) {
            		var name = responseJson.currentTrack.artist;
-            	if (cmdpath.startsWith('/station') && (['apple','spotify','deezer'].indexOf(service) != -1)) {
+            	if (cmdpath.startsWith('/station') && (['apple','spotify','deezer','elite'].indexOf(service) != -1)) {
                 	name += ' ' + responseJson.currentTrack.title;
             	}    
 	            musicHandler(roomValue, service, cmdpath, name, response);
@@ -686,27 +692,70 @@ var service = '';
 }    
 
 function httpreq(options, responseCallback) {
-    var transport = options.useHttps ? https : http;
+	if (options.useSQS) {
+		sqsServer.purgeQueue({QueueUrl:serverUrl}, function(err, data) {
+            console.log("sending SQS " + options.path);
+			sqsClient.sendMessage({
+					MessageBody: options.path,
+					QueueUrl: clientUrl
+				}, 
+				function(err, data) {
+					if (err) {
+						console.log('ERR', err);
+					} else {
+						console.log(data);
+						sqsServer.receiveMessage({	
+								QueueUrl: serverUrl,
+								MaxNumberOfMessages: 1, // how many messages do we wanna retrieve?
+								VisibilityTimeout: 60, // seconds - how long we want a lock on this job
+								WaitTimeSeconds: 20 // seconds - how long should we wait for a message?
+							}, 
+							function(err, data) {
+							    var message = data.Messages[0];
+								var response = message.Body;
+								if (!err) {
+								    sqsServer.deleteMessage({
+    									QueueUrl: serverUrl,
+      									ReceiptHandle: message.ReceiptHandle
+   									}, function(err, data) {
+	            						responseCallback(undefined, response);
+	            						if (err) {
+      										console.log(err);
+      									}
+	   								});
+    	        				} else {
+      								console.log(err);
+			        				responseCallback(err);
+            					}
+							}
+						);
+					}	
+				}
+			);  			
+		});
+	} else {
+    	var transport = options.useHttps ? https : http;
     
-    console.log("Sending " + (options.useHttps ? "HTTPS" : "HTTP" ) + " request to: " + options.path);
+    	console.log("Sending " + (options.useHttps ? "HTTPS" : "HTTP" ) + " request to: " + options.path);
   
-    var req = transport.request(options, function(httpResponse) {
-        var body = '';
+    	var req = transport.request(options, function(httpResponse) {
+        	var body = '';
         
-        httpResponse.on('data', function(data) {
-            body += data;
-        });
+        	httpResponse.on('data', function(data) {
+            	body += data;
+        	});
         
-        httpResponse.on('end', function() {
-            responseCallback(undefined, body);
-        });
-    });
+        	httpResponse.on('end', function() {
+            	responseCallback(undefined, body);
+        	});
+    	});
 
-    req.on('error', function(e) {
-        responseCallback(e);
-    });
+    	req.on('error', function(e) {
+        	responseCallback(e);
+    	});
 
-    req.end();
+    	req.end();
+    }
 }
 
 // 1) grab /zones and find the coordinator for the room being asked for
@@ -767,5 +816,16 @@ function findCoordinatorForRoom(responseJson, room) {
 exports.handler = function (event, context) {
     // Create an instance of the EchoSonos skill.
     var echoSonos = new EchoSonos();
+	if (options.useSQS) {
+		var region = process.env.AWS_REGION;
+   		var arn = context.invokedFunctionArn;
+   		var actLoc = arn.indexOf(region) + region.length + 1;
+   		var accountId = arn.substring(actLoc,arn.indexOf(':',actLoc));
+   		var baseSqsUrl = "https://sqs." + region + ".amazonaws.com/" + accountId;		
+   		serverUrl = baseSqsUrl + "/SQS-Proxy-Server";
+		clientUrl = baseSqsUrl + "/SQS-Proxy-Client";
+		sqsServer = new AWS.SQS({region : region});
+		sqsClient = new AWS.SQS({region : region});
+	}
     echoSonos.execute(event, context);
 };
