@@ -91,7 +91,7 @@ To set it up, you need to do the following:
 
 # Configure the AWS Lambda service that will trigger your node-sonos-http-api server
 1. Create an AWS Lambda account if you don't have one already. It's free!
-2. In the Lambda console, look to the upper right. Make sure "N. Virginia" is selected, because not every zone supports Alexa yet.
+2. In the Lambda console, look to the upper right. Make sure "N. Virginia" or one of the Lambda supported regions is selected, because not every zone supports Alexa yet.
 3. Create a new Lambda function. Skip the blueprint. 
 4. Pick any name you want, and choose runtime Node.js.
 5. Go into this repo's [lambda/src](lamda/src) directory and copy options.example.js to options.js. Edit options.js to have your DynDNS hostname, your port, and the Alexa App ID you just copied. Also specify the default room, service, and if you want Advanced Mode turned on.
@@ -101,7 +101,7 @@ To set it up, you need to do the following:
 9. Click Next to proceed. Once created, click "Event Sources".
 10. Add a source.  Choose "Alexa Skills Kit".
 11. Test it out. I included a test blueprint in this repo. Click "Test" and copy/paste this repo's [lambda/play_intent_testreq.json](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/lambda/play_intent_testreq.json) to test. It will trigger the "test" preset in your presets.json file on your Sonos server. Don't forget to replace the Alexa App Id again.
-12. For Advanced Mode you also need to give Lambda permission to access DynamoDB for storing the current room and service settings. Simply click on your AWS Dashboard account name in the upper right corner, Security Credentials, close the popup message, click Roles on the left, click on lambda_basic_execution, click Attach Policy, click the checkbox next to AmazonDynamoDBFullAccess, and click Attach Policy at the bottom of the screen.
+12. For Advanced Mode you also need to give Lambda permission to access DynamoDB for storing the current room and service settings. Simply click on your AWS Dashboard account name in the upper right corner, Security Credentials, close the popup message, click Roles on the left, click on lambda_basic_execution, click Attach Policy, click the checkboxes next to AmazonDynamoDBFullAccess and AmazonSQSFullAccess, and click Attach Policy at the bottom of the screen.
 
 # Connect Alexa Skill to AWS Lambda
 1. In the Lambda console, copy the long "ARN" string in the upper right.  
@@ -114,7 +114,9 @@ To set it up, you need to do the following:
   advancedMode: true              // Allows you to specify and change default rooms and music services. Requires additional AWS setup
 
 # Optional Security Features
-echo-sonos supports both HTTPS and basic auth, for those concerned with opening their Sonos server to the Internet.  options.example.js has flags and configuration information for both features. For HTTPS support, set "useHttps" to "true" and check to make sure the port is still correct.  For basic auth, change the "auth" variable and replace the username and password with your own.
+The echo-sqs-proxy solution allows Echo-Sonos to communicate with the node-sonos-http-api solution without having to alter your firewall to open your server to the Internet or having to make any of the changes below.  Read the README file in the echo-sqs-proxy directory for instructions.
+
+Alternatively, echo-sonos does support both HTTPS and basic auth, for those concerned with opening their Sonos server to the Internet.  options.example.js has flags and configuration information for both features. For HTTPS support, set "useHttps" to "true" and check to make sure the port is still correct.  For basic auth, change the "auth" variable and replace the username and password with your own.
 
 ## Configuring node-sonos-http-api
 Securing node-sonos-http-api, HTTPS, and your home server are outside the bounds of this project. The below documentation is provided for convenience because so many people have asked me about it.  You could certainly do much more to secure your home server.  For starters, you could pin certificates to the client or put more effort behind secure key and credential storage.  This is a DIY hobbyist project, and it's up to your discretion to determine how much effort to put into security.
