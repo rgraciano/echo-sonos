@@ -1,0 +1,7 @@
+{
+  "region": "YOUR_REGION_CODE",
+  "accessKeyId": "YOUR_ACCESS_KEY_ID",
+  "secretAccessKey": "YOUR_SECRET_ACCESS_KEY",
+  "host": "localhost",
+  "port": "5005"
+}
