@@ -43,14 +43,14 @@ The region should be the AWS region where your are running your Echo Lambda func
 can look in the upper right corner of your AWS dashboard to find the region description. 
 Use the CODE from below, NOT the description.  Current codes for Lambda are:
 
-Description					CODE
-US East (N. Virginia)		us-east-1
-US West (Oregon)			us-west-2
-Asia Pacific (Singapore)	ap-southeast-1
-Asia Pacific (Sydney)		ap-southeast-2	
-Asia Pacific (Tokyo)		ap-northeast-1	
-EU (Frankfurt)				eu-central-1	
-EU (Ireland)				eu-west-1
+Description              CODE
+US East (N. Virginia)    us-east-1
+US West (Oregon)         us-west-2
+Asia Pacific (Singapore) ap-southeast-1
+Asia Pacific (Sydney)    ap-southeast-2	
+Asia Pacific (Tokyo)     ap-northeast-1	
+EU (Frankfurt)           eu-central-1	
+EU (Ireland)             eu-west-1
 
 The access key information can be retrieved by creating and DOWNLOADING new credentials. 
 Click your name in the upper right of the dashboard, Security Credentials, Access 
