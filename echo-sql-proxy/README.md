@@ -12,9 +12,7 @@ can be installed on a different server.
 INSTALLATION
 -----
 
-Get the latest version of jplourde5/echo-sonos and install it if you haven't done so 
-already. Copy the echo-sqs-proxy folder from the echo-sonos directory to the same server 
-running node-sonos-http-api.
+Make sure your copy of echo-sonos is up to date, and then copy the echo-sqs-proxy folder from the echo-sonos directory to the same server running node-sonos-http-api.
 
 Fix your dependencies by invoking the following command while in the echo-sqs-proxy 
 directory:
