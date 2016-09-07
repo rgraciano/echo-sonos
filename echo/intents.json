@@ -1,15 +1,172 @@
 {
     "intents": [
+    
     {
-        "intent": "PlayIntent",
-        "slots": [
-            {
-                "name": "Preset",
-                "type": "PRESETS"
-            }
-        ]
+      "intent": "MusicIntent",
+      "slots": [
+        {
+            "name": "Name",
+            "type": "AMAZON.LITERAL"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
     },
- 
+    
+    {
+      "intent": "AlbumIntent",
+      "slots": [
+        {
+            "name": "Name",
+            "type": "AMAZON.LITERAL"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+      
+    {
+      "intent": "ArtistIntent",
+      "slots": [
+        {
+            "name": "Name",
+            "type": "AMAZON.LITERAL"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+      
+    {
+      "intent": "TrackIntent",
+      "slots": [
+        {
+            "name": "Name",
+            "type": "AMAZON.LITERAL"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+      
+    {
+      "intent": "MusicRadioIntent",
+      "slots": [
+        {
+            "name": "Name",
+            "type": "AMAZON.LITERAL"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+
+    {
+      "intent": "PlayMoreByArtistIntent",
+      "slots": [
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+  
+    {
+      "intent": "PlayMoreLikeTrackIntent",
+      "slots": [
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+      
+    {  
+      "intent": "SiriusXMStationIntent",
+      "slots": [
+        {
+            "name": "Station",
+            "type": "SXMSTATIONS"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+      
+    {  
+      "intent": "SiriusXMChannelIntent",
+      "slots": [
+        {
+            "name": "Channel",
+            "type": "SXMCHANNELS"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+      
+    {
+      "intent": "PandoraMusicIntent",
+      "slots": [
+        {
+            "name": "Name",
+            "type": "AMAZON.LITERAL"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+   
+    {
+      "intent": "PandoraThumbsUpIntent",
+      "slots": [
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+    
+    {
+      "intent": "PandoraThumbsDownIntent",
+      "slots": [
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+      
+    {
+      "intent": "PlayPresetIntent",
+      "slots": [
+        {
+            "name": "Preset",
+            "type": "PRESETS"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+  
     {
       "intent": "PlaylistIntent",
       "slots": [
@@ -38,6 +195,40 @@
       ]
     },
 
+    {
+      "intent": "ChangeRoomIntent",
+      "slots": [
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }   
+      ]
+    },
+    
+    {
+      "intent": "ChangeServiceIntent",
+      "slots": [
+        {
+            "name": "Service",
+            "type": "SERVICES"
+        }   
+      ]
+    },
+    
+    {
+      "intent": "ChangeRoomAndServiceIntent",
+      "slots": [
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        },   
+        {
+            "name": "Service",
+            "type": "SERVICES"
+        }   
+      ]
+    },
+    
     {
       "intent": "PauseIntent",
       "slots": [
@@ -229,4 +420,5 @@
     
   ]
 }
+
 
