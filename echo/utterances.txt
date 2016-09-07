@@ -1,4 +1,138 @@
-PlayIntent play {Preset}
+PlayMoreByArtistIntent play more by this artist in the {Room}
+PlayMoreByArtistIntent play more songs by this artist in the {Room}
+PlayMoreByArtistIntent play more tracks by this artist in the {Room}
+PlayMoreByArtistIntent play more music by this artist in the {Room}
+
+PlayMoreByArtistIntent play more by this artist
+PlayMoreByArtistIntent play more songs by this artist
+PlayMoreByArtistIntent play more tracks by this artist
+PlayMoreByArtistIntent play more music by this artist
+
+PlayMoreLikeTrackIntent play more like this in the {Room}
+PlayMoreLikeTrackIntent play more songs like this in the {Room}
+PlayMoreLikeTrackIntent play more tracks like this in the {Room}
+PlayMoreLikeTrackIntent play more music like this in the {Room}
+
+PlayMoreLikeTrackIntent play more like this
+PlayMoreLikeTrackIntent play more songs like this
+PlayMoreLikeTrackIntent play more tracks like this
+PlayMoreLikeTrackIntent play more music like this
+
+MusicIntent play {coldplay|Name} in the {Room}
+MusicIntent play {the fray|Name} in the {Room}
+MusicIntent play {the rolling stones|Name} in the {Room}
+MusicIntent play {toad the wet sproket|Name} in the {Room}
+MusicIntent play {KC and the sunshine band|Name} in the {Room}
+MusicIntent play {john travolta and olivia newton john|Name} in the {Room}
+MusicIntent play {DJ jazzy jeff and the fresh prince|Name} in the {Room}
+
+MusicIntent play {coldplay|Name}
+MusicIntent play {the fray|Name}
+MusicIntent play {the rolling stones|Name}
+MusicIntent play {toad the wet sproket|Name}
+MusicIntent play {KC and the sunshine band|Name}
+MusicIntent play {john travolta and olivia newton john|Name}
+MusicIntent play {DJ jazzy jeff and the fresh prince|Name}
+
+MusicIntent play {lola|Name} in the {Room}
+MusicIntent play {hello dolly|Name} in the {Room}
+MusicIntent play {love me tender|Name} in the {Room}
+MusicIntent play {when fools rush in|Name} in the {Room}
+MusicIntent play {take me to the river|Name} in the {Room}
+MusicIntent play {killing me softly with his song|Name} in the {Room}
+MusicIntent play {i just called to say i love you|Name} in the {Room}
+
+MusicIntent play {lola|Name}
+MusicIntent play {hello dolly|Name}
+MusicIntent play {love me tender|Name}
+MusicIntent play {when fools rush in|Name}
+MusicIntent play {take me to the river|Name}
+MusicIntent play {killing me softly with his song|Name}
+MusicIntent play {i just called to say i love you|Name}
+
+MusicIntent play {the kinks lola|Name} in the {Room}
+MusicIntent play {louis armstrong hello dolly|Name} in the {Room}
+MusicIntent play {elvis presley love me tender|Name} in the {Room}
+MusicIntent play {UB forty fools rush in|Name} in the {Room}
+MusicIntent play {talking heads take me to the river|Name} in the {Room}
+MusicIntent play {roberta flack killing me softly with his song|Name} in the {Room}
+MusicIntent play {stevie wonder i just called to say i love you|Name} in the {Room}
+MusicIntent play {toad the wet sproket i will not Take these things for granted|Name} in the {Room}
+
+MusicIntent play {the kinks lola|Name}
+MusicIntent play {louis armstrong hello dolly|Name}
+MusicIntent play {elvis presley love me tender|Name}
+MusicIntent play {UB forty fools rush in|Name}
+MusicIntent play {talking heads take me to the river|Name}
+MusicIntent play {roberta flack killing me softly with his song|Name}
+MusicIntent play {stevie wonder i just called to say i love you|Name}
+MusicIntent play {toad the wet sproket i will not Take these things for granted|Name}
+
+AlbumIntent play album {boston|Name} in the {Room}
+AlbumIntent play album {full circle|Name} in the {Room}
+AlbumIntent play album {stranger to stranger|Name} in the {Room}
+AlbumIntent play album {a cure for loneliness|Name} in the {Room}
+AlbumIntent play album {a sailor's guide to earth|Name} in the {Room}
+AlbumIntent play album {you will never be one of us|Name} in the {Room}
+AlbumIntent play album {for those of you that have never|Name} in the {Room}
+
+AlbumIntent play album {boston|Name}
+AlbumIntent play album {full circle|Name}
+AlbumIntent play album {stranger to stranger|Name}
+AlbumIntent play album {a cure for loneliness|Name}
+AlbumIntent play album {a sailor's guide to earth|Name}
+AlbumIntent play album {you will never be one of us|Name}
+AlbumIntent play album {for those of you that have never|Name}
+
+ArtistIntent play artist {coldplay|Name} in the {Room}
+ArtistIntent play artist {the fray|Name} in the {Room}
+ArtistIntent play artist {the rolling stones|Name} in the {Room}
+ArtistIntent play artist {toad the wet sproket|Name} in the {Room}
+ArtistIntent play artist {KC and the sunshine band|Name} in the {Room}
+ArtistIntent play artist {john travolta and olivia newton john|Name} in the {Room}
+ArtistIntent play artist {DJ jazzy jeff and the fresh prince|Name} in the {Room}
+
+ArtistIntent play artist {coldplay|Name}
+ArtistIntent play artist {the fray|Name}
+ArtistIntent play artist {the rolling stones|Name}
+ArtistIntent play artist {toad the wet sproket|Name}
+ArtistIntent play artist {KC and the sunshine band|Name}
+ArtistIntent play artist {john travolta and olivia newton john|Name}
+ArtistIntent play artist {DJ jazzy jeff and the fresh prince|Name}
+
+TrackIntent play {lola|Name} in the {Room}
+TrackIntent play {hello dolly|Name} in the {Room}
+TrackIntent play {love me tender|Name} in the {Room}
+TrackIntent play {when fools rush in|Name} in the {Room}
+TrackIntent play {take me to the river|Name} in the {Room}
+TrackIntent play {killing me softly with his song|Name} in the {Room}
+TrackIntent play {i just called to say i love you|Name} in the {Room}
+
+TrackIntent play track {lola|Name}
+TrackIntent play track {hello dolly|Name}
+TrackIntent play track {love me tender|Name}
+TrackIntent play track {when fools rush in|Name}
+TrackIntent play track {take me to the river|Name}
+TrackIntent play track {killing me softly with his song|Name}
+TrackIntent play track {i just called to say i love you|Name}
+
+MusicRadioIntent play {coldplay|Name} radio in the {Room}
+MusicRadioIntent play {the fray|Name} radio in the {Room}
+MusicRadioIntent play {the rolling stones|Name} radio in the {Room}
+MusicRadioIntent play {toad the wet sproket|Name} radio in the {Room}
+MusicRadioIntent play {KC and the sunshine band|Name} radio in the {Room}
+MusicRadioIntent play {john travolta and olivia newton john|Name} radio in the {Room}
+MusicRadioIntent play {DJ jazzy jeff and the fresh prince|Name} radio in the {Room}
+
+MusicRadioIntent play {coldplay|Name} radio
+MusicRadioIntent play {the fray|Name} radio
+MusicRadioIntent play {the rolling stones|Name} radio
+MusicRadioIntent play {toad the wet sproket|Name} radio
+MusicRadioIntent play {KC and the sunshine band|Name} radio
+MusicRadioIntent play {john travolta and olivia newton john|Name} radio
+MusicRadioIntent play {DJ jazzy jeff and the fresh prince|Name} radio
+
+PlayPresetIntent play preset {Preset}
 
 PlaylistIntent playlist {Preset} in {Room}
 PlaylistIntent playlist {Preset} in the {Room}
@@ -7,20 +141,56 @@ PlaylistIntent play playlist {Preset} in the {Room}
 PlaylistIntent start playlist {Preset} in {Room}
 PlaylistIntent start playlist {Preset} in the {Room}
 
+PlaylistIntent playlist {Preset}
+PlaylistIntent playlist {Preset}
+PlaylistIntent play playlist {Preset}
+PlaylistIntent play playlist {Preset}
+PlaylistIntent start playlist {Preset}
+PlaylistIntent start playlist {Preset}
+
 FavoriteIntent favorite {Preset} in {Room}
 FavoriteIntent favorite {Preset} in the {Room}
-FavoriteIntent play {Preset} in {Room}
-FavoriteIntent play {Preset} in the {Room}
 FavoriteIntent play favorite {Preset} in {Room}
 FavoriteIntent play favorite {Preset} in the {Room}
 FavoriteIntent start favorite {Preset} in {Room}
 FavoriteIntent start favorite {Preset} in the {Room}
 
+FavoriteIntent favorite {Preset}
+FavoriteIntent favorite {Preset}
+FavoriteIntent play favorite {Preset}
+FavoriteIntent play favorite {Preset}
+FavoriteIntent start favorite {Preset}
+FavoriteIntent start favorite {Preset}
+
+SiriusXMStationIntent start sirius XM {Station} in the {Room}
+SiriusXMStationIntent start sirius XM {Station}
+SiriusXMStationIntent tune to sirius XM {Station} in the {Room}
+SiriusXMStationIntent tune to sirius XM {Station}
+
+SiriusXMChannelIntent start sirius XM channel {Channel} in the {Room}
+SiriusXMChannelIntent start sirius XM channel {Channel}
+SiriusXMChannelIntent tune to sirius XM channel {Channel} in the {Room}
+SiriusXMChannelIntent tune to sirius XM channel {Channel}
+
+ChangeRoomIntent change room to {Room}
+ChangeRoomIntent change room to the {Room}
+
+ChangeServiceIntent change music to {Service}
+ChangeServiceIntent change service to {Service}
+
+ChangeRoomAndServiceIntent change room to {Room} and music to {Service}
+ChangeRoomAndServiceIntent change music to {Service} and room to {Room}
+ChangeRoomAndServiceIntent change room to the {Room} and music to {Service}
+ChangeRoomAndServiceIntent change music to {Service} and room to the {Room}
+ChangeRoomAndServiceIntent change room to {Room} and service to {Service}
+ChangeRoomAndServiceIntent change service to {Service} and room to {Room}
+ChangeRoomAndServiceIntent change room to the {Room} and service to {Service}
+ChangeRoomAndServiceIntent change service to {Service} and room to the {Room}
+
 ResumeAllIntent resume all
 ResumeAllIntent continue all
 ResumeAllIntent continue playing all
 ResumeAllIntent continue playing all the music
-
 
 ResumeIntent continue the {Room}
 ResumeIntent continue in the {Room}
@@ -35,6 +205,13 @@ ResumeIntent resume in the {Room}
 ResumeIntent resume the music in {Room}
 ResumeIntent resume the music in the {Room}
 
+ResumeIntent continue
+ResumeIntent continue the music
+ResumeIntent continue playing
+ResumeIntent continue playing
+ResumeIntent resume
+ResumeIntent resume the music
+
 PauseAllIntent pause all
 PauseAllIntent pause all the music
 PauseAllIntent stop all
@@ -47,6 +224,12 @@ PauseIntent stop in the {Room}
 PauseIntent stop in {Room}
 PauseIntent stop the music in {Room}
 
+PauseIntent pause
+PauseIntent pause
+PauseIntent pause the music
+PauseIntent stop
+PauseIntent stop
+PauseIntent stop the music
 
 VolumeUpIntent turn it up in {Room}
 VolumeUpIntent turn it up in the {Room}
@@ -58,6 +241,12 @@ VolumeUpIntent volume up in {Room}
 VolumeUpIntent volume up in the {Room}
 VolumeUpIntent raise volume in the {Room}
 VolumeUpIntent raise volume in {Room}
+
+VolumeUpIntent turn it up
+VolumeUpIntent turn the volume up
+VolumeUpIntent louder
+VolumeUpIntent volume up
+VolumeUpIntent raise volume
 
 VolumeDownIntent turn it down in {Room}
 VolumeDownIntent turn it down in the {Room}
@@ -72,6 +261,12 @@ VolumeDownIntent volume down in the {Room}
 VolumeDownIntent lower volume in the {Room}
 VolumeDownIntent lower volume in {Room}
 
+VolumeDownIntent turn it down
+VolumeDownIntent turn the volume down
+VolumeDownIntent softer
+VolumeDownIntent quieter
+VolumeDownIntent volume down
+VolumeDownIntent lower volume
 
 SetVolumeIntent set volume to {Percent} in {Room}
 SetVolumeIntent set volume to {Percent} percent in {Room}
@@ -93,6 +288,17 @@ SetVolumeIntent turn it down to {Percent} in {Room}
 SetVolumeIntent turn it down to {Percent} percent in {Room}
 SetVolumeIntent turn it down to {Percent} in the {Room}
 SetVolumeIntent turn it down to {Percent} percent in the {Room}
+
+SetVolumeIntent set volume to {Percent}
+SetVolumeIntent set volume to {Percent} percent
+SetVolumeIntent change volume to {Percent}
+SetVolumeIntent change volume to {Percent} percent
+SetVolumeIntent change the volume to {Percent}
+SetVolumeIntent change the volume to {Percent} percent
+SetVolumeIntent turn it up to {Percent}
+SetVolumeIntent turn it up to {Percent} percent
+SetVolumeIntent turn it down to {Percent}
+SetVolumeIntent turn it down to {Percent} percent
 
 NextTrackIntent go to next track in {Room}
 NextTrackIntent go to next track in the {Room}
@@ -117,6 +323,18 @@ NextTrackIntent skip song in the {Room}
 NextTrackIntent skip this song in {Room}
 NextTrackIntent skip this song in the {Room}
 
+NextTrackIntent go to next track
+NextTrackIntent go to the next track
+NextTrackIntent skip to next track
+NextTrackIntent skip to the next track
+NextTrackIntent skip
+NextTrackIntent next
+NextTrackIntent next track
+NextTrackIntent next song
+NextTrackIntent skip this track
+NextTrackIntent skip song
+NextTrackIntent skip this song
+
 PreviousTrackIntent go to previous track in {Room}
 PreviousTrackIntent go to previous track in the {Room}
 PreviousTrackIntent go to the previous track in {Room}
@@ -136,6 +354,16 @@ PreviousTrackIntent previous track in the {Room}
 PreviousTrackIntent previous song in {Room}
 PreviousTrackIntent previous song in the {Room}
 
+PreviousTrackIntent go to previous track
+PreviousTrackIntent go to the previous track
+PreviousTrackIntent go to the last song
+PreviousTrackIntent go back
+PreviousTrackIntent go back to the previous track
+PreviousTrackIntent last track
+PreviousTrackIntent last song
+PreviousTrackIntent previous track
+PreviousTrackIntent previous song
+
 ClearQueueIntent clear the queue in {Room}
 ClearQueueIntent clear the queue in the {Room}
 ClearQueueIntent clear queue in {Room}
@@ -143,25 +371,29 @@ ClearQueueIntent clear queue in the {Room}
 ClearQueueIntent clear playlist in {Room}
 ClearQueueIntent clear playlist in the {Room}
 
-WhatsPlayingIntent what's playing in {Room}
-WhatsPlayingIntent what's playing in the {Room}
-WhatsPlayingIntent what song is this in {Room}
-WhatsPlayingIntent what song is this in the {Room}
-WhatsPlayingIntent what band is this in {Room}
-WhatsPlayingIntent what band is this in the {Room}
-WhatsPlayingIntent who's playing in {Room}
-WhatsPlayingIntent who's playing in the {Room}
-WhatsPlayingIntent what am i hearing in the {Room}
+ClearQueueIntent clear the queue
+ClearQueueIntent clear queue
+ClearQueueIntent clear playlist
+
+WhatsPlayingIntent what's playing
+WhatsPlayingIntent what song is this
+WhatsPlayingIntent what band is this
+WhatsPlayingIntent who's playing
+WhatsPlayingIntent what am i hearing
 
 MuteIntent mute in {Room}
 MuteIntent mute in the {Room}
 MuteIntent mute {Room}
 MuteIntent mute the {Room}
 
+MuteIntent mute
+
 UnmuteIntent unmute in {Room}
 UnmuteIntent unmute in the {Room}
 UnmuteIntent unmute {Room}
 UnmuteIntent unmute the {Room}
+
+UnmuteIntent unmute
 
 RepeatIntent turn {Toggle} repeat in {Room}
 RepeatIntent turn {Toggle} repeat in the {Room}
@@ -170,6 +402,10 @@ RepeatIntent turn repeat {Toggle} in the {Room}
 RepeatIntent repeat {Toggle} in {Room}
 RepeatIntent repeat {Toggle} in the {Room}
 
+RepeatIntent turn {Toggle} repeat
+RepeatIntent turn repeat {Toggle}
+RepeatIntent repeat {Toggle}
+
 ShuffleIntent turn {Toggle} shuffle in {Room}
 ShuffleIntent turn {Toggle} shuffle in the {Room}
 ShuffleIntent turn shuffle {Toggle} in {Room}
@@ -177,12 +413,20 @@ ShuffleIntent turn shuffle {Toggle} in the {Room}
 ShuffleIntent shuffle {Toggle} in {Room}
 ShuffleIntent shuffle {Toggle} in the {Room}
 
+ShuffleIntent turn {Toggle} shuffle
+ShuffleIntent turn shuffle {Toggle}
+ShuffleIntent shuffle {Toggle}
+
 CrossfadeIntent turn {Toggle} crossfade in {Room}
 CrossfadeIntent turn {Toggle} crossfade in the {Room}
 CrossfadeIntent turn crossfade {Toggle} in {Room}
 CrossfadeIntent turn crossfade {Toggle} in the {Room}
 CrossfadeIntent crossfade {Toggle} in {Room}
 CrossfadeIntent crossfade {Toggle} in the {Room}
+
+CrossfadeIntent turn {Toggle} crossfade
+CrossfadeIntent turn crossfade {Toggle}
+CrossfadeIntent crossfade {Toggle}
 
 JoinGroupIntent join {JoiningRoom} to {PlayingRoom}
 JoinGroupIntent join the {JoiningRoom} to {PlayingRoom}
@@ -193,4 +437,3 @@ UngroupIntent ungroup {Room}
 UngroupIntent ungroup the {Room}
 UngroupIntent isolate {Room}
 UngroupIntent isolate the {Room}
-
