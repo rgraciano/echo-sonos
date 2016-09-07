@@ -5,56 +5,56 @@ All of the pieces for an Amazon Echo (Alexa) <-> Sonos integration.
 
 Global commands (no rooms required):
 
-* Presets: "Alexa, tell Sonos to play Rock"
-* Pause all: "Alexa, tell Sonos to pause all"
-* Resume all: "Alexa, tell Sonos to resume all"
+* Presets: "Alexa, ask sonos to play Rock"
+* Pause all: "Alexa, ask sonos to pause all"
+* Resume all: "Alexa, ask sonos to resume all"
 
-Room-specific commands, where "ROOM" could be any of your Sonos room names (eg Kitchen, Master Bedroom, and so on):
+Room-specific commands, where "ROOM" could be any of your sonos room names (eg Kitchen, Master Bedroom, and so on):
 
-* Play songs from an artist: "Alex, tell Sonos to play ARTIST NAME in the ROOM"
-* Play a song: "Alex, tell Sonos to play SONG NAME in the ROOM"
-* Play a specific artist's song: "Alex, tell Sonos to play ARTIST NAME SONG NAME in the ROOM"
-* Play "radio" songs like this artist: "Alexa, tell Sonos to play ARTIST NAME radio in the ROOM"
-* Play "radio" songs like this track: Alexa, tell Sonos to play SONG NAME radio in the ROOM"
-* Play "radio" songs like this track from a specific artist: "Alexa, tell Sonos to play ARTIST NAME SONG NAME radio in the ROOM"
+* Play songs from an artist: "Alex, ask sonos to play ARTIST NAME in the ROOM"
+* Play a song: "Alex, ask sonos to play SONG NAME in the ROOM"
+* Play a specific artist's song: "Alex, ask sonos to play ARTIST NAME SONG NAME in the ROOM"
+* Play "radio" songs like this artist: "Alexa, ask sonos to play ARTIST NAME radio in the ROOM"
+* Play "radio" songs like this track: Alexa, ask sonos to play SONG NAME radio in the ROOM"
+* Play "radio" songs like this track from a specific artist: "Alexa, ask sonos to play ARTIST NAME SONG NAME radio in the ROOM"
 * Play more "radio" songs like this song: "Alexa, play more songs by this artist in the ROOM"
 * Play more "radio" songs like this track: "Alexa, play more songs like this in the ROOM"
 * SiriusXM: "Alexa, play SiriusXM channel CHANNEL in the ROOM"
 * SiriusXM: "Alexa, play SiriusXM station STATION in the ROOM"
-* Playlists: "Alexa, tell Sonos to start playlist MY PLAYLIST in the ROOM"
-* Favorites: "Alexa, tell Sonos to play favorite MY FAVORITE in the ROOM"
-* Next: "Alexa, tell Sonos go to the next track in the ROOM"
-* Previous: "Alexa, tell Sonos to go back in the ROOM"
-* What's playing: "Alexa, ask Sonos what's playing in the ROOM"
-* Pause: "Alexa, tell Sonos to pause in the ROOM"
-* Resume: "Alexa, tell Sonos to resume in the ROOM"
-* Mute: "Alexa, tell Sonos to mute in the ROOM"
-* Unmute: "Alexa, tell Sonos to unmute in the ROOM"
-* Repeat: "Alexa, tell Sonos to turn repeat [on,off] in the ROOM"
-* Shuffle: "Alexa, tell Sonos to turn shuffle [on,off] in the ROOM"
-* Crossfade: "Alexa, tell Sonos to turn crossfade [on,off] in the ROOM"
-* Clear queue: "Alexa, tell Sonos to clear the queue in the ROOM"
-* Volume up or down (single room): "Alexa, tell Sonos to turn it [up,down] in the ROOM"
-* Volume up or down (all in group): "Alexa, tell Sonos to turn it [up,down] in the ROOM group"
-* Set volume (single room): "Alexa, tell Sonos to change the volume to 22 in the ROOM"
-* Set volume (all in group): "Alexa, tell Sonos to change the volume to 22 in the ROOM group"
-* Add room to the group: "Alexa, tell Sonos to join NEW_ROOM to the ROOM"
-* Remove room from the group: "Alexa, tell Sonos to ungroup ROOM"
+* Playlists: "Alexa, ask sonos to start playlist MY PLAYLIST in the ROOM"
+* Favorites: "Alexa, ask sonos to play favorite MY FAVORITE in the ROOM"
+* Next: "Alexa, ask sonos go to the next track in the ROOM"
+* Previous: "Alexa, ask sonos to go back in the ROOM"
+* What's playing: "Alexa, ask sonos what's playing in the ROOM"
+* Pause: "Alexa, ask sonos to pause in the ROOM"
+* Resume: "Alexa, ask sonos to resume in the ROOM"
+* Mute: "Alexa, ask sonos to mute in the ROOM"
+* Unmute: "Alexa, ask sonos to unmute in the ROOM"
+* Repeat: "Alexa, ask sonos to turn repeat [on,off] in the ROOM"
+* Shuffle: "Alexa, ask sonos to turn shuffle [on,off] in the ROOM"
+* Crossfade: "Alexa, ask sonos to turn crossfade [on,off] in the ROOM"
+* Clear queue: "Alexa, ask sonos to clear the queue in the ROOM"
+* Volume up or down (single room): "Alexa, ask sonos to turn it [up,down] in the ROOM"
+* Volume up or down (all in group): "Alexa, ask sonos to turn it [up,down] in the ROOM group"
+* Set volume (single room): "Alexa, ask sonos to change the volume to 22 in the ROOM"
+* Set volume (all in group): "Alexa, ask sonos to change the volume to 22 in the ROOM group"
+* Add room to the group: "Alexa, ask sonos to join NEW_ROOM to the ROOM"
+* Remove room from the group: "Alexa, ask sonos to ungroup ROOM"
 * Many other natural phrasings are supported for each command. The file "echo/utterances.txt" has all of the examples.
 
 Everything's dynamic - rooms and playlists are taken dynamically from your speech. There are common room names in utterances.txt to help the Alexa engine recognize valid entries, but it's not necessary to add more. You can specify a default room in options.js and that room will be used when no room is specified in the utterance. You can also specify a default service in options.js to be used for the music search functionality which supports Apple Music, Spotify, Deezer, Deezer Elite, and the local Sonos music library. The default for the music service is to use the presets.
 
 Turning on Advanced Mode in options.js will allow you to dynamically change the current room and/or current music service through utterances (below). The solution will also remember the last room that was used in a normal command and set the current room to that room. 
 
-* Change room: "Alexa, tell Sonos to change room to ROOM"
-* Change service: "Alexa, tell Sonos to change music to SERVICE" (SERVICE = Presets, Library, Apple, Spotify, Deezer, or Elite)
-* Change room and service: "Alexa, tell Sonos to change room to ROOM and music to SERVICE"
+* Change room: "Alexa, ask sonos to change room to ROOM"
+* Change service: "Alexa, ask sonos to change music to SERVICE" (SERVICE = Presets, Library, Apple, Spotify, Deezer, or Elite)
+* Change room and service: "Alexa, ask sonos to change room to ROOM and music to SERVICE"
 
 The service is also smart enough to control your whole group when given only a room name, even if that room isn't the Sonos coordinator, so you can change the volume in an entire group without having to remember which speaker is the coordinator.
 
 # How it works
 
-1. When you say the command to Alexa, it triggers the Alexa skill with invocation name Sonos. 
+1. When you say the command to Alexa, it triggers the Alexa skill with invocation name sonos. 
 2. The Alexa skill calls a web service running on AWS Lambda, passing it the preset name ("rock" in the example). 
 3. Lambda then fires an HTTP request to a node.js server running node-sonos-http-api on your local network. 
 4. node-sonos-http-api interprets the command and relays to Sonos over your local network.
@@ -106,7 +106,7 @@ To set it up, you need to do the following:
 # Connect Alexa Skill to AWS Lambda
 1. In the Lambda console, copy the long "ARN" string in the upper right.  
 2. Go back into the Alexa Skill console, open your skill, click "Skill Information", choose Lambda ARN and paste that ARN string in.
-3. Now you're ready to put it all together. Try "Alexa, use Sonos to play test"
+3. Now you're ready to put it all together. Try "Alexa, ask sonos to play test"
 
 # Optonal Features can be enabled in options.js
   defaultRoom: 'Kitchen',	      // Allows you to specify a default room to use when one is not specified in the utterance 	
@@ -148,6 +148,7 @@ In the above example, HTTPS is configured using "yourserver.key" and "yourserver
 2. If your Lambda test doesn't work, then you might have a case mis-match between the preset name in presets.json and the value in the Lambda test. It's also possible Lambda can't reach your host because your DynDNS setup isn't working, or a firewall is blocking it. If you're unsure, try the Maker plugin on IFTTT, to see if you can get it working externally from someplace else.
 3. If Alexa says something about not being able to use your skill, then Lambda is probably returning an error. Check the Lambda logs. Alexa will say this if she doesn't see a proper response from the Lambda server.
 4. If you run into a syntax error on node-sonos-http-api that looks something like "Syntax error in module 'index': SyntaxError at exports.runInThisContext", then it's likely that you inadvertently edited presets.json with a rich text editor and it replaced some of your quotation marks with quotes from a weird character set.  Try pasting your presets.json into a JSON linter like [jsonlint.com](http://www.jsonlint.com) and it should point out this error.
+5. If you have trouble with Alexa recognizing commands, make sure you say "Alexa ask sonos" rather than some of the other possibilities (like "Alexa tell sonos"). Many people report that "ask" works better than "tell", and (strangely) that a lowercase invocation name ("sonos") is better than its camelcase variant ("Sonos").
 
 If you're still stuck, add a comment on my original [Amazon Echo + Sonos integration](http://ryangraciano.com/post/124770680942/controlling-sonos-with-amazon-echo) blog post and I'll try to help you out.
 
