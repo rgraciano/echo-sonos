@@ -159,3 +159,6 @@ When upgrading your code to the latest version, make sure you do the following:
 
 # Contributing
 Lots of people are forking echo-sonos, which is awesome. I'd love to bring some of that innovation back into the project, so don't be shy about submitting pull requests!
+
+# Acknowledgements
+Thanks to [@jishi](https://github.com/jishi) for [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api), without which none of this would be possible.  And major credit goes to (@jplourde5)[https://github.com/jplourde5] for a slew of big features, like music services and echo-sqs-proxy.
