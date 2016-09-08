@@ -172,6 +172,52 @@ SiriusXMChannelIntent start sirius XM channel {Channel}
 SiriusXMChannelIntent tune to sirius XM channel {Channel} in the {Room}
 SiriusXMChannelIntent tune to sirius XM channel {Channel}
 
+PandoraMusicIntent tune to pandora {madona|Name} in the {Room}
+PandoraMusicIntent tune to pandora {van morrison|Name} in the {Room}
+PandoraMusicIntent tune to pandora {the rolling stones|Name} in the {Room}
+PandoraMusicIntent tune to pandora {toad the wet sproket|Name} in the {Room}
+PandoraMusicIntent tune to pandora {KC and the sunshine band|Name} in the {Room}
+PandoraMusicIntent tune to pandora {john travolta and olivia newton john|Name} in the {Room}
+PandoraMusicIntent tune to pandora {DJ jazzy jeff and the fresh prince|Name} in the {Room}
+
+PandoraMusicIntent tune to pandora {madona|Name}
+PandoraMusicIntent tune to pandora {van morrison|Name}
+PandoraMusicIntent tune to pandora {the rolling stones|Name}
+PandoraMusicIntent tune to pandora {toad the wet sproket|Name}
+PandoraMusicIntent tune to pandora {KC and the sunshine band|Name}
+PandoraMusicIntent tune to pandora {john travolta and olivia newton john|Name}
+PandoraMusicIntent tune to pandora {DJ jazzy jeff and the fresh prince|Name}
+
+PandoraMusicIntent tune to pandora {lola|Name} in the {Room}
+PandoraMusicIntent tune to pandora {hello dolly|Name} in the {Room}
+PandoraMusicIntent tune to pandora {love me tender|Name} in the {Room}
+PandoraMusicIntent tune to pandora {when fools rush in|Name} in the {Room}
+PandoraMusicIntent tune to pandora {take me to the river|Name} in the {Room}
+PandoraMusicIntent tune to pandora {killing me softly with his song|Name} in the {Room}
+PandoraMusicIntent tune to pandora {i just called to say i love you|Name} in the {Room}
+
+PandoraMusicIntent tune to pandora {lola|Name}
+PandoraMusicIntent tune to pandora {hello dolly|Name}
+PandoraMusicIntent tune to pandora {love me tender|Name}
+PandoraMusicIntent tune to pandora {when fools rush in|Name}
+PandoraMusicIntent tune to pandora {take me to the river|Name}
+PandoraMusicIntent tune to pandora {killing me softly with his song|Name}
+PandoraMusicIntent tune to pandora {i just called to say i love you|Name}
+
+PandoraThumbsUpIntent give the current song in the {Room} a thumbs up
+PandoraThumbsUpIntent give the current song a thumbs up in the {Room}
+PandoraThumbsUpIntent give this song a thumbs up in the {Room}
+
+PandoraThumbsUpIntent give the current song a thumbs up
+PandoraThumbsUpIntent give this song a thumbs up
+
+PandoraThumbsDownIntent give the current song in the {Room} a thumbs down
+PandoraThumbsDownIntent give the current song a thumbs down in the {Room}
+PandoraThumbsDownIntent give this song a thumbs down in the {Room}
+
+PandoraThumbsDownIntent give the current song a thumbs down
+PandoraThumbsDownIntent give this song a thumbs down
+
 ChangeRoomIntent change room to {Room}
 ChangeRoomIntent change room to the {Room}
 
