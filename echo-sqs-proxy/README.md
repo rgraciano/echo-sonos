@@ -10,9 +10,10 @@ can simply be installed on the same node.js server that is hosting the api solut
 can be installed on a different server.
 
 INSTALLATION
------
-
-Make sure your copy of echo-sonos is up to date, and then copy the echo-sqs-proxy folder from the echo-sonos directory to the same server running node-sonos-http-api.
+============
+Get the latest version of echo-sonos and install it if you haven't done so 
+already. Make sure it's up to date, then copy the echo-sqs-proxy folder from the echo-sonos directory to the same server 
+running node-sonos-http-api.
 
 Fix your dependencies by invoking the following command while in the echo-sqs-proxy 
 directory:
