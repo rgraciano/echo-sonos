@@ -511,9 +511,9 @@ var updateExpression = '';
 var values = {};
 
     if (options.advancedMode) {
-		if (!isBlank(room) && !isBlank(service)) {
+	if (!isBlank(room) && !isBlank(service)) {
     		updateExpression = "set currentRoom=:r, currentMusicService=:s";
-    		values = {":r":room, "s:":service};
+    		values = {":r":room, ":s":service};
     	} else
     	if (!isBlank(room)) {
     		updateExpression = "set currentRoom=:r";
