@@ -11,9 +11,9 @@ Global commands (no rooms required):
 
 Room-specific commands, where "ROOM" could be any of your sonos room names (eg Kitchen, Master Bedroom, and so on):
 
-* Play songs from an artist: "Alex, ask sonos to play ARTIST NAME in the ROOM"
-* Play a song: "Alex, ask sonos to play SONG NAME in the ROOM"
-* Play a specific artist's song: "Alex, ask sonos to play ARTIST NAME SONG NAME in the ROOM"
+* Play songs from an artist: "Alexa, ask sonos to play ARTIST NAME in the ROOM"
+* Play a song: "Alexa, ask sonos to play SONG NAME in the ROOM"
+* Play a specific artist's song: "Alexa, ask sonos to play ARTIST NAME SONG NAME in the ROOM"
 * Play "radio" songs like this artist: "Alexa, ask sonos to play ARTIST NAME radio in the ROOM"
 * Play "radio" songs like this track: Alexa, ask sonos to play SONG NAME radio in the ROOM"
 * Play "radio" songs like this track from a specific artist: "Alexa, ask sonos to play ARTIST NAME SONG NAME radio in the ROOM"
@@ -98,7 +98,7 @@ To set it up, you need to do the following:
 6. In lambda/src, zip up everything. On Mac/Linux, `cd src; chmod a+r *.js; zip src.zip *.js`.  Make sure you don't capture the folder, just the files.
 7. Choose to upload the zip file for src.zip.
 8. The default handler is fine. Create a new role of type Basic Execution Role. Pick smallest possible memory and so on.
-9. Click Next to proceed. Once created, click "Event Sources".
+9. Click Next to proceed. Once created, click "Triggers".
 10. Add a source.  Choose "Alexa Skills Kit".
 11. Test it out. I included a test blueprint in this repo. Click "Test" and copy/paste this repo's [lambda/play_intent_testreq.json](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/lambda/play_intent_testreq.json) to test. It will trigger the "test" preset in your presets.json file on your Sonos server. Don't forget to replace the Alexa App Id again.
 12. For Advanced Mode you also need to give Lambda permission to access DynamoDB for storing the current room and service settings. Simply click on your AWS Dashboard account name in the upper right corner, Security Credentials, close the popup message, click Roles on the left, click on lambda_basic_execution, click Attach Policy, click the checkboxes next to AmazonDynamoDBFullAccess and AmazonSQSFullAccess, and click Attach Policy at the bottom of the screen.
