@@ -56,7 +56,7 @@ EU (Ireland)             eu-west-1
 The access key information can be retrieved by creating and DOWNLOADING new credentials. 
 Click your name in the upper right of the dashboard, Security Credentials, Access 
 Keys, Create New Access Key.  Be sure to download your keys which will be saved to a CSV 
-file. You will not be ble to get your secret key again. You will have to create new 
+file. You will not be able to get your secret key again. You will have to create new 
 keys if you do not have your secret key. Both the accessKeyId and the secretAccessKey can 
 be retrieved from the downloaded CSV file and used provide the needed settings 
 information.
