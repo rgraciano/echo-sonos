@@ -26,7 +26,7 @@ MusicIntent play {Name}
 AlbumIntent play album {Name} in the {Room}
 AlbumIntent play album {Name} in {Room}
 
-AlbumIntent play album
+AlbumIntent play album {Name}
 
 ArtistIntent play artist {Name} in the {Room}
 ArtistIntent play artist {Name} in {Room}
