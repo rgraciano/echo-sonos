@@ -109,15 +109,19 @@ To set it up, you need to do the following:
 2. Go back into the Alexa Skill console, open your skill, click "Skill Information", choose Lambda ARN and paste that ARN string in.
 3. Now you're ready to put it all together. Try "Alexa, ask sonos to play test"
 
-# Optonal Features can be enabled in options.js
+# Optional "Advanced Mode" (enable in options.js)
+Advanced Mode comes with two major new features.  First, it supports music streaming services like Apple Music, Spotify, and Deezer.   And second, it remembers the room you're operating in, so you no longer need to include a room on every utterance.  With Advanced Mode turned on, you can request specific songs and albums.
+
+The following apply to "Advanced Mode" in options.js:
+
+  advancedMode: true              // Allows you to specify and change default rooms and music services. Requires additional AWS setup
   defaultRoom: 'Kitchen',	      // Allows you to specify a default room to use when one is not specified in the utterance 	
   defaultMusicService: 'apple',   // Supports presets, library, apple, spotify, deezer, or elite  (elite = Deezer Elite FLAC)
-  advancedMode: true              // Allows you to specify and change default rooms and music services. Requires additional AWS setup
 
 # Optional Security Features
 The echo-sqs-proxy solution allows Echo-Sonos to communicate with the node-sonos-http-api solution without having to alter your firewall to open your server to the Internet or having to make any of the changes below.  Read the README file in the echo-sqs-proxy directory for instructions.
 
-Alternatively, echo-sonos does support both HTTPS and basic auth, for those concerned with opening their Sonos server to the Internet.  options.example.js has flags and configuration information for both features. For HTTPS support, set "useHttps" to "true" and check to make sure the port is still correct.  For basic auth, change the "auth" variable and replace the username and password with your own.
+Alternatively, if you're not using echo-sqs-proxy, echo-sonos does support both HTTPS and basic auth.  options.example.js has flags and configuration information for both features. For HTTPS support, set "useHttps" to "true" and check to make sure the port is still correct.  For basic auth, change the "auth" variable and replace the username and password with your own.
 
 ## Configuring node-sonos-http-api
 Securing node-sonos-http-api, HTTPS, and your home server are outside the bounds of this project. The below documentation is provided for convenience because so many people have asked me about it.  You could certainly do much more to secure your home server.  For starters, you could pin certificates to the client or put more effort behind secure key and credential storage.  This is a DIY hobbyist project, and it's up to your discretion to determine how much effort to put into security.
