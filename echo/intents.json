@@ -416,8 +416,17 @@
           "type" : "ROOMS"
         }
       ]
-    }
+    },
     
+    {
+      "intent" : "PlayInRoomIntent",
+      "slots" : [
+        {
+          "name" : "Room",
+          "type" : "ROOMS"
+        }
+      ]
+    }
   ]
 }
 

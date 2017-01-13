@@ -333,7 +333,16 @@ EchoSonos.prototype.intentHandlers = {
         httpreq(options, function(error) {
             genericResponse(error, response);
         });
-    }
+    },
+
+    PlayInRoomIntent: function (intent, session, response) {
+        console.log("PlayInRoomIntent received");
+        options.path = '/' + encodeURIComponent(intent.slots.Room.value) + '/linein/' 
+                + encodeURIComponent(options.defaultLinein);
+        httpreq(options, function(error) {
+            genericResponse(error, response);
+        });
+    },
 }
 
 /** Handles Apple Music, Spotify, Deezer, library, or presets. The default can be specified in options.js or changed if advanced mode is turned on */

@@ -372,3 +372,7 @@ UngroupIntent ungroup {Room}
 UngroupIntent ungroup the {Room}
 UngroupIntent isolate {Room}
 UngroupIntent isolate the {Room}
+
+PlayInRoomIntent play in {Room}
+PlayInRoomIntent play in the {Room}
+
