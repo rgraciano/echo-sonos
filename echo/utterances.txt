@@ -157,6 +157,8 @@ PauseIntent pause in {Room}
 PauseIntent pause the music in {Room}
 PauseIntent stop in the {Room}
 PauseIntent stop in {Room}
+PauseIntent stop playing in the {Room}
+PauseIntent stop playing in {Room}
 PauseIntent stop the music in {Room}
 
 PauseIntent pause
@@ -375,4 +377,42 @@ UngroupIntent isolate the {Room}
 
 PlayInRoomIntent play in {Room}
 PlayInRoomIntent play in the {Room}
+PlayInRoomIntent to play in {Room}
+PlayInRoomIntent to play in the {Room}
+PlayInRoomIntent also play in {Room}
+PlayInRoomIntent also play in the {Room}
 
+LineInIntent {Room} use line-in
+LineInIntent {Room} to use line-in
+LineInIntent have {Room} use line-in
+LineInIntent have the {Room} use line-in
+LineInIntent to have {Room} use line-in
+LineInIntent to have the {Room} use line-in
+LineInIntent set line-in for {Room}
+LineInIntent set line-in for the {Room}
+LineInIntent set {Room} to line-in
+LineInIntent set the {Room} to line-in
+LineInIntent to set line-in for {Room}
+LineInIntent to set line-in for the {Room}
+LineInIntent to set {Room} to line-in
+LineInIntent to set the {Room} to line-in
+LineInIntent use line-in in {Room}
+LineInIntent use line-in in the {Room}
+
+LineInIntent set {Room} line-in to {LineIn}
+LineInIntent set the {Room} line-in to {LineIn}
+LineInIntent set {Room} line-in to the {LineIn}
+LineInIntent set the {Room} line-in to the {LineIn}
+LineInIntent to have {Room} use {LineIn} line-in
+LineInIntent to have the {Room} use {LineIn} line-in
+LineInIntent to have {Room} use the {LineIn} line-in
+LineInIntent to have the {Room} use the {LineIn} line-in
+LineInIntent set line-in for {Room} to {LineIn}
+LineInIntent set line-in for the {Room} to {LineIn}
+LineInIntent set line-in for {Room} to the {LineIn}
+LineInIntent set line-in for the {Room} to the {LineIn}
+LineInIntent to set line-in for {Room} to {LineIn}
+LineInIntent to set line-in for the {Room} to {LineIn}
+LineInIntent to set line-in for {Room} to the {LineIn}
+LineInIntent to set line-in for the {Room} to the {LineIn}
+LineInIntent to set line-in for {Room} to {LineIn}
