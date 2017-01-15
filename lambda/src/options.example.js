@@ -12,7 +12,7 @@ var options = {
   },
   useHttps: false,                // Change to true if you setup node-sonos-http-api with HTTPS
   rejectUnauthorized: true,       // Change to false if you self-signed your certificate
-  defaultRoom: '',				        // Allows you to specify a default room when one is not specified in the utterance 	
+  defaultRoom: '',                // Allows you to specify a default room when one is not specified in the utterance 	
   defaultMusicService: 'presets', // Supports presets, apple, spotify, deezer, or library
   defaultLinein: '',              // Allows you to specify a default Linein (e.g. with a dot connected) 
   advancedMode: false,            // Allows you to specify and change default rooms and music services. Requires additional AWS setup
