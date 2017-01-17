@@ -31,7 +31,6 @@ EchoSonos.prototype.constructor = EchoSonos;
 
 EchoSonos.prototype.intentHandlers = {
 
-
     AlbumIntent: function (intent, session, response) {
         console.log("AlbumIntent received");
         loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
@@ -330,6 +329,33 @@ EchoSonos.prototype.intentHandlers = {
         console.log("JoinGroupIntent received");
         options.path = '/' + encodeURIComponent(intent.slots.JoiningRoom.value) + '/join/' 
                 + encodeURIComponent(intent.slots.PlayingRoom.value);
+        httpreq(options, function(error) {
+            genericResponse(error, response);
+        });
+    },
+
+    PlayInRoomIntent: function (intent, session, response) {
+        console.log("PlayInRoomIntent received");
+        
+        if (options.defaultLinein === '' || !options.defaultLinein) {
+           	response.tell("This command does not work unless you set default Linein");
+        }
+        
+        options.path = '/' + encodeURIComponent(intent.slots.Room.value) + '/linein/' 
+                + encodeURIComponent(options.defaultLinein);
+        httpreq(options, function(error) {
+            genericResponse(error, response);
+        });
+    },
+
+    LineInIntent: function (intent, session, response) {
+        console.log("LineInIntent received");
+        
+        var room = intent.slots.Room;
+        var lineIn = intent.slots.LineIn || room;
+        
+        options.path = '/' + encodeURIComponent(room.value) + '/linein/' 
+                + encodeURIComponent(lineIn.value);
         httpreq(options, function(error) {
             genericResponse(error, response);
         });

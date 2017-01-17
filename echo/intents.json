@@ -416,9 +416,30 @@
           "type" : "ROOMS"
         }
       ]
-    }
+    },
     
+    {
+      "intent" : "PlayInRoomIntent",
+      "slots" : [
+        {
+          "name" : "Room",
+          "type" : "ROOMS"
+        }
+      ]
+    },
+
+    {
+      "intent":  "LineInIntent",
+      "slots": [
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        },
+        {
+            "name": "LineIn",
+            "type": "ROOMS"
+        }
+      ]
+    }
   ]
 }
-
-

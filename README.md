@@ -40,9 +40,12 @@ Room-specific commands, where "ROOM" could be any of your sonos room names (eg K
 * Set volume (all in group): "Alexa, ask sonos to change the volume to 22 in the ROOM group"
 * Add room to the group: "Alexa, ask sonos to join NEW_ROOM to the ROOM"
 * Remove room from the group: "Alexa, ask sonos to ungroup ROOM"
+* Set speaker line-in: "Alexa, ask sonos to set ROOM line-in to the LINEIN_ROOM"
 * Many other natural phrasings are supported for each command. The file "echo/utterances.txt" has all of the examples.
 
 Everything's dynamic - rooms and playlists are taken dynamically from your speech. There are common room names in utterances.txt to help the Alexa engine recognize valid entries, but it's not necessary to add more. You can specify a default room in options.js and that room will be used when no room is specified in the utterance. You can also specify a default service in options.js to be used for the music search functionality which supports Apple Music, Spotify, Deezer, Deezer Elite, and the local Sonos music library. The default for the music service is to use the presets.
+
+### Advanced Mode
 
 Turning on Advanced Mode in options.js will allow you to dynamically change the current room and/or current music service through utterances (below). The solution will also remember the last room that was used in a normal command and set the current room to that room. 
 
@@ -51,6 +54,14 @@ Turning on Advanced Mode in options.js will allow you to dynamically change the 
 * Change room and service: "Alexa, ask sonos to change room to ROOM and music to SERVICE"
 
 The service is also smart enough to control your whole group when given only a room name, even if that room isn't the Sonos coordinator, so you can change the volume in an entire group without having to remember which speaker is the coordinator.
+
+### Advanced Line-In
+
+if you have a default line-in (e.g. it has a dot connected) then you can set defaultLinein in options.js to this ROOM. This will open up:
+
+* Play in room: "Alexa, ask sonos to play in ROOM"
+
+This will set ROOM line-in to the default line-in (and play it)
 
 # How it works
 

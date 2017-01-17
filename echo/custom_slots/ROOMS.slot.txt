@@ -17,3 +17,4 @@ guest bathroom
 deck
 porch
 patio
+study
