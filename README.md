@@ -40,10 +40,12 @@ Room-specific commands, where "ROOM" could be any of your sonos room names (eg K
 * Set volume (all in group): "Alexa, ask sonos to change the volume to 22 in the ROOM group"
 * Add room to the group: "Alexa, ask sonos to join NEW_ROOM to the ROOM"
 * Remove room from the group: "Alexa, ask sonos to ungroup ROOM"
+* Set speaker line-in: "Alexa, ask sonos to set ROOM line-in to the LINEIN_ROOM"
 * Many other natural phrasings are supported for each command. The file "echo/utterances.txt" has all of the examples.
 
 Everything's dynamic - rooms and playlists are taken dynamically from your speech. There are common room names in utterances.txt to help the Alexa engine recognize valid entries, but it's not necessary to add more. You can specify a default room in options.js and that room will be used when no room is specified in the utterance. You can also specify a default service in options.js to be used for the music search functionality which supports Apple Music, Spotify, Deezer, Deezer Elite, and the local Sonos music library. The default for the music service is to use the presets.
 
+### Advanced Mode
 Turning on Advanced Mode in options.js will allow you to dynamically change the current room and/or current music service through utterances (below). The solution will also remember the last room that was used in a normal command and set the current room to that room.
 
 * Change room: "Alexa, ask sonos to change room to ROOM"
@@ -51,6 +53,14 @@ Turning on Advanced Mode in options.js will allow you to dynamically change the 
 * Change room and service: "Alexa, ask sonos to change room to ROOM and music to SERVICE"
 
 The service is also smart enough to control your whole group when given only a room name, even if that room isn't the Sonos coordinator, so you can change the volume in an entire group without having to remember which speaker is the coordinator.
+
+### Advanced Line-In
+
+if you have a default line-in (e.g. it has a dot connected) then you can set defaultLinein in options.js to this ROOM. This will open up:
+
+* Play in room: "Alexa, ask sonos to play in ROOM"
+
+This will set ROOM line-in to the default line-in (and play it)
 
 # How it works
 
@@ -82,11 +92,12 @@ To set it up, you need to do the following:
 1. Create a new Skill in the [Alexa Skills control panel](https://developer.amazon.com/edw/home.html) on Amazon. You need a developer account to do this. The account must be the same as bound to your Echo, and make sure you are logged into that account on amazon.com. You will see an error indicating access denied if the two accounts are different.
 2. Name can be whatever you want. "Invocation" is what you say, and it must be all lowercase (I used "sonos").
 3. Check Custom Interaction Model if it is not already checked. Click Next
-4. Click Next, taking you to Interaction Model. Create a Custom Slot Type ("Add Slot Type"). Add a new types for PRESETS, ROOMS, SXMCHANNELS, SXMSTATIONS, SERVICES, and a final one for TOGGLES. Into each, copy/paste the contents of [echo/custom_slots/PRESETS.slot.txt](https://raw.githubusercontent.com/jplourde5/echo-sonos/master/echo/custom_slots/PRESETS.slot.txt), [echo/custom_slots/ROOMS.slot.txt](https://raw.githubusercontent.com/jplourde5/echo-sonos/master/echo/custom_slots/ROOMS.slot.txt), [echo/custom_slots/SXMCHANNELS.slot.txt](https://raw.githubusercontent.com/jplourde5/echo-sonos/master/echo/custom_slots/SXMCHANNELS.slot.txt),
-[echo/custom_slots/SXMSTATIONS.slot.txt](https://raw.githubusercontent.com/jplourde5/echo-sonos/master/echo/custom_slots/SXMSTATIONS.slot.txt),
-[echo/custom_slots/SERVICES.slot.txt](https://raw.githubusercontent.com/jplourde5/echo-sonos/master/echo/custom_slots/SERVICES.slot.txt), and
-[echo/custom_slots/TOGGLES.slot.txt](https://raw.githubusercontent.com/jplourde5/echo-sonos/master/echo/custom_slots/TOGGLES.slot.txt).
-5. Still in Interaction Model, copy this repo's [echo/intents.json](https://raw.githubusercontent.com/jplourde5/echo-sonos/master/echo/intents.json) into the "Intent Schema" field, and [echo/utterances.txt](https://raw.githubusercontent.com/jplourde5/echo-sonos/master/echo/utterances.txt) into "Sample Utterances".
+4. Click Next, taking you to Interaction Model. Create a Custom Slot Type ("Add Slot Type"). Add a new types for PRESETS, ROOMS, SXMCHANNELS, SXMSTATIONS, SERVICES, TOGGLES and a final one for NAMES. Into each, copy/paste the contents of [echo/custom_slots/PRESETS.slot.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/custom_slots/PRESETS.slot.txt), [echo/custom_slots/ROOMS.slot.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/custom_slots/ROOMS.slot.txt), [echo/custom_slots/SXMCHANNELS.slot.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/custom_slots/SXMCHANNELS.slot.txt),
+[echo/custom_slots/SXMSTATIONS.slot.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/custom_slots/SXMSTATIONS.slot.txt),
+[echo/custom_slots/SERVICES.slot.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/custom_slots/SERVICES.slot.txt),
+[echo/custom_slots/TOGGLES.slot.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/custom_slots/TOGGLES.slot.txt), and
+[echo/custom_slots/NAMES.slot.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/custom_slots/NAMES.slot.txt).
+5. Still in Interaction Model, copy this repo's [echo/intents.json](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/intents.json) into the "Intent Schema" field, and [echo/utterances.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/utterances.txt) into "Sample Utterances".
 6. Don't test yet, just save. Click back to "Skill Information" and copy the "Application ID". You'll need this for Lambda.
 
 # Configure the AWS Lambda service that will trigger your node-sonos-http-api server
@@ -119,15 +130,19 @@ To set it up, you need to do the following:
 2. Go back into the Alexa Skill console, open your skill, click "Skill Information", choose Lambda ARN and paste that ARN string in.
 3. Now you're ready to put it all together. Try "Alexa, ask sonos to play test"
 
-# Optonal Features can be enabled in options.js
+# Optional "Advanced Mode" (enable in options.js)
+Advanced Mode comes with two major new features.  First, it supports music streaming services like Apple Music, Spotify, and Deezer.   And second, it remembers the room you're operating in, so you no longer need to include a room on every utterance.  With Advanced Mode turned on, you can request specific songs and albums.
+
+The following apply to "Advanced Mode" in options.js:
+
+  advancedMode: true              // Allows you to specify and change default rooms and music services. Requires additional AWS setup
   defaultRoom: 'Kitchen',	      // Allows you to specify a default room to use when one is not specified in the utterance 	
   defaultMusicService: 'apple',   // Supports presets, library, apple, spotify, deezer, or elite  (elite = Deezer Elite FLAC)
-  advancedMode: true              // Allows you to specify and change default rooms and music services. Requires additional AWS setup
 
 # Optional Security Features
 The echo-sqs-proxy solution allows Echo-Sonos to communicate with the node-sonos-http-api solution without having to alter your firewall to open your server to the Internet or having to make any of the changes below.  Read the README file in the echo-sqs-proxy directory for instructions.
 
-Alternatively, echo-sonos does support both HTTPS and basic auth, for those concerned with opening their Sonos server to the Internet.  options.example.js has flags and configuration information for both features. For HTTPS support, set "useHttps" to "true" and check to make sure the port is still correct.  For basic auth, change the "auth" variable and replace the username and password with your own.
+Alternatively, if you're not using echo-sqs-proxy, echo-sonos does support both HTTPS and basic auth.  options.example.js has flags and configuration information for both features. For HTTPS support, set "useHttps" to "true" and check to make sure the port is still correct.  For basic auth, change the "auth" variable and replace the username and password with your own.
 
 ## Configuring node-sonos-http-api
 Securing node-sonos-http-api, HTTPS, and your home server are outside the bounds of this project. The below documentation is provided for convenience because so many people have asked me about it.  You could certainly do much more to secure your home server.  For starters, you could pin certificates to the client or put more effort behind secure key and credential storage.  This is a DIY hobbyist project, and it's up to your discretion to determine how much effort to put into security.

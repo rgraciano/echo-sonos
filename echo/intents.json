@@ -6,7 +6,7 @@
       "slots": [
         {
             "name": "Name",
-            "type": "AMAZON.LITERAL"
+            "type": "NAMES"
         },
         {
             "name": "Room",
@@ -20,7 +20,7 @@
       "slots": [
         {
             "name": "Name",
-            "type": "AMAZON.LITERAL"
+            "type": "NAMES"
         },
         {
             "name": "Room",
@@ -34,7 +34,7 @@
       "slots": [
         {
             "name": "Name",
-            "type": "AMAZON.LITERAL"
+            "type": "NAMES"
         },
         {
             "name": "Room",
@@ -48,7 +48,7 @@
       "slots": [
         {
             "name": "Name",
-            "type": "AMAZON.LITERAL"
+            "type": "NAMES"
         },
         {
             "name": "Room",
@@ -62,7 +62,7 @@
       "slots": [
         {
             "name": "Name",
-            "type": "AMAZON.LITERAL"
+            "type": "NAMES"
         },
         {
             "name": "Room",
@@ -124,7 +124,7 @@
       "slots": [
         {
             "name": "Name",
-            "type": "AMAZON.LITERAL"
+            "type": "NAMES"
         },
         {
             "name": "Room",
@@ -416,9 +416,30 @@
           "type" : "ROOMS"
         }
       ]
-    }
+    },
     
+    {
+      "intent" : "PlayInRoomIntent",
+      "slots" : [
+        {
+          "name" : "Room",
+          "type" : "ROOMS"
+        }
+      ]
+    },
+
+    {
+      "intent":  "LineInIntent",
+      "slots": [
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        },
+        {
+            "name": "LineIn",
+            "type": "ROOMS"
+        }
+      ]
+    }
   ]
 }
-
-

@@ -18,119 +18,30 @@ PlayMoreLikeTrackIntent play more songs like this
 PlayMoreLikeTrackIntent play more tracks like this
 PlayMoreLikeTrackIntent play more music like this
 
-MusicIntent play {coldplay|Name} in the {Room}
-MusicIntent play {the fray|Name} in the {Room}
-MusicIntent play {the rolling stones|Name} in the {Room}
-MusicIntent play {toad the wet sproket|Name} in the {Room}
-MusicIntent play {KC and the sunshine band|Name} in the {Room}
-MusicIntent play {john travolta and olivia newton john|Name} in the {Room}
-MusicIntent play {DJ jazzy jeff and the fresh prince|Name} in the {Room}
+MusicIntent play {Name} in the {Room}
+MusicIntent play {Name} in {Room}
 
-MusicIntent play {coldplay|Name}
-MusicIntent play {the fray|Name}
-MusicIntent play {the rolling stones|Name}
-MusicIntent play {toad the wet sproket|Name}
-MusicIntent play {KC and the sunshine band|Name}
-MusicIntent play {john travolta and olivia newton john|Name}
-MusicIntent play {DJ jazzy jeff and the fresh prince|Name}
+MusicIntent play {Name}
 
-MusicIntent play {lola|Name} in the {Room}
-MusicIntent play {hello dolly|Name} in the {Room}
-MusicIntent play {love me tender|Name} in the {Room}
-MusicIntent play {when fools rush in|Name} in the {Room}
-MusicIntent play {take me to the river|Name} in the {Room}
-MusicIntent play {killing me softly with his song|Name} in the {Room}
-MusicIntent play {i just called to say i love you|Name} in the {Room}
+AlbumIntent play album {Name} in the {Room}
+AlbumIntent play album {Name} in {Room}
 
-MusicIntent play {lola|Name}
-MusicIntent play {hello dolly|Name}
-MusicIntent play {love me tender|Name}
-MusicIntent play {when fools rush in|Name}
-MusicIntent play {take me to the river|Name}
-MusicIntent play {killing me softly with his song|Name}
-MusicIntent play {i just called to say i love you|Name}
+AlbumIntent play album {Name}
 
-MusicIntent play {the kinks lola|Name} in the {Room}
-MusicIntent play {louis armstrong hello dolly|Name} in the {Room}
-MusicIntent play {elvis presley love me tender|Name} in the {Room}
-MusicIntent play {UB forty fools rush in|Name} in the {Room}
-MusicIntent play {talking heads take me to the river|Name} in the {Room}
-MusicIntent play {roberta flack killing me softly with his song|Name} in the {Room}
-MusicIntent play {stevie wonder i just called to say i love you|Name} in the {Room}
-MusicIntent play {toad the wet sproket i will not Take these things for granted|Name} in the {Room}
+ArtistIntent play artist {Name} in the {Room}
+ArtistIntent play artist {Name} in {Room}
 
-MusicIntent play {the kinks lola|Name}
-MusicIntent play {louis armstrong hello dolly|Name}
-MusicIntent play {elvis presley love me tender|Name}
-MusicIntent play {UB forty fools rush in|Name}
-MusicIntent play {talking heads take me to the river|Name}
-MusicIntent play {roberta flack killing me softly with his song|Name}
-MusicIntent play {stevie wonder i just called to say i love you|Name}
-MusicIntent play {toad the wet sproket i will not Take these things for granted|Name}
+ArtistIntent play artist {Name}
 
-AlbumIntent play album {boston|Name} in the {Room}
-AlbumIntent play album {full circle|Name} in the {Room}
-AlbumIntent play album {stranger to stranger|Name} in the {Room}
-AlbumIntent play album {a cure for loneliness|Name} in the {Room}
-AlbumIntent play album {a sailor's guide to earth|Name} in the {Room}
-AlbumIntent play album {you will never be one of us|Name} in the {Room}
-AlbumIntent play album {for those of you that have never|Name} in the {Room}
+TrackIntent play track {Name} in the {Room}
+TrackIntent play track {Name} in {Room}
 
-AlbumIntent play album {boston|Name}
-AlbumIntent play album {full circle|Name}
-AlbumIntent play album {stranger to stranger|Name}
-AlbumIntent play album {a cure for loneliness|Name}
-AlbumIntent play album {a sailor's guide to earth|Name}
-AlbumIntent play album {you will never be one of us|Name}
-AlbumIntent play album {for those of you that have never|Name}
+TrackIntent play track {Name}
 
-ArtistIntent play artist {coldplay|Name} in the {Room}
-ArtistIntent play artist {the fray|Name} in the {Room}
-ArtistIntent play artist {the rolling stones|Name} in the {Room}
-ArtistIntent play artist {toad the wet sproket|Name} in the {Room}
-ArtistIntent play artist {KC and the sunshine band|Name} in the {Room}
-ArtistIntent play artist {john travolta and olivia newton john|Name} in the {Room}
-ArtistIntent play artist {DJ jazzy jeff and the fresh prince|Name} in the {Room}
+MusicRadioIntent play {Name} radio in the {Room}
+MusicRadioIntent play {Name} radio in {Room}
 
-ArtistIntent play artist {coldplay|Name}
-ArtistIntent play artist {the fray|Name}
-ArtistIntent play artist {the rolling stones|Name}
-ArtistIntent play artist {toad the wet sproket|Name}
-ArtistIntent play artist {KC and the sunshine band|Name}
-ArtistIntent play artist {john travolta and olivia newton john|Name}
-ArtistIntent play artist {DJ jazzy jeff and the fresh prince|Name}
-
-TrackIntent play {lola|Name} in the {Room}
-TrackIntent play {hello dolly|Name} in the {Room}
-TrackIntent play {love me tender|Name} in the {Room}
-TrackIntent play {when fools rush in|Name} in the {Room}
-TrackIntent play {take me to the river|Name} in the {Room}
-TrackIntent play {killing me softly with his song|Name} in the {Room}
-TrackIntent play {i just called to say i love you|Name} in the {Room}
-
-TrackIntent play track {lola|Name}
-TrackIntent play track {hello dolly|Name}
-TrackIntent play track {love me tender|Name}
-TrackIntent play track {when fools rush in|Name}
-TrackIntent play track {take me to the river|Name}
-TrackIntent play track {killing me softly with his song|Name}
-TrackIntent play track {i just called to say i love you|Name}
-
-MusicRadioIntent play {coldplay|Name} radio in the {Room}
-MusicRadioIntent play {the fray|Name} radio in the {Room}
-MusicRadioIntent play {the rolling stones|Name} radio in the {Room}
-MusicRadioIntent play {toad the wet sproket|Name} radio in the {Room}
-MusicRadioIntent play {KC and the sunshine band|Name} radio in the {Room}
-MusicRadioIntent play {john travolta and olivia newton john|Name} radio in the {Room}
-MusicRadioIntent play {DJ jazzy jeff and the fresh prince|Name} radio in the {Room}
-
-MusicRadioIntent play {coldplay|Name} radio
-MusicRadioIntent play {the fray|Name} radio
-MusicRadioIntent play {the rolling stones|Name} radio
-MusicRadioIntent play {toad the wet sproket|Name} radio
-MusicRadioIntent play {KC and the sunshine band|Name} radio
-MusicRadioIntent play {john travolta and olivia newton john|Name} radio
-MusicRadioIntent play {DJ jazzy jeff and the fresh prince|Name} radio
+MusicRadioIntent play {Name} radio
 
 PlayPresetIntent play preset {Preset}
 
@@ -172,37 +83,15 @@ SiriusXMChannelIntent start sirius XM channel {Channel}
 SiriusXMChannelIntent tune to sirius XM channel {Channel} in the {Room}
 SiriusXMChannelIntent tune to sirius XM channel {Channel}
 
-PandoraMusicIntent tune to pandora {madona|Name} in the {Room}
-PandoraMusicIntent tune to pandora {van morrison|Name} in the {Room}
-PandoraMusicIntent tune to pandora {the rolling stones|Name} in the {Room}
-PandoraMusicIntent tune to pandora {toad the wet sproket|Name} in the {Room}
-PandoraMusicIntent tune to pandora {KC and the sunshine band|Name} in the {Room}
-PandoraMusicIntent tune to pandora {john travolta and olivia newton john|Name} in the {Room}
-PandoraMusicIntent tune to pandora {DJ jazzy jeff and the fresh prince|Name} in the {Room}
+PandoraMusicIntent tune to pandora {Name} in the {Room}
+PandoraMusicIntent tune to pandora {Name} in {Room}
 
-PandoraMusicIntent tune to pandora {madona|Name}
-PandoraMusicIntent tune to pandora {van morrison|Name}
-PandoraMusicIntent tune to pandora {the rolling stones|Name}
-PandoraMusicIntent tune to pandora {toad the wet sproket|Name}
-PandoraMusicIntent tune to pandora {KC and the sunshine band|Name}
-PandoraMusicIntent tune to pandora {john travolta and olivia newton john|Name}
-PandoraMusicIntent tune to pandora {DJ jazzy jeff and the fresh prince|Name}
+PandoraMusicIntent tune to pandora {Name}
 
-PandoraMusicIntent tune to pandora {lola|Name} in the {Room}
-PandoraMusicIntent tune to pandora {hello dolly|Name} in the {Room}
-PandoraMusicIntent tune to pandora {love me tender|Name} in the {Room}
-PandoraMusicIntent tune to pandora {when fools rush in|Name} in the {Room}
-PandoraMusicIntent tune to pandora {take me to the river|Name} in the {Room}
-PandoraMusicIntent tune to pandora {killing me softly with his song|Name} in the {Room}
-PandoraMusicIntent tune to pandora {i just called to say i love you|Name} in the {Room}
+PandoraMusicIntent tune to pandora {Name} in the {Room}
+PandoraMusicIntent tune to pandora {Name} in {Room}
 
-PandoraMusicIntent tune to pandora {lola|Name}
-PandoraMusicIntent tune to pandora {hello dolly|Name}
-PandoraMusicIntent tune to pandora {love me tender|Name}
-PandoraMusicIntent tune to pandora {when fools rush in|Name}
-PandoraMusicIntent tune to pandora {take me to the river|Name}
-PandoraMusicIntent tune to pandora {killing me softly with his song|Name}
-PandoraMusicIntent tune to pandora {i just called to say i love you|Name}
+PandoraMusicIntent tune to pandora {Name}
 
 PandoraThumbsUpIntent give the current song in the {Room} a thumbs up
 PandoraThumbsUpIntent give the current song a thumbs up in the {Room}
@@ -268,6 +157,8 @@ PauseIntent pause in {Room}
 PauseIntent pause the music in {Room}
 PauseIntent stop in the {Room}
 PauseIntent stop in {Room}
+PauseIntent stop playing in the {Room}
+PauseIntent stop playing in {Room}
 PauseIntent stop the music in {Room}
 
 PauseIntent pause
@@ -483,3 +374,45 @@ UngroupIntent ungroup {Room}
 UngroupIntent ungroup the {Room}
 UngroupIntent isolate {Room}
 UngroupIntent isolate the {Room}
+
+PlayInRoomIntent play in {Room}
+PlayInRoomIntent play in the {Room}
+PlayInRoomIntent to play in {Room}
+PlayInRoomIntent to play in the {Room}
+PlayInRoomIntent also play in {Room}
+PlayInRoomIntent also play in the {Room}
+
+LineInIntent {Room} use line-in
+LineInIntent {Room} to use line-in
+LineInIntent have {Room} use line-in
+LineInIntent have the {Room} use line-in
+LineInIntent to have {Room} use line-in
+LineInIntent to have the {Room} use line-in
+LineInIntent set line-in for {Room}
+LineInIntent set line-in for the {Room}
+LineInIntent set {Room} to line-in
+LineInIntent set the {Room} to line-in
+LineInIntent to set line-in for {Room}
+LineInIntent to set line-in for the {Room}
+LineInIntent to set {Room} to line-in
+LineInIntent to set the {Room} to line-in
+LineInIntent use line-in in {Room}
+LineInIntent use line-in in the {Room}
+
+LineInIntent set {Room} line-in to {LineIn}
+LineInIntent set the {Room} line-in to {LineIn}
+LineInIntent set {Room} line-in to the {LineIn}
+LineInIntent set the {Room} line-in to the {LineIn}
+LineInIntent to have {Room} use {LineIn} line-in
+LineInIntent to have the {Room} use {LineIn} line-in
+LineInIntent to have {Room} use the {LineIn} line-in
+LineInIntent to have the {Room} use the {LineIn} line-in
+LineInIntent set line-in for {Room} to {LineIn}
+LineInIntent set line-in for the {Room} to {LineIn}
+LineInIntent set line-in for {Room} to the {LineIn}
+LineInIntent set line-in for the {Room} to the {LineIn}
+LineInIntent to set line-in for {Room} to {LineIn}
+LineInIntent to set line-in for the {Room} to {LineIn}
+LineInIntent to set line-in for {Room} to the {LineIn}
+LineInIntent to set line-in for the {Room} to the {LineIn}
+LineInIntent to set line-in for {Room} to {LineIn}
