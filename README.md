@@ -46,8 +46,7 @@ Room-specific commands, where "ROOM" could be any of your sonos room names (eg K
 Everything's dynamic - rooms and playlists are taken dynamically from your speech. There are common room names in utterances.txt to help the Alexa engine recognize valid entries, but it's not necessary to add more. You can specify a default room in options.js and that room will be used when no room is specified in the utterance. You can also specify a default service in options.js to be used for the music search functionality which supports Apple Music, Spotify, Deezer, Deezer Elite, and the local Sonos music library. The default for the music service is to use the presets.
 
 ### Advanced Mode
-
-Turning on Advanced Mode in options.js will allow you to dynamically change the current room and/or current music service through utterances (below). The solution will also remember the last room that was used in a normal command and set the current room to that room. 
+Turning on Advanced Mode in options.js will allow you to dynamically change the current room and/or current music service through utterances (below). The solution will also remember the last room that was used in a normal command and set the current room to that room.
 
 * Change room: "Alexa, ask sonos to change room to ROOM"
 * Change service: "Alexa, ask sonos to change music to SERVICE" (SERVICE = Presets, Library, Apple, Spotify, Deezer, or Elite)
@@ -65,9 +64,9 @@ This will set ROOM line-in to the default line-in (and play it)
 
 # How it works
 
-1. When you say the command to Alexa, it triggers the Alexa skill with invocation name sonos. 
-2. The Alexa skill calls a web service running on AWS Lambda, passing it the preset name ("rock" in the example). 
-3. Lambda then fires an HTTP request to a node.js server running node-sonos-http-api on your local network. 
+1. When you say the command to Alexa, it triggers the Alexa skill with invocation name sonos.
+2. The Alexa skill calls a web service running on AWS Lambda, passing it the preset name ("rock" in the example).
+3. Lambda then fires an HTTP request to a node.js server running node-sonos-http-api on your local network.
 4. node-sonos-http-api interprets the command and relays to Sonos over your local network.
 
 Included here are the Alexa API definitions, the Lambda AWS service that catches the Alexa requests, and an example preset configuration for jishi's node-sonos-http-api to actually play the music.
@@ -75,7 +74,7 @@ Included here are the Alexa API definitions, the Lambda AWS service that catches
 To set it up, you need to do the following:
 
 # Get jishi's node-sonos-http-api working
-1. Install node.js on a server on the same network as your Sonos. 
+1. Install node.js on a server on the same network as your Sonos.
 2. Grab https://github.com/jishi/node-sonos-http-api and run it on that server.  On Mac, it's "npm install https://github.com/jishi/node-sonos-http-api", then go to the directory created and "npm start".
 3. Take the node-sonos-http-api/presets.json that I have here and drop it into your node-sonos-http-api root directory. Modify it to use your speaker names and your favorite stations. Make sure the preset names are lowercase (like "test" and "rock" in my example). NOTE: You can skip this step if you only want to use Playlists and Favorites, which require no configuration.
 4. Test it by hitting http://yourserverip:5005/zones
@@ -104,11 +103,22 @@ To set it up, you need to do the following:
 # Configure the AWS Lambda service that will trigger your node-sonos-http-api server
 1. Create an AWS Lambda account if you don't have one already. It's free!
 2. In the Lambda console, look to the upper right. Make sure "N. Virginia" or one of the Lambda supported regions is selected, because not every zone supports Alexa yet.
-3. Create a new Lambda function. Skip the blueprint. 
+3. Create a new Lambda function. Skip the blueprint.
 4. Pick any name you want, and choose runtime Node.js.
-5. Go into this repo's [lambda/src](lambda/src) directory and copy options.example.js to options.js. Edit options.js to have your DynDNS hostname, your port, and the Alexa App ID you just copied. Also specify the default room, service, and if you want Advanced Mode turned on.
+5. Go into this repo's [lambda/src](lambda/src) directory and copy options.example.js to options.js.
+ - Do not edit options.js you can customize using environment variables when you uplodad to lambda
 6. In lambda/src, zip up everything. On Mac/Linux, `cd src; chmod a+r *.js; zip src.zip *.js`.  Make sure you don't capture the folder, just the files.
 7. Choose to upload the zip file for src.zip.
+7. In the environment variables section make sure to fill in the following environment variable
+ - `APPID` - this is the Application ID you copied from above
+ - `HOST`  - this is the DNS name for your server hosting node-sonos-http-api
+7. You may optionally fill in any of the following environment variables
+ - `AUTH_USERNAME` and `AUTH_PASSWORD` for basic auth with node-sonos-http-api
+ - `USE_HTTPS` if you enabled https on node-sonos-http-api
+ - `REJECT_UNAUTHORIZED` if you enabled https and used a self signed certificate
+ - `DEFAULT_MUSIC_SERVICE` if you'd like to set a specific music service
+ - `ADVANCED_MODE` for enabling advanced mode
+ - `USE_SQS` if you are using node-sqs-proxy for secure communications
 8. The default handler is fine. Create a new role of type Basic Execution Role. Pick smallest possible memory and so on.
 9. Click Next to proceed. Once created, click "Triggers".
 10. Add a source.  Choose "Alexa Skills Kit".
