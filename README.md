@@ -12,11 +12,9 @@ Global commands (no rooms required):
 Room-specific commands, where "ROOM" could be any of your sonos room names (eg Kitchen, Master Bedroom, and so on):
 
 * Play songs from an artist: "Alexa, ask sonos to play ARTIST NAME in the ROOM"
-* Play a song: "Alexa, ask sonos to play SONG NAME in the ROOM"
-* Play a specific artist's song: "Alexa, ask sonos to play ARTIST NAME SONG NAME in the ROOM"
+* Play songs from an album: "Alexa, ask sonos to play album ALBUM NAME in the ROOM"
+* Play a song: "Alexa, ask sonos to play the song SONG NAME in the ROOM"
 * Play "radio" songs like this artist: "Alexa, ask sonos to play ARTIST NAME radio in the ROOM"
-* Play "radio" songs like this track: Alexa, ask sonos to play SONG NAME radio in the ROOM"
-* Play "radio" songs like this track from a specific artist: "Alexa, ask sonos to play ARTIST NAME SONG NAME radio in the ROOM"
 * Play more "radio" songs like this song: "Alexa, play more songs by this artist in the ROOM"
 * Play more "radio" songs like this track: "Alexa, play more songs like this in the ROOM"
 * SiriusXM: "Alexa, play SiriusXM channel CHANNEL in the ROOM"

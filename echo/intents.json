@@ -1,73 +1,59 @@
 {
     "intents": [
-    
-    {
-      "intent": "MusicIntent",
-      "slots": [
-        {
-            "name": "Name",
-            "type": "NAMES"
-        },
-        {
-            "name": "Room",
-            "type": "ROOMS"
-        }   
-      ]
-    },
-    
+
     {
       "intent": "AlbumIntent",
       "slots": [
         {
-            "name": "Name",
-            "type": "NAMES"
+            "name": "AlbumName",
+            "type": "AMAZON.MusicAlbum"
         },
         {
             "name": "Room",
             "type": "ROOMS"
-        }   
+        }
       ]
     },
-      
-    {
-      "intent": "ArtistIntent",
-      "slots": [
-        {
-            "name": "Name",
-            "type": "NAMES"
-        },
-        {
-            "name": "Room",
-            "type": "ROOMS"
-        }   
-      ]
-    },
-      
+
     {
       "intent": "TrackIntent",
       "slots": [
         {
-            "name": "Name",
-            "type": "NAMES"
+            "name": "TrackName",
+            "type": "AMAZON.MusicRecording"
         },
         {
             "name": "Room",
             "type": "ROOMS"
-        }   
+        }
       ]
     },
-      
+
+    {
+      "intent": "ArtistIntent",
+      "slots": [
+        {
+            "name": "ArtistName",
+            "type": "AMAZON.MusicGroup"
+        },
+        {
+            "name": "Room",
+            "type": "ROOMS"
+        }
+      ]
+    },
+
     {
       "intent": "MusicRadioIntent",
       "slots": [
         {
-            "name": "Name",
-            "type": "NAMES"
+            "name": "ArtistName",
+            "type": "AMAZON.MusicGroup"
         },
         {
             "name": "Room",
             "type": "ROOMS"
-        }   
+        }
       ]
     },
 

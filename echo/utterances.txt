@@ -18,30 +18,33 @@ PlayMoreLikeTrackIntent play more songs like this
 PlayMoreLikeTrackIntent play more tracks like this
 PlayMoreLikeTrackIntent play more music like this
 
-MusicIntent play {Name} in the {Room}
-MusicIntent play {Name} in {Room}
+AlbumIntent play album {AlbumName} in the {Room}
+AlbumIntent play album {AlbumName} in {Room}
 
-MusicIntent play {Name}
+AlbumIntent play album {AlbumName}
 
-AlbumIntent play album {Name} in the {Room}
-AlbumIntent play album {Name} in {Room}
+ArtistIntent play artist {ArtistName} in the {Room}
+ArtistIntent play artist {ArtistName} in {Room}
 
-AlbumIntent play album {Name}
+ArtistIntent play artist {ArtistName}
 
-ArtistIntent play artist {Name} in the {Room}
-ArtistIntent play artist {Name} in {Room}
+ArtistIntent play {ArtistName} in the {Room}
+ArtistIntent play {ArtistName} in {Room}
 
-ArtistIntent play artist {Name}
+ArtistIntent play {ArtistName}
 
-TrackIntent play track {Name} in the {Room}
-TrackIntent play track {Name} in {Room}
+TrackIntent play track {TrackName} in the {Room}
+TrackIntent play track {TrackName} in {Room}
 
-TrackIntent play track {Name}
+TrackIntent play the song {TrackName} in {Room}
+TrackIntent play the song {TrackName} in the {Room}
 
-MusicRadioIntent play {Name} radio in the {Room}
-MusicRadioIntent play {Name} radio in {Room}
+TrackIntent play track {TrackName}
 
-MusicRadioIntent play {Name} radio
+MusicRadioIntent play {ArtistName} radio in the {Room}
+MusicRadioIntent play {ArtistName} radio in {Room}
+
+MusicRadioIntent play {ArtistName} radio
 
 PlayPresetIntent play preset {Preset}
 

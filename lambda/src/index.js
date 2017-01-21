@@ -34,36 +34,29 @@ EchoSonos.prototype.intentHandlers = {
     AlbumIntent: function (intent, session, response) {
         console.log("AlbumIntent received");
         loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
-        	musicHandler(room, service, '/album/', intent.slots.Name.value, response);
-        });  
+	       musicHandler(room, service, '/album/', intent.slots.AlbumName.value, response);
+        });
     },
 
     ArtistIntent: function (intent, session, response) {
         console.log("MusicIntent received for room " + intent.slots.Room.value);
         loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
-	        musicHandler(room, service, '/song/', 'artist:' + intent.slots.Name.value, response);
-        });  
+	        musicHandler(room, service, '/song/', 'artist:' + intent.slots.ArtistName.value, response);
+        });
     },
 
     TrackIntent: function (intent, session, response) {
         console.log("MusicIntent received for room " + intent.slots.Room.value);
         loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
-	        musicHandler(room, service, '/song/', 'track:' + intent.slots.Name.value, response);
-        });  
-    },
-
-    MusicIntent: function (intent, session, response) {
-        console.log("MusicIntent received for room " + intent.slots.Room.value);
-        loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
-	        musicHandler(room, service, '/song/', intent.slots.Name.value, response);
-        });  
+	        musicHandler(room, service, '/song/', 'track:' + intent.slots.TrackName.value, response);
+        });
     },
 
     MusicRadioIntent: function (intent, session, response) {
         console.log("MusicRadioIntent received");
         loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
-	        musicHandler(room, service, '/station/', intent.slots.Name.value, response);
-        });  
+	        musicHandler(room, service, '/station/', intent.slots.ArtistName.value, response);
+        });
     },
 
     PlayMoreByArtistIntent: function (intent, session, response) {
