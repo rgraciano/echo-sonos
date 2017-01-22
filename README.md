@@ -98,7 +98,7 @@ To set it up, you need to do the following:
 [echo/custom_slots/SERVICES.slot.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/custom_slots/SERVICES.slot.txt),
 [echo/custom_slots/TOGGLES.slot.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/custom_slots/TOGGLES.slot.txt), and
 [echo/custom_slots/NAMES.slot.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/custom_slots/NAMES.slot.txt).
-5. Still in Interaction Model, copy this repo's [echo/intents.json](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/intents.json) into the "Intent Schema" field, and [echo/utterances.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/utterances.txt) into "Sample Utterances".
+5. Still in Interaction Model, copy this repo's [echo/intents.json](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/intents.json) into the "Intent Schema" field, and [echo/utterances.txt](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/echo/utterances.txt) into "Sample Utterances". Note: if you're in the UK or Germany, Amazon's support for band names and songs may not be available yet. In that case, replace anywhere you see `"AMAZON.MusicGroup"`, `"AMAZON.MusicRecording"`, and `"AMAZON.MusicAlbum"` with the word `"NAMES"`.
 6. Don't test yet, just save. Click back to "Skill Information" and copy the "Application ID". You'll need this for Lambda.
 
 # Configure the AWS Lambda service that will trigger your node-sonos-http-api server
