@@ -119,7 +119,7 @@ To set it up, you need to do the following:
  - `DEFAULT_MUSIC_SERVICE` if you'd like to set a specific music service
  - `ADVANCED_MODE` for enabling advanced mode
  - `USE_SQS` if you are using node-sqs-proxy for secure communications
-10. The default handler is fine. Create a new role of type Basic Execution Role. Pick smallest options across the board, because this is the world's smallest service (smallest option for memory, and so on). When in doubt, pick the default.
+10. The default handler is fine. Create a new role of type Basic Execution Role. Pick smallest options across the board, because this is the world's smallest service (smallest option for memory, and so on). Set the timeout to something high (suggest 30 seconds or so). For everything else, the default options should be fine.
 11. Click Next to proceed. Once created, click "Triggers".
 12. Add a source.  Choose "Alexa Skills Kit".
 13. Test it out. I included a test blueprint in this repo. Click "Test" and copy/paste this repo's [lambda/play_intent_testreq.json](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/lambda/play_intent_testreq.json) to test. It will trigger the "test" preset in your presets.json file on your Sonos server. Don't forget to replace the Alexa App Id again.
