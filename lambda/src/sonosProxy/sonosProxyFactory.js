@@ -16,6 +16,13 @@ sonosProxyFactory.get = function(baseUrl, useSqs){
     return sonosProxy
 };
 
+
+/**
+ * Enum
+ */
+sonosProxy.Service = {'Apple':'apple', 'Spotify': 'spotify', 'Deezer':'deezer', 'Elite':'elite', 'Library':'library'};
+sonosProxy.SearchType = {'Album':'album', 'Song':'song', 'Station':'station'};
+
 /**
  * Info
  */
@@ -167,7 +174,32 @@ sonosProxy.lineIn = function(room, lineIn) {
     return makeCall(url, this.useSqs);
 };
 
+sonosProxy.playContent = function(room, service, type, content) {
+    var room = encodeURIComponent(room);
+    var service = encodeURIComponent(service);
+    var type = encodeURIComponent(type);
+    var content = encodeURIComponent(content);
 
+    var url = `${this.baseUrl}/${room}/musicsearch/${service}/${type}/${content}`;
+
+    return makeCall(url, this.useSqs);
+};
+
+sonosProxy.playSong = function(room, service, song) {
+    return playContent(room, service, this.SearchType.Song, song);
+};
+
+sonosProxy.playArtist = function(room, service, artist) {
+    return playContent(room, service, this.SearchType.Song, artist);
+};
+
+sonosProxy.playAlbum = function(room, service, album) {
+    return playContent(room, service, this.SearchType.Album, album);
+};
+
+sonosProxy.playStation = function(room, service, station) {
+    return playContent(room, service, this.SearchType.Station, station);
+};
 
 function makeCall(url, useSqs) {  
     if(useSqs){
