@@ -1,6 +1,7 @@
 'use strict';
 
 var httpClient = require('./httpClient');
+var sqsClient = require('./sqsClient');
 var sonosProxyFactory =  {};
 var sonosProxy = {};
 
@@ -27,49 +28,49 @@ sonosProxy.SearchType = {'Album':'album', 'Song':'song', 'Station':'station'};
  * Info
  */
 sonosProxy.getZones = function() {
-    var url = `${this.baseUrl}/zones`;
-    return makeCall(url, this.useSqs);
+    var path = `/zones`;
+    return makeCall(path);
 };
 
 sonosProxy.getFavorites = function() {
-    var url = `${this.baseUrl}/favorites`;
-    return makeCall(url, this.useSqs);
+    var path = `/favorites`;
+    return makeCall(path);
 };
 
 sonosProxy.getPlaylists = function() {
-    var url = `${this.baseUrl}/playlists`;
-    return makeCall(url, this.useSqs);
+    var path = `/playlists`;
+    return makeCall(path);
 };
 
 /**
  * Global Commands
  */
 sonosProxy.pauseAll = function(timeoutInMinutes) {
-    var url = timeoutInMinutes === undefined ?  
-        `${this.baseUrl}/pauseall` : `${this.baseUrl}/pauseall/${encodeURIComponent(timeoutInMinutes)}`;
+    var path = timeoutInMinutes === undefined ?  
+        `/pauseall` : `/pauseall/${encodeURIComponent(timeoutInMinutes)}`;
 
-    return makeCall(url, this.useSqs);
+    return makeCall(path);
 };
 
 sonosProxy.resumeAll = function(timeoutInMinutes) {
-    var url = timeoutInMinutes === undefined ?  
-        `${this.baseUrl}/resumeall` : `${this.baseUrl}/resumeall/${encodeURIComponent(timeoutInMinutes)}`;
+    var path = timeoutInMinutes === undefined ?  
+        `/resumeall` : `/resumeall/${encodeURIComponent(timeoutInMinutes)}`;
 
-    return makeCall(url, this.useSqs);
+    return makeCall(path);
 };
 
 sonosProxy.preset = function(preset) {
     var preset = encodeURIComponent(preset);
-    var url = `${this.baseUrl}/preset/${preset}`;
+    var path = `/preset/${preset}`;
 
-    return makeCall(url, this.useSqs);
+    return makeCall(path);
 };
 
 sonosProxy.sleep = function(timeout) {
     var timeout = encodeURIComponent(timeout);
-    var url = `${this.baseUrl}/sleep/${timeout}`;
+    var path = `/sleep/${timeout}`;
 
-    return makeCall(url, this.useSqs);
+    return makeCall(path);
 };
 
 
@@ -78,100 +79,133 @@ sonosProxy.sleep = function(timeout) {
  */
 sonosProxy.play = function(room) {
     var room = encodeURIComponent(room);
-    var url = `${this.baseUrl}/${room}/play`;
+    var path = `/${room}/play`;
 
-    return makeCall(url, this.useSqs);
+    return makeCall(path);
 };
 
 sonosProxy.pause = function(room) {
     var room = encodeURIComponent(room);
-    var url = `${this.baseUrl}/${room}/pause`;
+    var path = `/${room}/pause`;
 
-    return makeCall(url, this.useSqs);
+    return makeCall(path);
 };
 
 sonosProxy.togglePlay = function(room) {
     var room = encodeURIComponent(room);
-    var url = `${this.baseUrl}/${room}/playpause`;
+    var path = `/${room}/playpause`;
 
-    return makeCall(url, this.useSqs);
+    return makeCall(path);
 };
 
 sonosProxy.setVolume = function(room, volume) {
     var room = encodeURIComponent(room);
     var volume = encodeURIComponent(volume);
-    var url = `${this.baseUrl}/${room}/volume/${volume}`;
+    var path = `/${room}/volume/${volume}`;
 
-    return makeCall(url, this.useSqs);
+    return makeCall(path);
 };
 
 sonosProxy.increaseVolume = function(room, volumeIncrease) {
     var room = encodeURIComponent(room);
     var volumeIncrease = encodeURIComponent(volumeIncrease);
-    var url = `${this.baseUrl}/${room}/volume/+${volumeIncrease}`;
+    var path = `/${room}/volume/+${volumeIncrease}`;
 
-    return makeCall(url, this.useSqs);
+    return makeCall(path);
 };
 
 sonosProxy.decreaseVolume = function(room, volumeDecrease) {
     var room = encodeURIComponent(room);
     var volumeIncrease = encodeURIComponent(volumeDecrease);
-    var url = `${this.baseUrl}/${room}/volume/-${volumeDecrease}`;
+    var path = `/${room}/volume/-${volumeDecrease}`;
 
-    return makeCall(url, this.useSqs);
+    return makeCall(path);
 };
 
 sonosProxy.setGroupVolume = function(room, volume) {
     var room = encodeURIComponent(room);
     var volume = encodeURIComponent(volume);
-    var url = `${this.baseUrl}/${room}/groupVolume/${volume}`;
+    var path = `/${room}/groupVolume/${volume}`;
 
-    return makeCall(url, this.useSqs);
+    return makeCall(path);
 };
 
 sonosProxy.increaseGroupVolume = function(room, volumeIncrease) {
     var room = encodeURIComponent(room);
     var volumeIncrease = encodeURIComponent(volumeIncrease);
-    var url = `${this.baseUrl}/${room}/groupVolume/+${volumeIncrease}`;
+    var path = `/${room}/groupVolume/+${volumeIncrease}`;
 
-    return makeCall(url, this.useSqs);
+    return makeCall(path);
 };
 
 sonosProxy.decreaseGroupVolume = function(room, volumeDecrease) {
     var room = encodeURIComponent(room);
     var volumeIncrease = encodeURIComponent(volumeDecrease);
-    var url = `${this.baseUrl}/${room}/groupVolume/-${volumeDecrease}`;
+    var path = `/${room}/groupVolume/-${volumeDecrease}`;
 
-    return makeCall(url, this.useSqs);
+    return makeCall(path);
 };
 
 sonosProxy.mute = function(room) {
     var room = encodeURIComponent(room);
-    var url = `${this.baseUrl}/${room}/mute`;
+    var path = `/${room}/mute`;
 
-    return makeCall(url, this.useSqs);
+    return makeCall(path);
 };
 
 sonosProxy.unmute = function(room) {
     var room = encodeURIComponent(room);
-    var url = `${this.baseUrl}/${room}/unmute`;
+    var path = `/${room}/unmute`;
 
-    return makeCall(url, this.useSqs);
+    return makeCall(path);
 };
 
 sonosProxy.toggleMute = function(room) {
     var room = encodeURIComponent(room);
-    var url = `${this.baseUrl}/${room}/togglemute`;
+    var path = `/${room}/togglemute`;
 
-    return makeCall(url, this.useSqs);
+    return makeCall(path);
+};
+
+sonosProxy.next = function(room) {
+    var room = encodeURIComponent(room);
+    var path = `/${room}/next`;
+
+    return makeCall(path);
+};
+
+sonosProxy.previous = function(room) {
+    var room = encodeURIComponent(room);
+    var path = `/${room}/previous`;
+
+    return makeCall(path);
+};
+
+sonosProxy.playlist = function(room, playlist) {
+    var room = encodeURIComponent(room);
+    var playlist = encodeURIComponent(playlist);
+    var path = `/${room}/playlist/${playlist}`;
+
+    return makeCall(path);
+};
+
+sonosProxy.say = function(room, phrase, volume, languageCode) {
+    var room = encodeURIComponent(room);
+    var phrase = encodeURIComponent(phrase);
+    var volume = volume ? encodeURIComponent(volume) : '30';
+    var languageCode = languageCode ? encodeURIComponent(languageCode) : 'en-us';
+
+    var path = `/${room}/say/${phrase}/${languageCode}/${volume}`;
+
+    return makeCall(path);
 };
 
 sonosProxy.lineIn = function(room, lineIn) {
     var room = encodeURIComponent(room);
     var lineIn = encodeURIComponent(lineIn);
-    var url = `${this.baseUrl}/${room}/linein/${lineIn}`;
+    var path = `/${room}/linein/${lineIn}`;
 
-    return makeCall(url, this.useSqs);
+    return makeCall(path);
 };
 
 sonosProxy.playContent = function(room, service, type, content) {
@@ -180,9 +214,9 @@ sonosProxy.playContent = function(room, service, type, content) {
     var type = encodeURIComponent(type);
     var content = encodeURIComponent(content);
 
-    var url = `${this.baseUrl}/${room}/musicsearch/${service}/${type}/${content}`;
+    var path = `/${room}/musicsearch/${service}/${type}/${content}`;
 
-    return makeCall(url, this.useSqs);
+    return makeCall(path);
 };
 
 sonosProxy.playSong = function(room, service, song) {
@@ -201,14 +235,41 @@ sonosProxy.playStation = function(room, service, station) {
     return playContent(room, service, this.SearchType.Station, station);
 };
 
-function makeCall(url, useSqs) {  
-    if(useSqs){
-        //TODO add sqs logic here
-        return new Promise((resolve, reject) => reject('Not Implemented'));
+function makeCall(path) {  
+    if(sonosProxy.useSqs){
+        return sqsClient.get(path).then((data) => logSqsSuccess(path, data), 
+                                        (error) => logSqsFailure(path, error));
     }
+    
+    var url = sonosProxy.baseUrl + path;
+    return httpClient.get(url).then((data) => logCallSuccess(url, data), 
+                                    (error) => logCallFailure(url, error));
+}
 
-    return httpClient.get(url).then(() => console.log(`Call to '${url}' suceeded`), 
-                                    (data) => console.log(`Call to '${url}' failed`));
+function logCallSuccess(url, data) {
+    console.log(`Call to '${url}' suceeded`)
+                                                  
+    return data;
+}
+
+function logCallFailure(url, error) {
+    console.log(`Call to '${url}' failed`);
+    console.log(error);
+
+    return error;
+}
+
+function logSqsSuccess(path, data) {
+    console.log(`Sqs '${path}' suceeded`);
+                                                  
+    return data;
+}
+
+function logSqsFailure(path, error) {
+    console.log(`Sqs '${path}' failed`);
+    console.log(error);
+
+    return error;
 }
 
 module.exports = sonosProxyFactory;

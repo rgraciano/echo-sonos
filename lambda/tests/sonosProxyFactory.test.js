@@ -12,7 +12,7 @@ var sonosProxy = sonosProxyFactory.get('http://localhost:5005');
 Promise.resolve()
     .then(() => {
         console.log('Calling getZones');
-        return sonosProxy.getZones()
+        return sonosProxy.getZones().then((data) => console.log(data));
     })
 
     .then(() => {
@@ -76,6 +76,14 @@ Promise.resolve()
     })
 
     .then(() => {
+        console.log('Calling say');
+        return sonosProxy.say('Study','hello');
+    })
+
+    .then(() => {
         console.log('Calling lineIn');
         return sonosProxy.lineIn('Study','Living Room');
     });
+
+     
+
