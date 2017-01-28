@@ -130,10 +130,10 @@ To set it up, you need to do the following:
 2. Go back into the Alexa Skill console, open your skill, click "Skill Information", choose Lambda ARN and paste that ARN string in.
 3. Now you're ready to put it all together. Try "Alexa, ask sonos to play test"
 
-# Optional "Advanced Mode" (enable in options.js)
+# Optional "Advanced Mode" (enable by settings environment variable "ADVANCED_MODE" to "true" in Lambda)
 Advanced Mode comes with two major new features.  First, it supports music streaming services like Apple Music, Spotify, and Deezer.   And second, it remembers the room you're operating in, so you no longer need to include a room on every utterance.  With Advanced Mode turned on, you can request specific songs and albums.
 
-The following apply to "Advanced Mode" in options.js:
+The following apply to "Advanced Mode" (:
 
   advancedMode: true              // Allows you to specify and change default rooms and music services. Requires additional AWS setup
   defaultRoom: 'Kitchen',	      // Allows you to specify a default room to use when one is not specified in the utterance 	
