@@ -42,6 +42,13 @@ sonosProxy.getPlaylists = function() {
     return makeCall(path);
 };
 
+sonosProxy.state = function(room) {
+    var room = encodeURIComponent(room);
+    var path = `/${room}/state`;
+
+    return makeCall(path);
+};
+
 /**
  * Global Commands
  */
@@ -200,6 +207,21 @@ sonosProxy.say = function(room, phrase, volume, languageCode) {
     return makeCall(path);
 };
 
+sonosProxy.join = function(room1, room2) {
+    var room1 = encodeURIComponent(room1);
+    var room2 = encodeURIComponent(room2);
+    var path = `/${room1}/join/${room2}`;
+
+    return makeCall(path);
+};
+
+sonosProxy.isolate = function(room) {
+    var room = encodeURIComponent(room);
+    var path = `/${room}/isolate`;
+
+    return makeCall(path);
+};
+
 sonosProxy.lineIn = function(room, lineIn) {
     var room = encodeURIComponent(room);
     var lineIn = encodeURIComponent(lineIn);
@@ -237,11 +259,13 @@ sonosProxy.playStation = function(room, service, station) {
 
 function makeCall(path) {  
     if(sonosProxy.useSqs){
-        return sqsClient.get(path).then((data) => logSqsSuccess(path, data), 
-                                        (error) => logSqsFailure(path, error));
+        console.log(`Sending SQS '${path}'`);
+        return sqsClient.get(sonosProxy.baseUrl, path).then((data) => logSqsSuccess(path, data), 
+                                                            (error) => logSqsFailure(path, error));
     }
     
     var url = sonosProxy.baseUrl + path;
+    console.log(`Calling '${path}'`);
     return httpClient.get(url).then((data) => logCallSuccess(url, data), 
                                     (error) => logCallFailure(url, error));
 }

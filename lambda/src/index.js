@@ -4,6 +4,7 @@
 var http = require('http');
 var https = require('https');
 var AWS = require('aws-sdk');
+var sonosProxyFactory = require('./sonosProxy/sonosProxyFactory');
 var dynamodb = null;
 
 var options = require('./options');
@@ -14,7 +15,7 @@ var serverUrl = '';
 var clientUrl = '';
 var sqsServer = null;
 var sqsClient = null;
-
+var sonosProxy = null;
 
 var AlexaSkill = require('./AlexaSkill');
 var EchoSonos = function () {
@@ -310,21 +311,18 @@ EchoSonos.prototype.intentHandlers = {
 
     UngroupIntent: function (intent, session, response) {
         console.log("UngroupIntent received");
+
         loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
-            options.path = '/' + encodeURIComponent(room) + '/isolate';
-            httpreq(options, function(error) {
-                genericResponse(error, response);
-            });
+            var promise = sonosProxy.isolate(room);
+            handleResponse(promise, response);
         });
     },
 
     JoinGroupIntent: function (intent, session, response) {
         console.log("JoinGroupIntent received");
-        options.path = '/' + encodeURIComponent(intent.slots.JoiningRoom.value) + '/join/' +
-            encodeURIComponent(intent.slots.PlayingRoom.value);
-        httpreq(options, function(error) {
-            genericResponse(error, response);
-        });
+        
+        var promise = sonosProxy.join(intent.slots.JoiningRoom.value, intent.slots.PlayingRoom.value);
+        handleResponse(promise, response);
     },
 
     PlayInRoomIntent: function (intent, session, response) {
@@ -334,24 +332,18 @@ EchoSonos.prototype.intentHandlers = {
             response.tell("This command does not work unless you set default Linein");
         }
 
-        options.path = '/' + encodeURIComponent(intent.slots.Room.value) + '/linein/' +
-            encodeURIComponent(options.defaultLinein);
-        httpreq(options, function(error) {
-            genericResponse(error, response);
-        });
+        var promise = sonosProxy.lineIn(intent.slots.Room.value, options.defaultLinein);
+        handleResponse(promise, response);
     },
 
     LineInIntent: function (intent, session, response) {
         console.log("LineInIntent received");
 
-        var room = intent.slots.Room;
-        var lineIn = intent.slots.LineIn || room;
+        var room = intent.slots.Room.value;
+        var lineIn = intent.slots.LineIn.value || room;
 
-        options.path = '/' + encodeURIComponent(room.value) + '/linein/' +
-            encodeURIComponent(lineIn.value);
-        httpreq(options, function(error) {
-            genericResponse(error, response);
-        });
+        var promise = sonosProxy.lineIn(room, lineIn);
+        handleResponse(promise, response);
     }
 };
 
@@ -490,6 +482,11 @@ function volumeHandler(roomValue, response, volume) {
             genericResponse(error, response);
         });
     }
+}
+
+function getUrl(options) {
+    var protocol = options.useHttps ? 'https' : 'http';
+    return `${protocol}://${options.host}:${options.port}`;
 }
 
 /* Given a string roomArgument that either looks like "my room" or "my room group",
@@ -796,6 +793,11 @@ function genericResponse(error, response, success) {
     }
 }
 
+function handleResponse(promise, response, success) {
+    promise.then(() => response.tell(success || "OK"))
+           .catch((error) => response.tell("The Lambda service encountered an error: " + error.message));
+}
+
 // Given a room name, returns the name of the coordinator for that room
 function findCoordinatorForRoom(responseJson, room) {
     console.log("finding coordinator for room: " + room);
@@ -827,6 +829,13 @@ exports.handler = function (event, context) {
         clientUrl = baseSqsUrl + "/SQS-Proxy-Client";
         sqsServer = new AWS.SQS({region : region});
         sqsClient = new AWS.SQS({region : region});
+
+        sonosProxy = sonosProxyFactory.get(baseSqsUrl, options.useSQS);
     }
+    else {
+        sonosProxy = sonosProxyFactory.get(getUrl(options), options.useSQS);
+    }
+    
+
     echoSonos.execute(event, context);
 };

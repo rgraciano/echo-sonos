@@ -2,56 +2,61 @@
 
 var AWS = require('aws-sdk');
 
-var region = process.env.AWS_REGION;
-var arn = context.invokedFunctionArn;
-var actLoc = arn.indexOf(region) + region.length + 1;
-var accountId = arn.substring(actLoc,arn.indexOf(':',actLoc));
-var baseSqsUrl = "https://sqs." + region + ".amazonaws.com/" + accountId;		
-var serverUrl = baseSqsUrl + "/SQS-Proxy-Server";
-var clientUrl = baseSqsUrl + "/SQS-Proxy-Client";
+var sqsClient = {};
+var region = process.env.AWS_REGION;	
 var sqsServerProxy = new AWS.SQS({region : region});
 var sqsClientProxy = new AWS.SQS({region : region});
 
 
-sqsClient.get = function(path) {
+sqsClient.get = function(baseSqsUrl, path) {
     var response = null;
+    var serverUrl = baseSqsUrl + "/SQS-Proxy-Server";
+    var clientUrl = baseSqsUrl + "/SQS-Proxy-Client";
 
-    return  purgeQueue() //Delete all messages from queue
-            .then(sendMessage(path)) 
-            .catch(sendMessage(path)) //Send messages even if perge fails
-            .then(receiveMessage) //Read response
+    return  purgeQueue(serverUrl) //Delete all messages from queue
+            .then(sendMessage(clientUrl, path)) 
+            .catch(sendMessage(clientUrl, path)) //Send messages even if purge fails
+            .then(receiveMessage(serverUrl)) //Read response
             .then((data) => {
                 var message = data.Messages[0];
                 response = message.Body;
 
-                return deleteMessage(message); //Delete message that was just read
+                return deleteMessage(serverUrl, message); //Delete message that was just read
             }).then(() => {
                 return response; //return data
             });
 };
 
 
-function purgeQueue(){
-    return convertToPromise(sqsServerProxy, sqsServerProxy.purgeQueue, {QueueUrl:serverUrl});
+function purgeQueue(serverUrl){
+    var promise = convertToPromise(sqsServerProxy, sqsServerProxy.purgeQueue, {QueueUrl:serverUrl})
+
+    promise.then(() => console.log('SQS queue purged'))
+           .catch(() => console.log('SQS queue not purged'));
+
+    return promise;
 }
 
-function sendMessage(path){
+function sendMessage(clientUrl, path){
     var promise = convertToPromise(sqsClientProxy, sqsClientProxy.sendMessage, {'MessageBody': path, 'QueueUrl': clientUrl});
 
     //curry
     return (() => {return promise});
 }
 
-function receiveMessage(){
-    return convertToPromise(sqsServerProxy, sqsServerProxy.receiveMessage, {	
+function receiveMessage(serverUrl){
+    var promise = convertToPromise(sqsServerProxy, sqsServerProxy.receiveMessage, {	
 								QueueUrl: serverUrl,
 								MaxNumberOfMessages: 1, // how many messages do we wanna retrieve?
 								VisibilityTimeout: 60, // seconds - how long we want a lock on this job
 								WaitTimeSeconds: 20 // seconds - how long should we wait for a message?
     });
+
+    //curry
+    return (() => {return promise});
 }
 
-function deleteMessage(message){
+function deleteMessage(serverUrl, message){
     return convertToPromise(sqsServerProxy, sqsServerProxy.deleteMessage, {QueueUrl: serverUrl, ReceiptHandle: message.ReceiptHandle});
 }
 

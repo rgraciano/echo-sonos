@@ -16,6 +16,11 @@ Promise.resolve()
     })
 
     .then(() => {
+        console.log('Calling join');
+        return sonosProxy.join('Study', 'Living Room');
+    })
+
+    .then(() => {
         console.log('Calling getFavorites');
         return sonosProxy.getFavorites()
     })
@@ -84,6 +89,5 @@ Promise.resolve()
         console.log('Calling lineIn');
         return sonosProxy.lineIn('Study','Living Room');
     });
-
      
 
