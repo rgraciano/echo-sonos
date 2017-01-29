@@ -133,7 +133,7 @@ To set it up, you need to do the following:
 # Optional "Advanced Mode" (enable by settings environment variable "ADVANCED_MODE" to "true" in Lambda)
 Advanced Mode comes with two major new features.  First, it supports music streaming services like Apple Music, Spotify, and Deezer.   And second, it remembers the room you're operating in, so you no longer need to include a room on every utterance.  With Advanced Mode turned on, you can request specific songs and albums.
 
-The following apply to "Advanced Mode" (:
+The following apply to "Advanced Mode":
 
   advancedMode: true              // Allows you to specify and change default rooms and music services. Requires additional AWS setup
   defaultRoom: 'Kitchen',	      // Allows you to specify a default room to use when one is not specified in the utterance 	
