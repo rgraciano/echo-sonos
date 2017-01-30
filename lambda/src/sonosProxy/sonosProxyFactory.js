@@ -23,6 +23,7 @@ sonosProxyFactory.get = function(baseUrl, useSqs){
  */
 sonosProxy.Service = {'Apple':'apple', 'Spotify': 'spotify', 'Deezer':'deezer', 'Elite':'elite', 'Library':'library'};
 sonosProxy.SearchType = {'Album':'album', 'Song':'song', 'Station':'station'};
+sonosProxy.State = {'On':'on', 'Off':'off'};
 
 /**
  * Info
@@ -42,7 +43,7 @@ sonosProxy.getPlaylists = function() {
     return makeCall(path);
 };
 
-sonosProxy.state = function(room) {
+sonosProxy.getState = function(room) {
     var room = encodeURIComponent(room);
     var path = `/${room}/state`;
 
@@ -107,7 +108,6 @@ sonosProxy.togglePlay = function(room) {
 
 sonosProxy.setVolume = function(room, volume) {
     var room = encodeURIComponent(room);
-    var volume = encodeURIComponent(volume);
     var path = `/${room}/volume/${volume}`;
 
     return makeCall(path);
@@ -131,7 +131,6 @@ sonosProxy.decreaseVolume = function(room, volumeDecrease) {
 
 sonosProxy.setGroupVolume = function(room, volume) {
     var room = encodeURIComponent(room);
-    var volume = encodeURIComponent(volume);
     var path = `/${room}/groupVolume/${volume}`;
 
     return makeCall(path);
@@ -174,6 +173,27 @@ sonosProxy.toggleMute = function(room) {
     return makeCall(path);
 };
 
+sonosProxy.crossfade = function(room, state) {
+    var room = encodeURIComponent(room);
+    var path = `/${room}/crossfade/${state}`;
+
+    return makeCall(path);
+};
+
+sonosProxy.repeat = function(room, state) {
+    var room = encodeURIComponent(room);
+    var path = `/${room}/repeat/${state}`;
+
+    return makeCall(path);
+};
+
+sonosProxy.shuffle = function(room, state) {
+    var room = encodeURIComponent(room);
+    var path = `/${room}/shuffle/${state}`;
+
+    return makeCall(path);
+};
+
 sonosProxy.next = function(room) {
     var room = encodeURIComponent(room);
     var path = `/${room}/next`;
@@ -192,6 +212,14 @@ sonosProxy.playlist = function(room, playlist) {
     var room = encodeURIComponent(room);
     var playlist = encodeURIComponent(playlist);
     var path = `/${room}/playlist/${playlist}`;
+
+    return makeCall(path);
+};
+
+sonosProxy.favorite = function(room, favorite) {
+    var room = encodeURIComponent(room);
+    var favorite = encodeURIComponent(favorite);
+    var path = `/${room}/favorite/${favorite}`;
 
     return makeCall(path);
 };
@@ -255,6 +283,13 @@ sonosProxy.playAlbum = function(room, service, album) {
 
 sonosProxy.playStation = function(room, service, station) {
     return playContent(room, service, this.SearchType.Station, station);
+};
+
+sonosProxy.clearqueue = function(room) {
+    var room = encodeURIComponent(room);
+    var path = `/${room}/clearqueue`;
+
+    return makeCall(path);
 };
 
 function makeCall(path) {  

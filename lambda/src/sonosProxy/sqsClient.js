@@ -14,8 +14,7 @@ sqsClient.get = function(baseSqsUrl, path) {
     var clientUrl = baseSqsUrl + "/SQS-Proxy-Client";
 
     return  purgeQueue(serverUrl) //Delete all messages from queue
-            .then(sendMessage(clientUrl, path)) 
-            .catch(sendMessage(clientUrl, path)) //Send messages even if purge fails
+            .then(sendMessage(clientUrl, path))
             .then(receiveMessage(serverUrl)) //Read response
             .then((data) => {
                 var message = data.Messages[0];
@@ -29,35 +28,60 @@ sqsClient.get = function(baseSqsUrl, path) {
 
 
 function purgeQueue(serverUrl){
-    var promise = convertToPromise(sqsServerProxy, sqsServerProxy.purgeQueue, {QueueUrl:serverUrl})
+    var result = convertToPromise(sqsServerProxy, sqsServerProxy.purgeQueue, {QueueUrl:serverUrl})
 
-    promise.then(() => console.log('SQS queue purged'))
-           .catch(() => console.log('SQS queue not purged'));
+    var promise = new Promise((resolve, reject) => {
+                     result.then(() => {
+                            console.log('SQS purged queue');
+                            resolve();
+                     })
+                     .catch(() => {
+                            console.log(`SQS didn't purged queue`);
+                            resolve();
+                    });
+    });
 
     return promise;
 }
 
 function sendMessage(clientUrl, path){
-    var promise = convertToPromise(sqsClientProxy, sqsClientProxy.sendMessage, {'MessageBody': path, 'QueueUrl': clientUrl});
 
     //curry
-    return (() => {return promise});
+    return (() => {
+        var promise = convertToPromise(sqsClientProxy, sqsClientProxy.sendMessage, {'MessageBody': path, 'QueueUrl': clientUrl});
+
+        promise.then(() => console.log(`SQS successfully sent message ${path}`))
+               .catch(() => console.log(`SQS failed to send message ${path}`)); 
+
+        return promise
+    });
 }
 
 function receiveMessage(serverUrl){
-    var promise = convertToPromise(sqsServerProxy, sqsServerProxy.receiveMessage, {	
+    
+    //curry
+    return (() => {
+        var promise = convertToPromise(sqsServerProxy, sqsServerProxy.receiveMessage, {	
 								QueueUrl: serverUrl,
 								MaxNumberOfMessages: 1, // how many messages do we wanna retrieve?
 								VisibilityTimeout: 60, // seconds - how long we want a lock on this job
 								WaitTimeSeconds: 20 // seconds - how long should we wait for a message?
-    });
+        });
 
-    //curry
-    return (() => {return promise});
+        promise.then(() => console.log(`SQS successfully received response`))
+               .catch(() => console.log(`SQS failed to receive response`)); 
+
+        return promise;
+    });
 }
 
 function deleteMessage(serverUrl, message){
-    return convertToPromise(sqsServerProxy, sqsServerProxy.deleteMessage, {QueueUrl: serverUrl, ReceiptHandle: message.ReceiptHandle});
+    var promise = convertToPromise(sqsServerProxy, sqsServerProxy.deleteMessage, {QueueUrl: serverUrl, ReceiptHandle: message.ReceiptHandle});
+
+    promise.then(() => console.log(`SQS successfully disposed message`))
+           .catch(() => console.log(`SQS failed to dispose message`)); 
+
+    return promise;
 }
 
 

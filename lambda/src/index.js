@@ -144,7 +144,7 @@ EchoSonos.prototype.intentHandlers = {
     },
 
     ChangeServiceIntent: function (intent, session, response) {
-        console.log("ChangeSERVICEIntent received");
+        console.log("ChangeServiceIntent received");
         if (!options.advancedMode) {
             response.tell("This command does not work unless advanced mode is turned on");
         } else {
@@ -167,37 +167,29 @@ EchoSonos.prototype.intentHandlers = {
 
     ResumeAllIntent: function (intent, session, response) {
         console.log("ResumeAllIntent received");
-        options.path = '/resumeAll';
-        httpreq(options, function(error) {
-            genericResponse(error, response);
-        });
+        var promise = sonosProxy.resumeAll();
+        handleResponse(promise, response);
     },
 
     ResumeIntent: function (intent, session, response) {
         console.log("ResumeIntent received");
         loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
-            options.path = '/' + encodeURIComponent(room) + '/play';
-            httpreq(options, function(error) {
-                genericResponse(error, response);
-            });
+            var promise = sonosProxy.play(room);
+            handleResponse(promise, response);
         });
     },
 
     PauseAllIntent: function (intent, session, response) {
         console.log("PauseAllIntent received");
-        options.path = '/pauseAll';
-        httpreq(options, function(error) {
-            genericResponse(error, response);
-        });
+        var promise = sonosProxy.pauseAll();
+        handleResponse(promise, response);
     },
 
     PauseIntent: function (intent, session, response) {
         console.log("PauseIntent received");
         loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
-            options.path = '/' + encodeURIComponent(room) + '/pause';
-            httpreq(options, function(error) {
-                genericResponse(error, response);
-            });
+            var promise = sonosProxy.pause(room);
+            handleResponse(promise, response);
         });
     },
 
@@ -224,37 +216,36 @@ EchoSonos.prototype.intentHandlers = {
 
     NextTrackIntent: function (intent, session, response) {
         console.log("NextTrackIntent received");
-
         loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
-            actOnCoordinator(options, '/next', room,  function (error, responseBodyJson) {
-                genericResponse(error, response);
+            var promise = getCoordinatorForRoom(room).then((coordinator) => {
+                return sonosProxy.next(coordinator);
             });
+            
+            handleResponse(promise, response);
         });
     },
 
     PreviousTrackIntent: function (intent, session, response) {
         console.log("PreviousTrackIntent received");
         loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
-            actOnCoordinator(options, '/previous', room,  function (error, responseBodyJson) {
-                genericResponse(error, response);
+            var promise = getCoordinatorForRoom(room).then((coordinator) => {
+                return sonosProxy.previous(coordinator);
             });
+            
+            handleResponse(promise, response);
         });
     },
 
     WhatsPlayingIntent: function (intent, session, response) {
         console.log("WhatsPlayingIntent received");
         loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
-            options.path = '/' + encodeURIComponent(room) + '/state';
-
-            httpreq(options, function (error, responseJson) {
-                if (!error) {
-                    responseJson = JSON.parse(responseJson);
-                    var randResponse = Math.floor(Math.random() * STATE_RESPONSES.length);
-                    var responseText = STATE_RESPONSES[randResponse].replace("$currentTitle", responseJson.currentTrack.title).replace("$currentArtist", responseJson.currentTrack.artist);
-                    response.tell(responseText);
-                } else {
-                    response.tell(error.message);
-                }
+            sonosProxy.getState(room).then((data) => {
+                 var responseJson = JSON.parse(data);
+                 var randResponse = Math.floor(Math.random() * STATE_RESPONSES.length);
+                 var responseText = STATE_RESPONSES[randResponse].replace("$currentTitle", responseJson.currentTrack.title).replace("$currentArtist", responseJson.currentTrack.artist);
+                 response.tell(responseText);
+            }).catch((error) => {
+                response.tell(error.message);
             });
         });
     },
@@ -262,29 +253,27 @@ EchoSonos.prototype.intentHandlers = {
     MuteIntent: function (intent, session, response) {
         console.log("MuteIntent received");
         loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
-            options.path = '/' + encodeURIComponent(room) + '/mute';
-            httpreq(options, function(error) {
-                genericResponse(error, response);
-            });
+            var promise = sonosProxy.mute(room);
+            handleResponse(promise, response);
         });
     },
 
     UnmuteIntent: function (intent, session, response) {
         console.log("UnmuteIntent received");
         loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
-            options.path = '/' + encodeURIComponent(room) + '/unmute';
-            httpreq(options, function(error) {
-                genericResponse(error, response);
-            });
+            var promise = sonosProxy.unmute(room);
+            handleResponse(promise, response);
         });
     },
 
     ClearQueueIntent: function (intent, session, response) {
         console.log("ClearQueueIntent received");
         loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
-            actOnCoordinator(options, '/clearqueue', room,  function (error, responseBodyJson) {
-                genericResponse(error, response);
+            var promise = getCoordinatorForRoom(room).then((coordinator) => {
+                return sonosProxy.clearqueue(coordinator);
             });
+            
+            handleResponse(promise, response);
         });
     },
 
@@ -311,7 +300,6 @@ EchoSonos.prototype.intentHandlers = {
 
     UngroupIntent: function (intent, session, response) {
         console.log("UngroupIntent received");
-
         loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
             var promise = sonosProxy.isolate(room);
             handleResponse(promise, response);
@@ -320,7 +308,6 @@ EchoSonos.prototype.intentHandlers = {
 
     JoinGroupIntent: function (intent, session, response) {
         console.log("JoinGroupIntent received");
-        
         var promise = sonosProxy.join(intent.slots.JoiningRoom.value, intent.slots.PlayingRoom.value);
         handleResponse(promise, response);
     },
@@ -407,7 +394,7 @@ function siriusXMHandler(roomValue, name, type, response) {
     });
 }
 
-/** Handles SiriusXM Radio */
+/** Handles Pandora */
 function pandoraHandler(roomValue, cmdpath, name, response) {
 
     var skillPath = '/pandora' + cmdpath + ((cmdpath=='/play/')?encodeURIComponent(name):'');
@@ -426,38 +413,34 @@ function pandoraHandler(roomValue, cmdpath, name, response) {
 }
 
 /** Handles playlists and favorites */
-function playlistHandler(roomValue, presetValue, skillName, response) {
-    var skillPath = '/' + skillName + '/' + encodeURIComponent(presetValue.toLowerCase());
+function playlistHandler(room, presetValue, skillName, response) {
+    var coordinator = null;
 
+    var promise = getCoordinatorForRoom(room)
     // This first action queues up the playlist / favorite, and it shouldn't say anything unless there's an error
-    actOnCoordinator(options, skillPath, roomValue, function(error, responseBodyJson) {
-        if (error) {
-            genericResponse(error, response);
-        }
+    .then((data) => {
+        coordinator = data;
+        return sonosProxy[skillName](coordinator, presetValue.toLowerCase());
+    })
+    // The 2nd action actually plays the playlist / favorite
+    .then(() => {
+        return sonosProxy.play(coordinator);
     });
 
-    // The 2nd action actually plays the playlist / favorite
-    actOnCoordinator(options, '/play', roomValue, function(error, responseBodyJson) {
-        genericResponse(error, response, "Queued and started " + presetValue);
-    });
+    var successResponse = `Queued and started ${presetValue}`;
+    handleResponse(promise, response, successResponse);
 }
 
 /** Handles all skills of the form /roomname/toggle/[on,off] */
 function toggleHandler(roomValue, toggleValue, skillName, response) {
-    if (!toggleValue || (toggleValue != 'on' && toggleValue != 'off')) {
+    if (!toggleValue || (toggleValue != sonosProxy.State.On && toggleValue != sonosProxy.State.Off)) {
         response.tell("I need to know if I should turn  " + skillName + " on or off. Example: Alexa, tell Sonos to turn " + skillName + " on");
         return;
     }
 
-    options.path = '/' + encodeURIComponent(roomValue) + '/' + skillName + '/' + toggleValue;
-
-    httpreq(options, function(error) {
-        if (!error) {
-            response.tell("Turned " + skillName + " " + toggleValue + " in " + roomValue);
-        } else {
-          response.tell(error.message);
-        }
-    });
+    var promise = sonosProxy[skillName](roomValue, toggleValue);
+    var successMessage = `${skillName} is now ${toggleValue} in ${roomValue}`
+    handleResponse(promise, response, successMessage);
 }
 
 /** Handles up, down, & absolute volume for either an individual room or an entire group */
@@ -470,23 +453,17 @@ function volumeHandler(roomValue, response, volume) {
     }
 
     if (!roomAndGroup.group) {
-        options.path = '/' + encodeURIComponent(roomAndGroup.room) + '/volume/' + volume;
-
-        httpreq(options, function(error) {
-            genericResponse(error, response);
-        });
+        let promise = sonosProxy.setVolume(roomAndGroup.room, volume);
+        handleResponse(promise, response);
     }
 
     else {
-        actOnCoordinator(options, '/groupVolume/' + volume, roomAndGroup.room,  function (error, responseBodyJson) {
-            genericResponse(error, response);
+        let promise = getCoordinatorForRoom(roomAndGroup.room).then((coordinator) => {
+            return sonosProxy.setGroupVolume(coordinator, volume);
         });
+            
+        handleResponse(promise, response);
     }
-}
-
-function getUrl(options) {
-    var protocol = options.useHttps ? 'https' : 'http';
-    return `${protocol}://${options.host}:${options.port}`;
 }
 
 /* Given a string roomArgument that either looks like "my room" or "my room group",
@@ -519,7 +496,7 @@ function isBlank(val) {
     return ((val === undefined) || (val === null) || (val === ''));
 }
 
-function changeCurrent(echoId, room, service, OnCompleteFun) {
+function changeCurrent(echoId, room, service, onCompleteFn) {
     var updateExpression = '';
     var values = {};
 
@@ -553,7 +530,7 @@ function changeCurrent(echoId, room, service, OnCompleteFun) {
                 } else {
                     console.log("Update of current defaults succeeded:", JSON.stringify(data, null, 2));
                 }
-                OnCompleteFun();
+                onCompleteFn();
             });
         }
     } else {
@@ -561,7 +538,7 @@ function changeCurrent(echoId, room, service, OnCompleteFun) {
     }
 }
 
-function loadCurrentRoomAndService(echoId, room, OnCompleteFun) {
+function loadCurrentRoomAndService(echoId, room, onCompleteFn) {
     var service = '';
 
     function checkDefaults() {
@@ -576,7 +553,7 @@ function loadCurrentRoomAndService(echoId, room, OnCompleteFun) {
 
     console.log("Advanced Mode = " + options.advancedMode);
     if (options.advancedMode) {
-        function addCurrent(OnCompleteFun) {
+        function addCurrent(onCompleteFn) {
             checkDefaults();
 
             var docClient = new AWS.DynamoDB.DocumentClient();
@@ -596,12 +573,12 @@ function loadCurrentRoomAndService(echoId, room, OnCompleteFun) {
                 if (err) {
                     console.error("Unable to add default. Error JSON:", JSON.stringify(err, null, 2));
                 } else {
-                    OnCompleteFun(room, service);
+                    onCompleteFn(room, service);
                     }
             });
         }
 
-        function readCurrent(OnCompleteFun) {
+        function readCurrent(onCompleteFn) {
             var newRoom = '';
             var newService = '';
             var docClient = new AWS.DynamoDB.DocumentClient();
@@ -617,7 +594,7 @@ function loadCurrentRoomAndService(echoId, room, OnCompleteFun) {
                 //console.log("err=" + JSON.stringify(err, null, 2));
                 //console.log("data=" + JSON.stringify(data, null, 2));
                 if (err || (data.Item === undefined)) {
-                    addCurrent(OnCompleteFun);
+                    addCurrent(onCompleteFn);
                 } else {
                     if (isBlank(room)) {
                         room = data.Item.currentRoom;
@@ -631,10 +608,10 @@ function loadCurrentRoomAndService(echoId, room, OnCompleteFun) {
                     }
                     console.log("room=" + room +" newRoom=" + newRoom + "  service=" + service + " newService=" + newService);
                     if (isBlank(newRoom) && isBlank(newService)) {
-                        OnCompleteFun(room, service);
+                        onCompleteFn(room, service);
                     } else {
                         changeCurrent(echoId, newRoom, newService, function() {
-                            OnCompleteFun(room, service);
+                            onCompleteFn(room, service);
                         });
                     }
                 }
@@ -678,21 +655,64 @@ function loadCurrentRoomAndService(echoId, room, OnCompleteFun) {
                               if (err) {
                                 console.error("Unable to wait for table table. Error JSON:", JSON.stringify(err, null, 2));
                               } else {
-                                  addCurrent(OnCompleteFun);
+                                  addCurrent(onCompleteFn);
                               }
                         });
                     }
                 });
             } else if (isBlank(service) || isBlank(room)) {
-                readCurrent(OnCompleteFun);
+                readCurrent(onCompleteFn);
             }
         });
     } else {
         checkDefaults();
-        OnCompleteFun(room, service);
+        onCompleteFn(room, service);
     }
 }
 
+//Gets the coordinator for a given room
+//returns a promise
+//TODO move (to a state service?) and cache zones results, save zone and a room list
+function getCoordinatorForRoom(room) {
+    console.log(`Getting coordinator for room: ${room}`);
+
+    var promise = sonosProxy.getZones().then((data) => {
+        var responseJson = JSON.parse(data);
+        var coordinator = findCoordinatorForRoom(responseJson, room);
+
+        console.log(`Coordinator for ${room} : ${coordinator}`);
+        return coordinator;
+    })
+
+    return promise;
+}
+
+// Given a room name, returns the name of the coordinator for that room
+function findCoordinatorForRoom(responseJson, room) {
+    for (var i = 0; i < responseJson.length; i++) {
+        var zone = responseJson[i];
+
+        for (var j = 0; j < zone.members.length; j++) {
+            var member = zone.members[j];
+
+            if ((member.roomName !== undefined) && (member.roomName.toLowerCase() == room.toLowerCase())) {
+                return zone.coordinator.roomName;
+            }
+        }
+    }
+}
+
+function handleResponse(promise, response, success) {
+    promise.then(() => response.tell(success || "OK"))
+           .catch((error) => response.tell("The Lambda service encountered an error: " + error.message));
+}
+
+function getUrl(options) {
+    var protocol = options.useHttps ? 'https' : 'http';
+    return `${protocol}://${options.host}:${options.port}`;
+}
+
+//TODO DELETE once proxy is fully being used
 function httpreq(options, responseCallback) {
     if (options.useSQS) {
         sqsServer.purgeQueue({QueueUrl:serverUrl}, function(err, data) {
@@ -760,9 +780,10 @@ function httpreq(options, responseCallback) {
     }
 }
 
+//TODO DELETE once proxy is fully being used
 // 1) grab /zones and find the coordinator for the room being asked for
 // 2) perform an action on that coordinator
-function actOnCoordinator(options, actionPath, room, onCompleteFun) {
+function actOnCoordinator(options, actionPath, room, onCompleteFn) {
     options.path = '/zones';
     console.log("getting zones...");
 
@@ -773,14 +794,15 @@ function actOnCoordinator(options, actionPath, room, onCompleteFun) {
 
             options.path = '/' + encodeURIComponent(coordinatorRoomName) + actionPath;
             console.log(options.path);
-            httpreq(options, onCompleteFun);
+            httpreq(options, onCompleteFn);
         } else {
-            onCompleteFun(error);
+            onCompleteFn(error);
         }
     };
     httpreq(options, handleZonesResponse);
 }
 
+//TODO DELETE once proxy is fully being used
 function genericResponse(error, response, success) {
     if (!error) {
         if (!success) {
@@ -793,27 +815,6 @@ function genericResponse(error, response, success) {
     }
 }
 
-function handleResponse(promise, response, success) {
-    promise.then(() => response.tell(success || "OK"))
-           .catch((error) => response.tell("The Lambda service encountered an error: " + error.message));
-}
-
-// Given a room name, returns the name of the coordinator for that room
-function findCoordinatorForRoom(responseJson, room) {
-    console.log("finding coordinator for room: " + room);
-
-    for (var i = 0; i < responseJson.length; i++) {
-        var zone = responseJson[i];
-
-        for (var j = 0; j < zone.members.length; j++) {
-            var member = zone.members[j];
-
-            if ((member.roomName !== undefined) && (member.roomName.toLowerCase() == room.toLowerCase())) {
-                return zone.coordinator.roomName;
-            }
-        }
-    }
-}
 
 // Create the handler that responds to the Alexa Request.
 exports.handler = function (event, context) {

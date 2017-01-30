@@ -181,12 +181,15 @@ VolumeUpIntent volume up in {Room}
 VolumeUpIntent volume up in the {Room}
 VolumeUpIntent raise volume in the {Room}
 VolumeUpIntent raise volume in {Room}
+VolumeUpIntent increase volume in the {Room}
+VolumeUpIntent increase volume in {Room}
 
 VolumeUpIntent turn it up
 VolumeUpIntent turn the volume up
 VolumeUpIntent louder
 VolumeUpIntent volume up
 VolumeUpIntent raise volume
+VolumeUpIntent increase volume
 
 VolumeDownIntent turn it down in {Room}
 VolumeDownIntent turn it down in the {Room}
@@ -200,6 +203,9 @@ VolumeDownIntent volume down in {Room}
 VolumeDownIntent volume down in the {Room}
 VolumeDownIntent lower volume in the {Room}
 VolumeDownIntent lower volume in {Room}
+VolumeDownIntent decrease volume in the {Room}
+VolumeDownIntent decrease volume in {Room}
+
 
 VolumeDownIntent turn it down
 VolumeDownIntent turn the volume down
@@ -207,6 +213,7 @@ VolumeDownIntent softer
 VolumeDownIntent quieter
 VolumeDownIntent volume down
 VolumeDownIntent lower volume
+VolumeDownIntent decrease volume
 
 SetVolumeIntent set volume to {Percent} in {Room}
 SetVolumeIntent set volume to {Percent} percent in {Room}
