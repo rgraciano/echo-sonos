@@ -91,11 +91,6 @@ PandoraMusicIntent tune to pandora {Name} in {Room}
 
 PandoraMusicIntent tune to pandora {Name}
 
-PandoraMusicIntent tune to pandora {Name} in the {Room}
-PandoraMusicIntent tune to pandora {Name} in {Room}
-
-PandoraMusicIntent tune to pandora {Name}
-
 PandoraThumbsUpIntent give the current song in the {Room} a thumbs up
 PandoraThumbsUpIntent give the current song a thumbs up in the {Room}
 PandoraThumbsUpIntent give this song a thumbs up in the {Room}

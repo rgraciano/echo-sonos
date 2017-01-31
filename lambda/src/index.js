@@ -1,21 +1,14 @@
 /*jslint vars: true, plusplus: true, devel: true, indent: 4, maxerr: 50, node: true */ /*global define */
 'use strict';
 
-var http = require('http');
-var https = require('https');
-var AWS = require('aws-sdk');
 var sonosProxyFactory = require('./sonosProxy/sonosProxyFactory');
+var sonosProxy = null;
 var dynamodb = null;
 
 var options = require('./options');
 var defaultMusicService = ((options.defaultMusicService !== undefined) && (options.defaultMusicService > '')) ? options.defaultMusicService : 'presets';
 var defaultRoom = (options.defaultRoom !== undefined) ? options.defaultRoom : '';
 
-var serverUrl = '';
-var clientUrl = '';
-var sqsServer = null;
-var sqsClient = null;
-var sonosProxy = null;
 
 var AlexaSkill = require('./AlexaSkill');
 var EchoSonos = function () {
@@ -36,28 +29,28 @@ EchoSonos.prototype.intentHandlers = {
     AlbumIntent: function (intent, session, response) {
         console.log("AlbumIntent received");
         loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
-            musicHandler(room, service, '/album/', intent.slots.AlbumName.value, response);
+            musicHandler(room, service, sonosProxy.ContentType.Album, intent.slots.AlbumName.value, response);
         });
     },
 
     ArtistIntent: function (intent, session, response) {
-        console.log("MusicIntent received for room " + intent.slots.Room.value);
+        console.log("ArtistIntent received for room " + intent.slots.Room.value);
         loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
-            musicHandler(room, service, '/song/', 'artist:' + intent.slots.ArtistName.value, response);
+            musicHandler(room, service, sonosProxy.ContentType.Artist, intent.slots.ArtistName.value, response);
         });
     },
 
     TrackIntent: function (intent, session, response) {
-        console.log("MusicIntent received for room " + intent.slots.Room.value);
+        console.log("TrackIntent received for room " + intent.slots.Room.value);
         loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
-            musicHandler(room, service, '/song/', 'track:' + intent.slots.TrackName.value, response);
+            musicHandler(room, service, sonosProxy.ContentType.Song, intent.slots.TrackName.value, response);
         });
     },
 
     MusicRadioIntent: function (intent, session, response) {
         console.log("MusicRadioIntent received");
         loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
-            musicHandler(room, service, '/station/', intent.slots.ArtistName.value, response);
+            musicHandler(room, service, sonosProxy.ContentType.Station, intent.slots.ArtistName.value, response);
         });
     },
 
@@ -92,30 +85,28 @@ EchoSonos.prototype.intentHandlers = {
     PandoraMusicIntent: function (intent, session, response) {
         console.log("PandoraMusicIntent received");
         loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
-            pandoraHandler(room, '/play/', intent.slots.Name.value, response);
+            pandoraHandler(room, 'pandoraPlay', intent.slots.Name.value, response);
         });
     },
 
     PandoraThumbsUpIntent: function (intent, session, response) {
         console.log("PandoraThumbsUpIntent received");
         loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
-            pandoraHandler(room, '/thumbsup', '', response);
+            pandoraHandler(room, 'pandoraThumbsUp', '', response);
         });
     },
 
     PandoraThumbsDownIntent: function (intent, session, response) {
         console.log("PandoraThumbsDownIntent received");
         loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
-            pandoraHandler(room, '/thumbsdown', '', response);
+            pandoraHandler(room, 'pandoraThumbsDown', '', response);
         });
     },
 
     PlayPresetIntent: function (intent, session, response) {
         console.log("PlayPresetIntent received");
-        options.path = '/preset/' + encodeURIComponent(intent.slots.Preset.value.toLowerCase());
-        httpreq(options, function(error) {
-            genericResponse(error, response);
-        });
+        var promise = sonosProxy.preset();
+        handleResponse(promise, response);
     },
 
     PlaylistIntent: function (intent, session, response) {
@@ -138,7 +129,7 @@ EchoSonos.prototype.intentHandlers = {
            response.tell("This command does not work unless advanced mode is turned on");
         } else {
             changeCurrent('DefaultEcho', intent.slots.Room.value, '', function() {
-                genericResponse('', response);
+                response.tell("OK");
             });
         }
     },
@@ -149,7 +140,7 @@ EchoSonos.prototype.intentHandlers = {
             response.tell("This command does not work unless advanced mode is turned on");
         } else {
             changeCurrent('DefaultEcho', '', intent.slots.Service.value, function() {
-                genericResponse('', response);
+                response.tell("OK");
             });
         }
     },
@@ -160,7 +151,7 @@ EchoSonos.prototype.intentHandlers = {
             response.tell("This command does not work unless advanced mode is turned on");
         } else {
             changeCurrent('DefaultEcho', intent.slots.Room.value, intent.slots.Service.value, function() {
-                genericResponse('', response);
+                response.tell("OK");
             });
         }
     },
@@ -335,81 +326,69 @@ EchoSonos.prototype.intentHandlers = {
 };
 
 /** Handles Apple Music, Spotify, Deezer, library, or presets. The default can be specified in options.js or changed if advanced mode is turned on */
-function musicHandler(roomValue, service, cmdpath, name, response) {
+function musicHandler(room, service, type, content, response) {
 
     if (service == 'presets') {
-        options.path = '/preset/' + encodeURIComponent(name);
-        httpreq(options, function(error) {
-            genericResponse(error, response);
-        });
-    } else {
-        var skillPath = '/musicsearch/' + service.toLowerCase() + cmdpath + encodeURIComponent(name);
-        var msgStart = (cmdpath.startsWith('/station'))?'Started ':'Queued and started ';
-        var msgEnd = (cmdpath.startsWith('/station'))?' radio':'';
+        var promise = sonosProxy.preset(content);
+        handleResponse(promise, response);
+        return;
+    } 
 
-        actOnCoordinator(options, skillPath, roomValue, function(error, responseBodyJson) {
-            if (error) {
-                response.tell(error.message);
-              } else {
-                response.tell(msgStart + name + msgEnd);
-            }
-        });
-    }
+    var promise = getCoordinatorForRoom(room)
+    .then((coordinator) => {
+        return sonosProxy.playContent(room, service, type, content);
+    });
+        
+    handleResponse(promise, response, `Started playing ${type} ${content}`);
 }
 
 /** Handles Apple Music - plays artist tracks or plays a radio station for the current track */
-function moreMusicHandler(roomValue, service, cmdpath, response) {
-    options.path = '/' + encodeURIComponent(roomValue) + '/state';
+function moreMusicHandler(room, service, type, response) {
+    var promise = sonosProxy.getState(room).then((data) => {
+        var responseJson = JSON.parse(data);
+        console.log("Currently Playing : " + JSON.stringify(responseJson, null, 2));
 
-    httpreq(options, function (error, responseJson) {
-        if (!error) {
-            responseJson = JSON.parse(responseJson);
-            console.log("Currently Playing = " + JSON.stringify(responseJson, null, 2));
-            if (responseJson.currentTrack.artist !== undefined) {
-                var name = responseJson.currentTrack.artist;
-                if (cmdpath.startsWith('/station') && (['apple','spotify','deezer','elite'].indexOf(service) != -1)) {
-                    name += ' ' + responseJson.currentTrack.title;
-                }
-                musicHandler(roomValue, service, cmdpath, name, response);
-            } else {
-                response.tell("The current artist is not identified");
+        if (responseJson.currentTrack.artist !== undefined) {
+            var content = responseJson.currentTrack.artist;
+            if (type === sonosProxy.ContentType.Station && (['apple','spotify','deezer','elite'].indexOf(service) != -1)) {
+                content += ' ' + responseJson.currentTrack.title;
             }
+
+            musicHandler(room, service, type, content, response);
         } else {
-            genericResponse(error, response);
+            response.tell("The current artist is not identified");
         }
     });
+
+    handleResponse(promise, response);
 }
 
 /** Handles SiriusXM Radio */
-function siriusXMHandler(roomValue, name, type, response) {
-
-    var skillPath = '/siriusxm/' + encodeURIComponent(name.replace(' ','+'));
-
-    actOnCoordinator(options, skillPath, roomValue, function(error, responseBodyJson) {
-        if (error) {
-            genericResponse(error, response);
-        } else {
-            response.tell('Sirius XM ' + type + ' ' + name + ' started');
-        }
+function siriusXMHandler(room, content, type, response) {
+    var promise = getCoordinatorForRoom(room)
+    .then((coordinator) => {
+       return sonosProxy.siriusXmPlay(coordinator, content);
     });
+
+    var successResponse = `Sirius XM ${type} ${content} started`;
+    handleResponse(promise, response, successResponse);
 }
 
 /** Handles Pandora */
-function pandoraHandler(roomValue, cmdpath, name, response) {
+function pandoraHandler(room, action, content, response) {
+    var isPlay = action == 'pandoraPlay';
+   
+    var promise = getCoordinatorForRoom(room)
+    .then((coordinator) => {
+        if(isPlay) {
+            return sonosProxy.pandoraPlay(coordinator, content);
+        }
 
-    var skillPath = '/pandora' + cmdpath + ((cmdpath=='/play/')?encodeURIComponent(name):'');
-
-    actOnCoordinator(options, skillPath, roomValue, function(error, responseBodyJson) {
-        if (error) {
-            response.tell(error.message);
-        } else {
-              if (cmdpath == '/play/') {
-                 response.tell('Pandora ' + name + ' started');
-              } else {
-                genericResponse(error, response);
-              }
-          }
+        return sonosProxy[action](coordinator);
     });
+
+     var successResponse = isPlay ? `Pandora ${content} started` : undefined;
+     handleResponse(promise, response, successResponse);
 }
 
 /** Handles playlists and favorites */
@@ -712,110 +691,6 @@ function getUrl(options) {
     return `${protocol}://${options.host}:${options.port}`;
 }
 
-//TODO DELETE once proxy is fully being used
-function httpreq(options, responseCallback) {
-    if (options.useSQS) {
-        sqsServer.purgeQueue({QueueUrl:serverUrl}, function(err, data) {
-            console.log("sending SQS " + options.path);
-            sqsClient.sendMessage({
-                    MessageBody: options.path,
-                    QueueUrl: clientUrl
-                },
-                function(err, data) {
-                    if (err) {
-                        console.log('ERR', err);
-                    } else {
-                        console.log(data);
-                        sqsServer.receiveMessage({
-                                QueueUrl: serverUrl,
-                                MaxNumberOfMessages: 1, // how many messages do we wanna retrieve?
-                                VisibilityTimeout: 60, // seconds - how long we want a lock on this job
-                                WaitTimeSeconds: 20 // seconds - how long should we wait for a message?
-                            },
-                            function(err, data) {
-                                var message = data.Messages[0];
-                                var response = message.Body;
-                                if (!err) {
-                                    sqsServer.deleteMessage({
-                                            QueueUrl: serverUrl,
-                                            ReceiptHandle: message.ReceiptHandle
-                                        }, function(err, data) {
-                                            responseCallback(undefined, response);
-                                            if (err) {
-                                                console.log(err);
-                                            }
-                                        });
-                                } else {
-                                    console.log(err);
-                                    responseCallback(err);
-                                }
-                            }
-                        );
-                    }
-                }
-            );
-        });
-    } else {
-        var transport = options.useHttps ? https : http;
-
-        console.log("Sending " + (options.useHttps ? "HTTPS" : "HTTP" ) + " request to: " + options.path);
-
-        var req = transport.request(options, function(httpResponse) {
-            var body = '';
-
-            httpResponse.on('data', function(data) {
-                body += data;
-            });
-
-            httpResponse.on('end', function() {
-                responseCallback(undefined, body);
-            });
-        });
-
-        req.on('error', function(e) {
-            responseCallback(e);
-        });
-
-        req.end();
-    }
-}
-
-//TODO DELETE once proxy is fully being used
-// 1) grab /zones and find the coordinator for the room being asked for
-// 2) perform an action on that coordinator
-function actOnCoordinator(options, actionPath, room, onCompleteFn) {
-    options.path = '/zones';
-    console.log("getting zones...");
-
-    var handleZonesResponse = function (error, responseJson) {
-        if (!error) {
-            responseJson = JSON.parse(responseJson);
-            var coordinatorRoomName = findCoordinatorForRoom(responseJson, room);
-
-            options.path = '/' + encodeURIComponent(coordinatorRoomName) + actionPath;
-            console.log(options.path);
-            httpreq(options, onCompleteFn);
-        } else {
-            onCompleteFn(error);
-        }
-    };
-    httpreq(options, handleZonesResponse);
-}
-
-//TODO DELETE once proxy is fully being used
-function genericResponse(error, response, success) {
-    if (!error) {
-        if (!success) {
-            response.tell("OK");
-        } else {
-            response.tell(success);
-        }
-    } else {
-        response.tell("The Lambda service encountered an error: " + error.message);
-    }
-}
-
-
 // Create the handler that responds to the Alexa Request.
 exports.handler = function (event, context) {
     // Create an instance of the EchoSonos skill.
@@ -826,10 +701,6 @@ exports.handler = function (event, context) {
         var actLoc = arn.indexOf(region) + region.length + 1;
         var accountId = arn.substring(actLoc,arn.indexOf(':',actLoc));
         var baseSqsUrl = "https://sqs." + region + ".amazonaws.com/" + accountId;
-        serverUrl = baseSqsUrl + "/SQS-Proxy-Server";
-        clientUrl = baseSqsUrl + "/SQS-Proxy-Client";
-        sqsServer = new AWS.SQS({region : region});
-        sqsClient = new AWS.SQS({region : region});
 
         sonosProxy = sonosProxyFactory.get(baseSqsUrl, options.useSQS);
     }
