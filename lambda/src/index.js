@@ -105,7 +105,7 @@ EchoSonos.prototype.intentHandlers = {
 
     PlayPresetIntent: function (intent, session, response) {
         console.log("PlayPresetIntent received");
-        var promise = sonosProxy.preset();
+        var promise = sonosProxy.preset(intent.slots.Preset.value.toLowerCase());
         handleResponse(promise, response);
     },
 
