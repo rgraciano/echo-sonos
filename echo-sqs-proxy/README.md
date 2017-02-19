@@ -82,21 +82,9 @@ Start the server by running
 If you don't see any errors, then everything should be ready and the queues will have been
 created.
 
-Next, edit your echo-sonos options.js file, set useSQS to true, and save it.
+Next, update your Lambda Environment Variables to use SQS
 
-```
-...
-  useHttps: false, 			// Change to true if you setup node-sonos-http-api with HTTPS
-  rejectUnauthorized: true, // Change to false if you self-signed your certificate
-  defaultRoom: 'Kitchen',	// Allows you to specify a default room when one is not specified in the utterance 	
-  defaultMusicService: 'presets', // Supports presets, apple, spotify, deezer, or library
-  advancedMode: true,       // Allows you to specify and change default rooms and music services. Requires additional AWS setup
-  useSQS: true   			// Use AWS SQS and node-sqs-proxy for secure communications
-};
-```
-
-Zip up all of your echo-sonos/lambda/src *.js files, Upload to Lambda, and Save.
- 
+- `USE_SQS` set to `true`
 
 Your echo-sonos solution should now use AWS SQS queues for communication and you can
 remove any port forwarding that you had on your firewall for node-sonos-http-api if you
