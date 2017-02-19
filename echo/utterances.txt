@@ -91,11 +91,6 @@ PandoraMusicIntent tune to pandora {Name} in {Room}
 
 PandoraMusicIntent tune to pandora {Name}
 
-PandoraMusicIntent tune to pandora {Name} in the {Room}
-PandoraMusicIntent tune to pandora {Name} in {Room}
-
-PandoraMusicIntent tune to pandora {Name}
-
 PandoraThumbsUpIntent give the current song in the {Room} a thumbs up
 PandoraThumbsUpIntent give the current song a thumbs up in the {Room}
 PandoraThumbsUpIntent give this song a thumbs up in the {Room}
@@ -181,12 +176,15 @@ VolumeUpIntent volume up in {Room}
 VolumeUpIntent volume up in the {Room}
 VolumeUpIntent raise volume in the {Room}
 VolumeUpIntent raise volume in {Room}
+VolumeUpIntent increase volume in the {Room}
+VolumeUpIntent increase volume in {Room}
 
 VolumeUpIntent turn it up
 VolumeUpIntent turn the volume up
 VolumeUpIntent louder
 VolumeUpIntent volume up
 VolumeUpIntent raise volume
+VolumeUpIntent increase volume
 
 VolumeDownIntent turn it down in {Room}
 VolumeDownIntent turn it down in the {Room}
@@ -200,6 +198,9 @@ VolumeDownIntent volume down in {Room}
 VolumeDownIntent volume down in the {Room}
 VolumeDownIntent lower volume in the {Room}
 VolumeDownIntent lower volume in {Room}
+VolumeDownIntent decrease volume in the {Room}
+VolumeDownIntent decrease volume in {Room}
+
 
 VolumeDownIntent turn it down
 VolumeDownIntent turn the volume down
@@ -207,6 +208,7 @@ VolumeDownIntent softer
 VolumeDownIntent quieter
 VolumeDownIntent volume down
 VolumeDownIntent lower volume
+VolumeDownIntent decrease volume
 
 SetVolumeIntent set volume to {Percent} in {Room}
 SetVolumeIntent set volume to {Percent} percent in {Room}
@@ -385,37 +387,19 @@ PlayInRoomIntent to play in the {Room}
 PlayInRoomIntent also play in {Room}
 PlayInRoomIntent also play in the {Room}
 
+LineInIntent {Room} to use line in
+LineInIntent set {Room} to line in
+LineInIntent set the {Room} to line in
 LineInIntent {Room} use line-in
 LineInIntent {Room} to use line-in
-LineInIntent have {Room} use line-in
-LineInIntent have the {Room} use line-in
-LineInIntent to have {Room} use line-in
-LineInIntent to have the {Room} use line-in
-LineInIntent set line-in for {Room}
-LineInIntent set line-in for the {Room}
 LineInIntent set {Room} to line-in
 LineInIntent set the {Room} to line-in
-LineInIntent to set line-in for {Room}
-LineInIntent to set line-in for the {Room}
-LineInIntent to set {Room} to line-in
-LineInIntent to set the {Room} to line-in
-LineInIntent use line-in in {Room}
-LineInIntent use line-in in the {Room}
-
+  
+LineInIntent set {Room} line in to {LineIn}
+LineInIntent set the {Room} line in to {LineIn}
+LineInIntent set {Room} line in to the {LineIn}
+LineInIntent set the {Room} line in to the {LineIn}
 LineInIntent set {Room} line-in to {LineIn}
 LineInIntent set the {Room} line-in to {LineIn}
 LineInIntent set {Room} line-in to the {LineIn}
 LineInIntent set the {Room} line-in to the {LineIn}
-LineInIntent to have {Room} use {LineIn} line-in
-LineInIntent to have the {Room} use {LineIn} line-in
-LineInIntent to have {Room} use the {LineIn} line-in
-LineInIntent to have the {Room} use the {LineIn} line-in
-LineInIntent set line-in for {Room} to {LineIn}
-LineInIntent set line-in for the {Room} to {LineIn}
-LineInIntent set line-in for {Room} to the {LineIn}
-LineInIntent set line-in for the {Room} to the {LineIn}
-LineInIntent to set line-in for {Room} to {LineIn}
-LineInIntent to set line-in for the {Room} to {LineIn}
-LineInIntent to set line-in for {Room} to the {LineIn}
-LineInIntent to set line-in for the {Room} to the {LineIn}
-LineInIntent to set line-in for {Room} to {LineIn}
