@@ -107,7 +107,8 @@ To set it up, you need to do the following:
 3. Create a new Lambda function. Skip the blueprint.
 4. Pick any name you want, and choose runtime Node.js.
 5. Go into this repo's [lambda/src](lambda/src) directory and copy options.example.js to options.js. It's recommended you DO NOT edit the options.js file (leave all defaults), because it's easier to customize this later.
-6. In lambda/src, zip up everything. On Mac/Linux, `cd src; chmod a+r *.js; zip src.zip *.js`.  Make sure you don't capture the folder, just the files.
+6. In lambda/src, 
+up everything. On Mac/Linux, `cd src; chmod a+r *.js sonosProxy/*.js; zip src.zip *.js sonosProxy/*.js`.  Make sure you don't capture the folder, just the files.
 7. Choose to upload the zip file for src.zip.
 8. In the environment variables section make sure to fill in the following environment variable
  	- `APPID` - this is the Application ID you copied from above
