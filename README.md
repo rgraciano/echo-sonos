@@ -74,7 +74,7 @@ To set it up, you need to do the following:
 # Get jishi's node-sonos-http-api working
 1. Install [node.js](https://nodejs.org/en/download) on a server on the same network as your Sonos.  By "server", we mean any computer that will never be turned off or put to sleep.  If you're having trouble on Windows, try [this blog](http://blog.teamtreehouse.com/install-node-js-npm-windows).  On Mac, check your version of node with "node -v".  If it's less than version 4, you need to [upgrade node](https://www.solarianprogrammer.com/2016/04/29/how-to-upgrade-nodejs-mac-os-x/).
 2. Download [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api).  The easiest way to do this is to open a command prompt (Terminal on Mac, or type "cmd" in the Run menu on Windows) and type "npm install https://github.com/jishi/node-sonos-http-api".  If you downloaded it as a .zip file, unzip it and put it somewhere easy to get to in a terminal window (like right off C:\ on Windows or in ~ on Mac).
-3. Take the node-sonos-http-api/presets.json that I have here and drop it into your node-sonos-http-api root directory. Modify it to use your speaker names and your favorite stations. Make sure the preset names are lowercase (like "test" and "rock" in my example). NOTE: You can skip this step if you only want to use Playlists and Favorites, which require no configuration.
+3. Take the node-sonos-http-api/presets.json that I have here and drop it into the "presets" folder in your node-sonos-http-api root directory. Modify it to use your speaker names and your favorite stations. Make sure the preset names are lowercase (like "test" and "rock" in my example). NOTE: You can skip this step if you only want to use Playlists and Favorites, which require no configuration.
 4. In your command prompt / terminal, go into the node-sonos-http-api directory ("cd node-sonos-http-api") and type "npm start".  You should see a bunch of stuff indicating that it's running now.  If it dumps you right back to the command prompt, something went wrong - likely you have some invalid characters in presets.json.  Try opening presets.json in a text editor, copying everything to clipboard, and pasting it in a [JSON syntax validator](http://jsonlint.com/).  Fix whatever errors it finds, paste it back in the file & save it, then "npm start" again until it works.
 5. Test it by hitting http://yourserverip:5005/zones
 6. If you get a response, great! You now have a server that can control your Sonos. Now try playing something: http://yourserverip:5005/preset/[your_preset_name]. Or, play a Playlist or Favorite (example: http://yourserverip:5005/kitchen/playlist/myplaylist). To stop, use /pauseall.
@@ -107,22 +107,39 @@ To set it up, you need to do the following:
 3. Create a new Lambda function. Skip the blueprint.
 4. Pick any name you want, and choose runtime Node.js.
 5. Go into this repo's [lambda/src](lambda/src) directory and copy options.example.js to options.js. It's recommended you DO NOT edit the options.js file (leave all defaults), because it's easier to customize this later.
-6. In lambda/src, zip up everything. On Mac/Linux, `cd src; chmod a+r *.js; zip src.zip *.js`.  Make sure you don't capture the folder, just the files.
+6. In lambda/src, 
+up everything. On Mac/Linux, `cd src; chmod a+r *.js sonosProxy/*.js; zip src.zip *.js sonosProxy/*.js`.  Make sure you don't capture the folder, just the files.
 7. Choose to upload the zip file for src.zip.
 8. In the environment variables section make sure to fill in the following environment variable
- - `APPID` - this is the Application ID you copied from above
- - `HOST`  - this is the DNS name for your server hosting node-sonos-http-api
+ 	- `APPID` - this is the Application ID you copied from above
+ 	- `HOST`  - this is the DNS name for your server hosting node-sonos-http-api
 9. You may optionally fill in any of the following environment variables
- - `AUTH_USERNAME` and `AUTH_PASSWORD` for basic auth with node-sonos-http-api
- - `USE_HTTPS` if you enabled https on node-sonos-http-api
- - `REJECT_UNAUTHORIZED` if you enabled https and used a self signed certificate
- - `DEFAULT_MUSIC_SERVICE` if you'd like to set a specific music service
- - `ADVANCED_MODE` for enabling advanced mode
- - `USE_SQS` if you are using node-sqs-proxy for secure communications
+ 	- `AUTH_USERNAME` and `AUTH_PASSWORD` for basic auth with node-sonos-http-api
+	 - `USE_HTTPS` (`true`/`false`)if you enabled https on node-sonos-http-api
+	 - `REJECT_UNAUTHORIZED` (`true`/`false`) if you enabled https and used a self signed certificate
+	 - `DEFAULT_MUSIC_SERVICE` if you'd like to set a specific music service (See "Advanced Mode" section below for info on setting default music services)
+	 - `ADVANCED_MODE` (`true`/`false`) for enabling advanced mode
+	 - `USE_SQS` (`true`/`false`) if you are using node-sqs-proxy for secure communications
 10. The default handler is fine. Create a new role of type Basic Execution Role. Pick smallest options across the board, because this is the world's smallest service (smallest option for memory, and so on). Set the timeout to something high (suggest 30 seconds or so). For everything else, the default options should be fine.
 11. Click Next to proceed. Once created, click "Triggers".
 12. Add a source.  Choose "Alexa Skills Kit".
 13. Test it out. I included a test blueprint in this repo. Click "Test" and copy/paste this repo's [lambda/play_intent_testreq.json](https://raw.githubusercontent.com/rgraciano/echo-sonos/master/lambda/play_intent_testreq.json) to test. It will trigger the "test" preset in your presets.json file on your Sonos server. Don't forget to replace the Alexa App Id again.
+	- You should see the following output if successful:
+	
+	```
+	{  
+		"version": "1.0",
+		"response": {   
+			"outputSpeech": {  
+				"type": "PlainText",  
+				"text": "OK"  
+	    },  
+	    "shouldEndSession": true  
+	  },  
+	  "sessionAttributes": {}
+	}
+	```
+	
 14. For Advanced Mode you also need to give Lambda permission to access DynamoDB for storing the current room and service settings. Simply click on your AWS Dashboard account name in the upper right corner, Security Credentials, close the popup message, click Roles on the left, click on lambda_basic_execution, click Attach Policy, click the checkboxes next to AmazonDynamoDBFullAccess and AmazonSQSFullAccess, and click Attach Policy at the bottom of the screen.
 
 # Connect Alexa Skill to AWS Lambda
@@ -130,14 +147,16 @@ To set it up, you need to do the following:
 2. Go back into the Alexa Skill console, open your skill, click "Skill Information", choose Lambda ARN and paste that ARN string in.
 3. Now you're ready to put it all together. Try "Alexa, ask sonos to play test"
 
-# Optional "Advanced Mode" (enable by settings environment variable "ADVANCED_MODE" to "true" in Lambda)
+# Optional "Advanced Mode"
 Advanced Mode comes with two major new features.  First, it supports music streaming services like Apple Music, Spotify, and Deezer.   And second, it remembers the room you're operating in, so you no longer need to include a room on every utterance.  With Advanced Mode turned on, you can request specific songs and albums.
 
-The following apply to "Advanced Mode":
+Enable Advanced Mode using the Environment Variables in your Lambda function.
+`ADVANCED_MODE` set to `true`
 
-  advancedMode: true              // Allows you to specify and change default rooms and music services. Requires additional AWS setup
-  defaultRoom: 'Kitchen',	      // Allows you to specify a default room to use when one is not specified in the utterance 	
-  defaultMusicService: 'apple',   // Supports presets, library, apple, spotify, deezer, or elite  (elite = Deezer Elite FLAC)
+If you enable Advanced Mode you may also enable the following via Lambda Environment Variables.
+
+  `DEFAULT_ROOM`: 'Kitchen',	      // Allows you to specify a default room to use when one is not specified in the utterance 	
+  `DEFAULT_MUSIC_SERVICE`: 'apple',   // Supports presets, library, apple, spotify, deezer, or elite  (elite = Deezer Elite FLAC)
 
 # Optional Security Features
 The echo-sqs-proxy solution allows Echo-Sonos to communicate with the node-sonos-http-api solution without having to alter your firewall to open your server to the Internet or having to make any of the changes below.  Read the README file in the echo-sqs-proxy directory for instructions.
