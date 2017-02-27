@@ -10,9 +10,9 @@ var sonosProxy = {};
  * Use factory patern to get a sonosProxy with a given baseUrl
  * sonosProxy provides an interface for node-sonos-http-api
  */
-sonosProxyFactory.get = function(baseUrl, useSqs){
+sonosProxyFactory.get = function(baseUrl, options){
     sonosProxy.baseUrl = baseUrl;
-    sonosProxy.useSqs = useSqs || false;
+    sonosProxy.options = options;
 
     return sonosProxy
 };
@@ -341,16 +341,23 @@ sonosProxy.favorite = function(room, favorite) {
     return makeCall(path);
 };
 
-function makeCall(path) {  
-    if(sonosProxy.useSqs){
+function makeCall(path) {
+    if(sonosProxy.options.useSqs){
         console.log(`Sending SQS '${path}'`);
         return sqsClient.get(sonosProxy.baseUrl, path).then((data) => logSqsSuccess(path, data), 
                                                             (error) => logSqsFailure(path, error));
     }
     
     var url = sonosProxy.baseUrl + path;
+    var request = {
+        host: sonosProxy.options.host,
+        port: sonosProxy.options.port,
+        path: path,
+        headers: sonosProxy.options.headers,
+        useHttps: sonosProxy.options.useHttps
+    };
     console.log(`Calling '${path}'`);
-    return httpClient.get(url).then((data) => logCallSuccess(url, data), 
+    return httpClient.get(request).then((data) => logCallSuccess(url, data), 
                                     (error) => logCallFailure(url, error));
 }
 
