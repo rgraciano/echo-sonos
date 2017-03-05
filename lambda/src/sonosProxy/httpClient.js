@@ -2,12 +2,12 @@
 
 var httpClient = {};
 
-httpClient.get = function(url) {
+httpClient.get = function(options) {    
   // return new pending promise
   return new Promise((resolve, reject) => {
     // select http or https module, depending on reqested url
-    const lib = url.startsWith('https') ? require('https') : require('http');
-    const request = lib.get(url, (response) => {
+    const lib = options.useHttps ? require('https') : require('http');
+    const request = lib.get(options, (response) => {
       // handle http errors
       if (response.statusCode < 200 || response.statusCode > 299) {
          reject(new Error('Failed to retrieve data, status code: ' + response.statusCode));

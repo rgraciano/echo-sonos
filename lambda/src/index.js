@@ -702,10 +702,10 @@ exports.handler = function (event, context) {
         var accountId = arn.substring(actLoc,arn.indexOf(':',actLoc));
         var baseSqsUrl = "https://sqs." + region + ".amazonaws.com/" + accountId;
 
-        sonosProxy = sonosProxyFactory.get(baseSqsUrl, options.useSQS);
+        sonosProxy = sonosProxyFactory.get(baseSqsUrl, options);
     }
     else {
-        sonosProxy = sonosProxyFactory.get(getUrl(options), options.useSQS);
+        sonosProxy = sonosProxyFactory.get(getUrl(options), options);
     }
     
 
