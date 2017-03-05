@@ -2,6 +2,7 @@
 'use strict';
 
 var sonosProxyFactory = require('./sonosProxy/sonosProxyFactory');
+var AWS = require('aws-sdk');
 var sonosProxy = null;
 var dynamodb = null;
 
