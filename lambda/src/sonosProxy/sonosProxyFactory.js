@@ -342,7 +342,7 @@ sonosProxy.favorite = function(room, favorite) {
 };
 
 function makeCall(path) {
-    if(sonosProxy.options.useSqs){
+    if(sonosProxy.options.useSQS){
         console.log(`Sending SQS '${path}'`);
         return sqsClient.get(sonosProxy.baseUrl, path).then((data) => logSqsSuccess(path, data), 
                                                             (error) => logSqsFailure(path, error));
