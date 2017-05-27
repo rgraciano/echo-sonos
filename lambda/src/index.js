@@ -479,6 +479,10 @@ function isBlank(val) {
 function changeCurrent(echoId, room, service, onCompleteFn) {
     var updateExpression = '';
     var values = {};
+    
+    if (!isBlank(service)) {
+        service = service.toLowerCase();
+    }
 
     if (options.advancedMode) {
         if (!isBlank(room) && !isBlank(service)) {
