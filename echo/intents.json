@@ -2,6 +2,16 @@
     "intents": [
 
     {
+      "intent": "FinishedIntent",
+      "slots": [
+        {
+          "name": "ending",
+          "type": "ENDINGS"
+        }
+      ],
+    },
+
+    {
       "intent": "AlbumIntent",
       "slots": [
         {
