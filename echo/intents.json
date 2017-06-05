@@ -5,7 +5,7 @@
       "intent": "FinishedIntent",
       "slots": [
         {
-          "name": "ending",
+          "name": "Ending",
           "type": "ENDINGS"
         }
       ]
