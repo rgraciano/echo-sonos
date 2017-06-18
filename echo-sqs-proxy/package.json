@@ -11,6 +11,7 @@
     "url": "https://github.com/jplourde5/node-sonos-http-api.git"
   },
   "dependencies": {
+    "async": "^2.4.1",
     "aws-sdk": "^2.4.13",
     "request": "~2.74.0",
     "sqs-consumer": "^3.2.0"
