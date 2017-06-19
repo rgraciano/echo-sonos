@@ -24,8 +24,7 @@ var STATE_RESPONSES = [
 
 var states = {
     NORMALMODE:       '_NORMALMODE',
-    INETERACTIVEMODE: '_INTERACTIVEMODE',
-    HELPMODE:         '_HELPMODE',
+    INTERACTIVEMODE:  '_INTERACTIVEMODE'
 };
 var currentState = states.NORMALMODE;
 
