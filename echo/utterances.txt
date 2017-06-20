@@ -1,3 +1,6 @@
+FinishedIntent I'm {Ending}
+FinishedIntent {Ending}
+
 PlayMoreByArtistIntent play more by this artist in the {Room}
 PlayMoreByArtistIntent play more songs by this artist in the {Room}
 PlayMoreByArtistIntent play more tracks by this artist in the {Room}
