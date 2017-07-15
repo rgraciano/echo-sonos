@@ -1,15 +1,28 @@
 # echo-sonos
 All of the pieces for an Amazon Echo (Alexa) <-> Sonos integration.
 
-# Usage
+### Music Services
+echo-sonos supports Apple Music, Spotify, Deezer, Deezer Elite, Sonos playlists, Sonos favorites, SiriusXM, the local Sonos music library, and configurable node-sonos-http-api presets.
 
-Global commands (no rooms required):
+* Sonos Playlists: "Alexa, ask sonos to start playlist MY PLAYLIST in the ROOM"
+* Sonos Favorites: "Alexa, ask sonos to play favorite MY FAVORITE in the ROOM"
 
-* Presets: "Alexa, ask sonos to play Rock"
-* Pause all: "Alexa, ask sonos to pause all"
-* Resume all: "Alexa, ask sonos to resume all"
+* Music services: "Alexa, ask sonos to change music to SERVICE" (SERVICE = Presets, Library, Apple, Spotify, Deezer, or Elite)
 
-Room-specific commands, where "ROOM" could be any of your sonos room names (eg Kitchen, Master Bedroom, and so on):
+* SiriusXM: "Alexa, play SiriusXM channel CHANNEL in the ROOM"
+* SiriusXM: "Alexa, play SiriusXM station STATION in the ROOM"
+
+* node-sonos-http-api Presets: "Alexa, ask sonos to play Rock" (queues a node-sonos-http-api macro that sets up speaker/volume/service configuration)
+
+### Sonos Rooms and Groups
+echo-sonos can default to controlling a specific room, to save you some talking.  It will also remember the last room that was used in a normal command, and use that room in future commands.
+
+* Change room: "Alexa, ask sonos to change room to ROOM"
+* Change room and service: "Alexa, ask sonos to change room to ROOM and music to SERVICE"
+* Add room to the group: "Alexa, ask sonos to join NEW_ROOM to the ROOM"
+* Remove room from the group: "Alexa, ask sonos to ungroup ROOM"
+
+### Playing Music
 
 * Play songs from an artist: "Alexa, ask sonos to play ARTIST NAME in the ROOM"
 * Play songs from an album: "Alexa, ask sonos to play album ALBUM NAME in the ROOM"
@@ -17,52 +30,39 @@ Room-specific commands, where "ROOM" could be any of your sonos room names (eg K
 * Play "radio" songs like this artist: "Alexa, ask sonos to play ARTIST NAME radio in the ROOM"
 * Play more "radio" songs like this song: "Alexa, play more songs by this artist in the ROOM"
 * Play more "radio" songs like this track: "Alexa, play more songs like this in the ROOM"
-* SiriusXM: "Alexa, play SiriusXM channel CHANNEL in the ROOM"
-* SiriusXM: "Alexa, play SiriusXM station STATION in the ROOM"
-* Playlists: "Alexa, ask sonos to start playlist MY PLAYLIST in the ROOM"
-* Favorites: "Alexa, ask sonos to play favorite MY FAVORITE in the ROOM"
 * Next: "Alexa, ask sonos go to the next track in the ROOM"
 * Previous: "Alexa, ask sonos to go back in the ROOM"
+* Clear queue: "Alexa, ask sonos to clear the queue in the ROOM"
 * What's playing: "Alexa, ask sonos what's playing in the ROOM"
+
+### Controlling Music
+
 * Pause: "Alexa, ask sonos to pause in the ROOM"
+* Pause all: "Alexa, ask sonos to pause all"
 * Resume: "Alexa, ask sonos to resume in the ROOM"
+* Resume all: "Alexa, ask sonos to resume all"
 * Mute: "Alexa, ask sonos to mute in the ROOM"
 * Unmute: "Alexa, ask sonos to unmute in the ROOM"
 * Repeat: "Alexa, ask sonos to turn repeat [on,off] in the ROOM"
 * Shuffle: "Alexa, ask sonos to turn shuffle [on,off] in the ROOM"
 * Crossfade: "Alexa, ask sonos to turn crossfade [on,off] in the ROOM"
-* Clear queue: "Alexa, ask sonos to clear the queue in the ROOM"
 * Volume up or down (single room): "Alexa, ask sonos to turn it [up,down] in the ROOM"
 * Volume up or down (all in group): "Alexa, ask sonos to turn it [up,down] in the ROOM group"
 * Set volume (single room): "Alexa, ask sonos to change the volume to 22 in the ROOM"
 * Set volume (all in group): "Alexa, ask sonos to change the volume to 22 in the ROOM group"
-* Add room to the group: "Alexa, ask sonos to join NEW_ROOM to the ROOM"
-* Remove room from the group: "Alexa, ask sonos to ungroup ROOM"
+
+### Line-In (for Echo Dot)
+
+If you have a default line-in (e.g. it has a dot connected) then you can set defaultLinein in your Lambda environment variables to this ROOM. This will open up:
+
 * Set speaker line-in: "Alexa, ask sonos to set ROOM line-in to the LINEIN_ROOM"
-* Many other natural phrasings are supported for each command. The file "echo/utterances.txt" has all of the examples.
-
-Everything's dynamic - rooms and playlists are taken dynamically from your speech. There are common room names in utterances.txt to help the Alexa engine recognize valid entries, but it's not necessary to add more. You can specify a default room in options.js and that room will be used when no room is specified in the utterance. You can also specify a default service in options.js to be used for the music search functionality which supports Apple Music, Spotify, Deezer, Deezer Elite, and the local Sonos music library. The default for the music service is to use the presets.
-
-### Advanced Mode
-Turning on Advanced Mode in options.js will allow you to dynamically change the current room and/or current music service through utterances (below). The solution will also remember the last room that was used in a normal command and set the current room to that room.
-
-* Change room: "Alexa, ask sonos to change room to ROOM"
-* Change service: "Alexa, ask sonos to change music to SERVICE" (SERVICE = Presets, Library, Apple, Spotify, Deezer, or Elite)
-* Change room and service: "Alexa, ask sonos to change room to ROOM and music to SERVICE"
-
-The service is also smart enough to control your whole group when given only a room name, even if that room isn't the Sonos coordinator, so you can change the volume in an entire group without having to remember which speaker is the coordinator.
-
-### Advanced Line-In
-
-If you have a default line-in (e.g. it has a dot connected) then you can set defaultLinein in options.js to this ROOM. This will open up:
-
 * Play in room: "Alexa, ask sonos to play in ROOM"
 
 This will set ROOM line-in to the default line-in (and play it)
 
 # How it works
 
-1. When you say the command to Alexa, it triggers the Alexa skill with invocation name sonos.
+1. When you say the command to Alexa, it triggers the Alexa skill with invocation name "sonos".
 2. The Alexa skill calls a web service running on AWS Lambda, passing it the preset name ("rock" in the example).
 3. Lambda then fires an HTTP request to a node.js server running node-sonos-http-api on your local network.
 4. node-sonos-http-api interprets the command and relays to Sonos over your local network.
@@ -74,7 +74,7 @@ To set it up, you need to do the following:
 # Get jishi's node-sonos-http-api working
 1. Install [node.js](https://nodejs.org/en/download) on a server on the same network as your Sonos.  By "server", we mean any computer that will never be turned off or put to sleep.  If you're having trouble on Windows, try [this blog](http://blog.teamtreehouse.com/install-node-js-npm-windows).  On Mac, check your version of node with "node -v".  If it's less than version 4, you need to [upgrade node](https://www.solarianprogrammer.com/2016/04/29/how-to-upgrade-nodejs-mac-os-x/).
 2. Download [node-sonos-http-api](https://github.com/jishi/node-sonos-http-api).  The easiest way to do this is to open a command prompt (Terminal on Mac, or type "cmd" in the Run menu on Windows) and type "npm install https://github.com/jishi/node-sonos-http-api".  If you downloaded it as a .zip file, unzip it and put it somewhere easy to get to in a terminal window (like right off C:\ on Windows or in ~ on Mac).
-3. Take the node-sonos-http-api/presets.json that I have here and drop it into the "presets" folder in your node-sonos-http-api root directory. Modify it to use your speaker names and your favorite stations. Make sure the preset names are lowercase (like "test" and "rock" in my example). NOTE: You can skip this step if you only want to use Playlists and Favorites, which require no configuration.
+3. Take the node-sonos-http-api/presets.json that I have here and drop it into the "presets" folder in your node-sonos-http-api root directory. Modify it to use your speaker names and your favorite stations. Make sure the preset names are lowercase (like "test" and "rock" in my example). NOTE: You can skip this step if you only want to use Playlists, Favorites, or Advanced Mode, which require no configuration.
 4. In your command prompt / terminal, go into the node-sonos-http-api directory ("cd node-sonos-http-api") and type "npm start".  You should see a bunch of stuff indicating that it's running now.  If it dumps you right back to the command prompt, something went wrong - likely you have some invalid characters in presets.json.  Try opening presets.json in a text editor, copying everything to clipboard, and pasting it in a [JSON syntax validator](http://jsonlint.com/).  Fix whatever errors it finds, paste it back in the file & save it, then "npm start" again until it works.
 5. Test it by hitting http://yourserverip:5005/zones
 6. If you get a response, great! You now have a server that can control your Sonos. Now try playing something: http://yourserverip:5005/preset/[your_preset_name]. Or, play a Playlist or Favorite (example: http://yourserverip:5005/kitchen/playlist/myplaylist). To stop, use /pauseall.
@@ -111,14 +111,15 @@ To set it up, you need to do the following:
 up everything. On Mac/Linux, `cd src; chmod a+r *.js sonosProxy/*.js; zip src.zip *.js sonosProxy/*.js`.  Make sure you don't capture the folder, just the files.
 7. Choose to upload the zip file for src.zip.
 8. In the environment variables section make sure to fill in the following environment variable
- 	- `APPID` - this is the Application ID you copied from above
- 	- `HOST`  - this is the DNS name for your server hosting node-sonos-http-api
+ 	 - `APPID` - this is the Application ID you copied from above
+ 	 - `HOST`  - this is the DNS name for your server hosting node-sonos-http-api
+9. To enable music services and default rooms (strongly recommended), also add the following environment variables
+	 - `ADVANCED_MODE` (`true`) - remembers last room you commanded, and uses your default music service
+	 - `DEFAULT_MUSIC_SERVICE` - supports presets, library, apple, spotify, deezer, or elite
+	 - `DEFAULT_ROOM` - example: "Kitchen". If Alexa doesn't remember your last room and you don't say one
 9. You may optionally fill in any of the following environment variables
- 	- `AUTH_USERNAME` and `AUTH_PASSWORD` for basic auth with node-sonos-http-api
-	 - `USE_HTTPS` (`true`/`false`)if you enabled https on node-sonos-http-api
-	 - `REJECT_UNAUTHORIZED` (`true`/`false`) if you enabled https and used a self signed certificate
-	 - `DEFAULT_MUSIC_SERVICE` if you'd like to set a specific music service (See "Advanced Mode" section below for info on setting default music services)
-	 - `ADVANCED_MODE` (`true`/`false`) for enabling advanced mode
+ 	 - `AUTH_USERNAME` and `AUTH_PASSWORD` - for basic auth with node-sonos-http-api
+	 - `USE_HTTPS` (`true`/`false`) - if you enabled https on node-sonos-http-api
 	 - `USE_SQS` (`true`/`false`) if you are using node-sqs-proxy for secure communications
 10. The default handler is fine. Create a new role of type Basic Execution Role. Pick smallest options across the board, because this is the world's smallest service (smallest option for memory, and so on). Set the timeout to something high (suggest 30 seconds or so). For everything else, the default options should be fine.
 11. Click Next to proceed. Once created, click "Triggers".
@@ -146,17 +147,6 @@ up everything. On Mac/Linux, `cd src; chmod a+r *.js sonosProxy/*.js; zip src.zi
 1. In the Lambda console, copy the long "ARN" string in the upper right.  
 2. Go back into the Alexa Skill console, open your skill, click "Skill Information", choose Lambda ARN and paste that ARN string in.
 3. Now you're ready to put it all together. Try "Alexa, ask sonos to play test"
-
-# Optional "Advanced Mode"
-Advanced Mode comes with two major new features.  First, it supports music streaming services like Apple Music, Spotify, and Deezer.   And second, it remembers the room you're operating in, so you no longer need to include a room on every utterance.  With Advanced Mode turned on, you can request specific songs and albums.
-
-Enable Advanced Mode using the Environment Variables in your Lambda function.
-`ADVANCED_MODE` set to `true`
-
-If you enable Advanced Mode you may also enable the following via Lambda Environment Variables.
-
-  `DEFAULT_ROOM`: 'Kitchen',	      // Allows you to specify a default room to use when one is not specified in the utterance 	
-  `DEFAULT_MUSIC_SERVICE`: 'apple',   // Supports presets, library, apple, spotify, deezer, or elite  (elite = Deezer Elite FLAC)
 
 # Optional Security Features
 The echo-sqs-proxy solution allows Echo-Sonos to communicate with the node-sonos-http-api solution without having to alter your firewall to open your server to the Internet or having to make any of the changes below.  Read the README file in the echo-sqs-proxy directory for instructions.
