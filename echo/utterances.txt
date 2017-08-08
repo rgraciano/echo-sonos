@@ -43,6 +43,7 @@ TrackIntent play the song {TrackName} in {Room}
 TrackIntent play the song {TrackName} in the {Room}
 
 TrackIntent play track {TrackName}
+TrackIntent play the song {TrackName}
 
 MusicRadioIntent play {ArtistName} radio in the {Room}
 MusicRadioIntent play {ArtistName} radio in {Room}
@@ -50,6 +51,7 @@ MusicRadioIntent play {ArtistName} radio in {Room}
 MusicRadioIntent play {ArtistName} radio
 
 PlayPresetIntent play preset {Preset}
+PlayPresetIntent play the preset {Preset}
 
 PlaylistIntent playlist {Preset} in {Room}
 PlaylistIntent playlist {Preset} in the {Room}
@@ -144,7 +146,6 @@ ResumeIntent resume the music in the {Room}
 ResumeIntent continue
 ResumeIntent continue the music
 ResumeIntent continue playing
-ResumeIntent continue playing
 ResumeIntent resume
 ResumeIntent resume the music
 
@@ -163,9 +164,7 @@ PauseIntent stop playing in {Room}
 PauseIntent stop the music in {Room}
 
 PauseIntent pause
-PauseIntent pause
 PauseIntent pause the music
-PauseIntent stop
 PauseIntent stop
 PauseIntent stop the music
 
@@ -173,6 +172,8 @@ VolumeUpIntent turn it up in {Room}
 VolumeUpIntent turn it up in the {Room}
 VolumeUpIntent turn the volume up in {Room}
 VolumeUpIntent turn the volume up in the {Room}
+VolumeUpIntent turn up the volume in {Room}
+VolumeUpIntent turn up the volume in the {Room}
 VolumeUpIntent louder in {Room}
 VolumeUpIntent louder in the {Room}
 VolumeUpIntent volume up in {Room}
@@ -184,6 +185,7 @@ VolumeUpIntent increase volume in {Room}
 
 VolumeUpIntent turn it up
 VolumeUpIntent turn the volume up
+VolumeUpIntent turn up the volume
 VolumeUpIntent louder
 VolumeUpIntent volume up
 VolumeUpIntent raise volume
@@ -193,6 +195,8 @@ VolumeDownIntent turn it down in {Room}
 VolumeDownIntent turn it down in the {Room}
 VolumeDownIntent turn the volume down in {Room}
 VolumeDownIntent turn the volume down in the {Room}
+VolumeDownIntent turn down the volume in {Room}
+VolumeDownIntent turn down the volume in the {Room}
 VolumeDownIntent softer in {Room}
 VolumeDownIntent softer in the {Room}
 VolumeDownIntent quieter in {Room}
@@ -207,6 +211,7 @@ VolumeDownIntent decrease volume in {Room}
 
 VolumeDownIntent turn it down
 VolumeDownIntent turn the volume down
+VolumeDownIntent turn down the volume
 VolumeDownIntent softer
 VolumeDownIntent quieter
 VolumeDownIntent volume down
@@ -217,6 +222,10 @@ SetVolumeIntent set volume to {Percent} in {Room}
 SetVolumeIntent set volume to {Percent} percent in {Room}
 SetVolumeIntent set volume to {Percent} in the {Room}
 SetVolumeIntent set volume to {Percent} percent in the {Room}
+SetVolumeIntent set the volume to {Percent} in {Room}
+SetVolumeIntent set the volume to {Percent} percent in {Room}
+SetVolumeIntent set the volume to {Percent} in the {Room}
+SetVolumeIntent set the volume to {Percent} percent in the {Room}
 SetVolumeIntent change volume to {Percent} in {Room}
 SetVolumeIntent change volume to {Percent} percent in {Room}
 SetVolumeIntent change volume to {Percent} in the {Room}
@@ -236,6 +245,8 @@ SetVolumeIntent turn it down to {Percent} percent in the {Room}
 
 SetVolumeIntent set volume to {Percent}
 SetVolumeIntent set volume to {Percent} percent
+SetVolumeIntent set the volume to {Percent}
+SetVolumeIntent set the volume to {Percent} percent
 SetVolumeIntent change volume to {Percent}
 SetVolumeIntent change volume to {Percent} percent
 SetVolumeIntent change the volume to {Percent}
@@ -325,6 +336,8 @@ WhatsPlayingIntent what song is this
 WhatsPlayingIntent what band is this
 WhatsPlayingIntent who's playing
 WhatsPlayingIntent what am i hearing
+WhatsPlayingIntent who is this
+WhatsPlayingIntent what is this
 
 MuteIntent mute in {Room}
 MuteIntent mute in the {Room}
