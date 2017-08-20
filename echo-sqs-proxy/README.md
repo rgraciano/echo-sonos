@@ -25,8 +25,8 @@ This will download the necessary dependencies if possible.
 Logon to your AWS dashboard at aws.amazon.com to be able to retrieve some needed 
 information.
 
-Edit the settings.json file in the echo-sqs-proxy directory on your server to specify your 
-account information:
+In the echo-sqs-proxy directory on your server, copy the settings.example.json file to settings.json, then edit the 
+settings.json file to specify your account information:
 
 ```
 {
