@@ -259,10 +259,45 @@ EchoSonos.prototype.intentHandlers = {
         console.log("WhatsPlayingIntent received");
         loadCurrentRoomAndService('DefaultEcho', intent.slots.Room.value, function(room, service) {
             sonosProxy.getState(room).then((data) => {
-                 var responseJson = JSON.parse(data);
-                 var randResponse = Math.floor(Math.random() * STATE_RESPONSES.length);
-                 var responseText = STATE_RESPONSES[randResponse].replace("$currentTitle", responseJson.currentTrack.title).replace("$currentArtist", responseJson.currentTrack.artist);
-                 quickResponse(response, responseText);
+                var responseJson = JSON.parse(data);
+                var randResponse = Math.floor(Math.random() * STATE_RESPONSES.length);
+                
+                var streamInfoArray;
+                var playTitle;
+                var playArtist;
+                // Check if something is playing
+                if (responseJson.playbackState == "PLAYING") {
+                    if (responseJson.currentTrack.uri.substring(0, 21) == "x-sonosapi-hls-static") {
+                        // Amazon Music Radio Station
+                        playTitle = responseJson.currentTrack.title;
+                        playArtist = responseJson.currentTrack.artist;
+                    } else if (responseJson.currentTrack.uri.substring(0, 14) == "x-sonosapi-hls") {
+                        // Sirius XM Radio Station
+                        streamInfoArray = responseJson.currentTrack.title.split("|");
+                        playTitle = streamInfoArray[2].substring(6);
+                        playArtist = streamInfoArray[3].substring(7);
+                    } else if (responseJson.currentTrack.uri.substring(0, 17) == "x-sonosapi-stream") {
+                        // Regular radio station
+                        streamInfoArray = responseJson.currentTrack.title.split(" - ");
+                        playTitle = streamInfoArray[1];
+                        playArtist = streamInfoArray[0];
+                    } else {
+                        // Regular song
+                        playTitle = responseJson.currentTrack.title;
+                        playArtist = responseJson.currentTrack.artist;
+                    }
+                    if ((playTitle)&&(playArtist)) {
+                        var audioTitle = playTitle.replace(/[@#$%\/]/g, " ").replace(/\(Remix\)/g, "").replace(/feat\./g, "featuring");
+                        var audioArtist = playArtist.replace(/[@#$%\/]/g, " ").replace(/feat\./g, "featuring");
+                        var responseText = STATE_RESPONSES[randResponse].replace("$currentTitle", audioTitle).replace("$currentArtist", audioArtist);
+                        quickResponse(response, responseText);
+                    } else {
+                        quickResponse(response, "Sorry, I cannot determine what's playing right now");
+                    }
+                } else {
+                        quickResponse(response, "There is nothing playing in this room");
+                }
+
             }).catch((error) => {
                 quickResponse(response, error.message);
             });
