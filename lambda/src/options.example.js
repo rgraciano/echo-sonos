@@ -32,11 +32,19 @@ var options = {
 
 module.exports = options;
 
+
 function getDefault(key, defaultVal) {
   if (typeof(process.env[key]) == 'undefined') { 
     return defaultVal;
   }
   else {
+    // special case true and false because they need to be set to logical values, not strings
+    if (process.env[key] == 'false') {
+      return false
+    }
+    if (process.env[key] == 'true') {
+      return true
+    }
     return process.env[key];
   }
 }
