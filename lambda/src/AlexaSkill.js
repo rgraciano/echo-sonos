@@ -98,6 +98,8 @@ AlexaSkill.prototype.execute = function (event, context) {
             event.session.attributes = {};
         }
 
+        this.setEchoId(event.context);
+
         if (event.session.new) {
             this.eventHandlers.onSessionStarted(event.request, event.session);
         }
